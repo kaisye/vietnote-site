@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thanh toán · VietNote</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0e0b22">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="grid"></i></div>
+  <header class="nav"><a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="34" height="34"><span>VietNote</span></a></header>
+  <main class="result">
+    <div class="result-card" id="card">
+      <div class="mark" id="mark">✓</div>
+      <h1 id="title">Thanh toán thành công</h1>
+      <p id="text">Số giờ đã được cộng vào tài khoản. Quay lại ứng dụng VietNote để tiếp tục, số giờ mới sẽ hiện sau vài giây.</p>
+      <p class="order" id="order"></p>
+    </div>
+  </main>
+  <script>
+    // payOS returns here with ?code=00&status=PAID|CANCELLED&cancel=true|false&orderCode=...
+    const q = new URLSearchParams(location.search)
+    const cancelled = q.get('cancel') === 'true' || q.get('status') === 'CANCELLED'
+    if (cancelled) {
+      document.getElementById('card').classList.add('cancel')
+      document.getElementById('mark').textContent = '×'
+      document.getElementById('title').textContent = 'Đã huỷ thanh toán'
+      document.getElementById('text').textContent = 'Bạn chưa bị trừ tiền. Có thể quay lại ứng dụng VietNote và chọn gói khác bất cứ lúc nào.'
+    } else if (q.get('status') !== 'PAID') {
+      document.getElementById('mark').textContent = '…'
+      document.getElementById('title').textContent = 'Đang xử lý thanh toán'
+      document.getElementById('text').textContent = 'Nếu bạn đã chuyển khoản, số giờ sẽ được cộng tự động. Quay lại ứng dụng VietNote để kiểm tra.'
+    }
+    const order = q.get('orderCode')
+    if (order && /^\d+$/.test(order)) document.getElementById('order').textContent = `Mã đơn hàng: ${order}`
+  </script>
+</body>
+</html>
