@@ -1,14 +1,14 @@
 # vietnote-site
 
-Trang giới thiệu và tải VietNote. HTML tĩnh, không cần build, host trên Cloudflare Pages.
+Trang giới thiệu và tải VietNote. HTML tĩnh trong `public/`, chạy bằng Cloudflare Workers (static assets).
 
 | File | Nội dung |
 |---|---|
-| `index.html` | Trang chủ: giới thiệu, tính năng, bảng giá, hỏi đáp, nút tải |
-| `thanh-toan.html` | Trang payOS chuyển về sau khi thanh toán (`/thanh-toan`) |
-| `app.js` | Tải bảng giá từ Supabase, ưu tiên nút tải theo hệ điều hành |
-| `config.js` | Địa chỉ Supabase và anon key (công khai theo thiết kế) |
-| `functions/download/[platform].js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub |
+| `public/index.html` | Trang chủ: giới thiệu, tính năng, bảng giá, hỏi đáp, nút tải |
+| `public/thanh-toan.html` | Trang payOS chuyển về sau khi thanh toán (`/thanh-toan`) |
+| `public/app.js` | Tải bảng giá từ Supabase, ưu tiên nút tải theo hệ điều hành |
+| `public/config.js` | Địa chỉ Supabase và anon key (công khai theo thiết kế) |
+| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub |
 
 ## Đổi giá và khuyến mãi
 
@@ -26,12 +26,12 @@ Không cần sửa code. Vào Supabase → **Table Editor → credit_packages**,
 
 Không đổi `id` của gói đã có đơn hàng; muốn bỏ gói thì bỏ chọn `active`.
 
-## Deploy lên Cloudflare Pages
+## Deploy lên Cloudflare
 
-1. Cloudflare Dashboard → **Workers & Pages → Create → Pages → Connect to Git**, chọn repo này.
-2. Framework preset: **None**, Build command: để trống, Build output directory: `/`.
-3. Mỗi lần push lên `main` Cloudflare tự deploy lại.
-4. Gắn domain riêng ở **Custom domains**, rồi đặt secret `SITE_URL` của Supabase thành domain đó
-   (để payOS chuyển về đúng trang `/thanh-toan`).
+Repo đã được kết nối với Worker `web` (Workers & Pages → Import a repository);
+mỗi lần push lên `main` Cloudflare tự chạy `npx wrangler deploy` với `wrangler.jsonc`.
 
-Xem thử trên máy: `python3 -m http.server 8787` rồi mở http://localhost:8787.
+Deploy tay: `npx wrangler deploy`. Xem thử trên máy (có cả `/download/*`): `npx wrangler dev`.
+
+Khi đổi domain, đặt secret `SITE_URL` của Supabase thành domain mới
+(để payOS chuyển về đúng trang `/thanh-toan`).

@@ -6,11 +6,15 @@ const FILES = {
 }
 const RELEASES = 'https://github.com/kaisye/VietNote/releases/latest/download'
 
-export async function onRequestGet({ params }) {
-  const file = FILES[params.platform]
+export async function download(platform) {
+  const file = FILES[platform]
   if (!file) return new Response('Not found', { status: 404 })
   const upstream = await fetch(`${RELEASES}/${file.asset}`, { cf: { cacheEverything: true, cacheTtl: 600 } })
-  if (!upstream.ok) return new Response('Bản cài đặt đang được cập nhật, vui lòng thử lại sau ít phút.', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
+  if (!upstream.ok) {
+    return new Response('Bản cài đặt đang được cập nhật, vui lòng thử lại sau ít phút.', {
+      status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    })
+  }
   const headers = new Headers({
     'Content-Type': file.type,
     'Content-Disposition': `attachment; filename="${file.name}"`,
