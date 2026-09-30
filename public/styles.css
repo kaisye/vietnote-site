@@ -128,3 +128,6 @@ main { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
   .footer { padding: 24px 16px 32px; }
 }
 .nowrap { white-space: nowrap; }
+.install-steps { max-width: 780px; margin: 32px auto 0; padding-left: 22px; text-align: left; color: var(--muted); display: grid; gap: 10px; }
+.install-steps b { color: var(--ink); }
+.fine a, .steps a, .faq a { color: var(--lavender); }
