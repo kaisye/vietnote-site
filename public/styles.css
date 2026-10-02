@@ -105,7 +105,7 @@ main { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 .final { display: flex; flex-direction: column; align-items: center; padding-bottom: 40px; }
 .final img { margin-bottom: 20px; border-radius: 24%; box-shadow: 0 24px 70px rgba(255,120,190,.35); }
 
-.footer { display: flex; justify-content: space-between; max-width: 1160px; margin: 80px auto 0; padding: 28px 24px 40px; border-top: 1px solid var(--border); font-size: 14px; color: var(--muted); }
+.footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; max-width: 1160px; margin: 80px auto 0; padding: 28px 24px 40px; border-top: 1px solid var(--border); font-size: 14px; color: var(--muted); }
 .footer a:hover { color: var(--ink); }
 
 /* Payment result page */
@@ -130,4 +130,4 @@ main { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 .nowrap { white-space: nowrap; }
 .install-steps { max-width: 780px; margin: 32px auto 0; padding-left: 22px; text-align: left; color: var(--muted); display: grid; gap: 10px; }
 .install-steps b { color: var(--ink); }
-.fine a, .steps a, .faq a { color: var(--lavender); }
+.fine a, .steps a, .faq a, .result .order a { color: var(--lavender); }
