@@ -17,13 +17,23 @@
     })
   }
 
+  // Signup bonus from Supabase (app_settings), so it changes without a deploy.
+  const rpc = name => fetch(`${config.supabaseUrl}/rest/v1/rpc/${name}`, {
+    method: 'POST',
+    headers: { apikey: config.supabaseAnonKey, Authorization: `Bearer ${config.supabaseAnonKey}`, 'Content-Type': 'application/json' },
+    body: '{}',
+  }).then(response => response.ok ? response.json() : Promise.reject(response.status))
+
+  if (config && document.querySelector('[data-signup-bonus]')) {
+    rpc('signup_bonus_minutes').then(minutes => {
+      if (!Number.isInteger(minutes) || minutes <= 0) return
+      document.querySelectorAll('[data-signup-bonus]').forEach(el => { el.textContent = `${minutes} phút` })
+    }).catch(() => {})
+  }
+
   const pricing = document.querySelector('[data-pricing]')
   if (pricing && config) {
-    fetch(`${config.supabaseUrl}/rest/v1/rpc/credit_offers`, {
-      method: 'POST',
-      headers: { apikey: config.supabaseAnonKey, Authorization: `Bearer ${config.supabaseAnonKey}`, 'Content-Type': 'application/json' },
-      body: '{}',
-    }).then(response => response.ok ? response.json() : []).then(offers => {
+    rpc('credit_offers').catch(() => []).then(offers => {
       pricing.insertAdjacentHTML('beforeend', offers.map(offer => {
         const total = Number(offer.hours) + Number(offer.bonus_hours)
         const perHour = Math.round(offer.price_vnd / total / 100) * 100

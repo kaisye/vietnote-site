@@ -26,6 +26,12 @@ Không cần sửa code. Vào Supabase → **Table Editor → credit_packages**,
 
 Không đổi `id` của gói đã có đơn hàng; muốn bỏ gói thì bỏ chọn `active`.
 
+## Đổi số phút tặng khi đăng ký
+
+Vào Supabase → **Table Editor → app_settings**, sửa `value` của dòng `signup_bonus_minutes`
+(vd. `120`) rồi lưu. Tài khoản đăng ký sau đó nhận số phút mới; trang web hiển thị ngay.
+Tài khoản đã có không thay đổi.
+
 ## Deploy lên Cloudflare
 
 Repo đã được kết nối với Worker `web` (Workers & Pages → Import a repository);
