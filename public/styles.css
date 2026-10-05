@@ -1,5 +1,5 @@
 :root {
-  /* Light is the default; the nav toggle sets data-theme="dark" on <html>. */
+  /* Light palette; dark (data-theme="dark" on <html>) is the default, set before paint unless the visitor chose light. */
   --deep: #f6f5fb;
   --surface: rgba(255, 255, 255, .74);
   --surface-strong: rgba(255, 255, 255, .94);

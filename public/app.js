@@ -31,7 +31,7 @@
     }).catch(() => {})
   }
 
-  // Light by default; the toggle remembers dark for this browser.
+  // Dark by default; the toggle remembers the choice for this browser.
   const toggle = document.getElementById('theme-toggle')
   if (toggle) toggle.addEventListener('click', () => {
     const dark = document.documentElement.dataset.theme !== 'dark'
