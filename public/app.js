@@ -31,6 +31,34 @@
     }).catch(() => {})
   }
 
+  // Light by default; the toggle remembers dark for this browser.
+  const toggle = document.getElementById('theme-toggle')
+  if (toggle) toggle.addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme !== 'dark'
+    if (dark) document.documentElement.dataset.theme = 'dark'
+    else delete document.documentElement.dataset.theme
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#0e0b22' : '#f6f5fb'
+    try { localStorage.setItem('vietnote.theme', dark ? 'dark' : 'light') } catch {}
+  })
+
+  // Downloading for macOS: the installer keeps downloading while the install video plays.
+  const guide = document.getElementById('mac-guide')
+  if (guide && typeof guide.showModal === 'function') {
+    const video = guide.querySelector('video')
+    document.querySelectorAll('[data-downloads] [data-os="mac"]').forEach(link => link.addEventListener('click', () => {
+      document.querySelectorAll('video').forEach(v => { if (v !== video) v.pause() })
+      guide.showModal()
+      video.currentTime = 0
+      video.play().catch(() => {})
+    }))
+    guide.addEventListener('click', event => {
+      const box = guide.getBoundingClientRect()
+      const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom
+      if ((event.target === guide && outside) || event.target.closest('[data-close]')) guide.close()
+    })
+    guide.addEventListener('close', () => video.pause())
+  }
+
   const pricing = document.querySelector('[data-pricing]')
   if (pricing && config) {
     rpc('credit_offers').catch(() => []).then(offers => {
