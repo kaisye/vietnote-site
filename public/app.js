@@ -41,11 +41,11 @@
     try { localStorage.setItem('vietnote.theme', dark ? 'dark' : 'light') } catch {}
   })
 
-  // Downloading for macOS: the installer keeps downloading while the install video plays.
-  const guide = document.getElementById('mac-guide')
-  if (guide && typeof guide.showModal === 'function') {
+  // Downloading: the installer keeps downloading while that OS's install video plays.
+  document.querySelectorAll('dialog.guide[data-os]').forEach(guide => {
+    if (typeof guide.showModal !== 'function') return
     const video = guide.querySelector('video')
-    document.querySelectorAll('[data-downloads] [data-os="mac"]').forEach(link => link.addEventListener('click', () => {
+    document.querySelectorAll(`[data-downloads] [data-os="${guide.dataset.os}"]`).forEach(link => link.addEventListener('click', () => {
       document.querySelectorAll('video').forEach(v => { if (v !== video) v.pause() })
       guide.showModal()
       video.currentTime = 0
@@ -57,7 +57,7 @@
       if ((event.target === guide && outside) || event.target.closest('[data-close]')) guide.close()
     })
     guide.addEventListener('close', () => video.pause())
-  }
+  })
 
   const pricing = document.querySelector('[data-pricing]')
   if (pricing && config) {

@@ -172,7 +172,7 @@
     </section>
   </main>
 
-  <dialog class="guide" id="mac-guide" aria-labelledby="mac-guide-title">
+  <dialog class="guide" id="mac-guide" data-os="mac" aria-labelledby="mac-guide-title">
     <button class="guide-close" type="button" data-close aria-label="Đóng">×</button>
     <div class="guide-done" aria-hidden="true">↓</div>
     <h2 id="mac-guide-title">VietNote đang được tải về</h2>
@@ -186,6 +186,20 @@
       <li>Nếu được hỏi về Keychain: nhập mật khẩu đăng nhập máy Mac, chọn <b>Always Allow</b>.</li>
     </ol>
     <p class="fine">Chưa thấy tệp tải về? <a href="/download/mac">Tải lại</a></p>
+  </dialog>
+
+  <dialog class="guide" id="windows-guide" data-os="windows" aria-labelledby="windows-guide-title">
+    <button class="guide-close" type="button" data-close aria-label="Đóng">×</button>
+    <div class="guide-done" aria-hidden="true">↓</div>
+    <h2 id="windows-guide-title">VietNote đang được tải về</h2>
+    <p class="section-lead">Trình duyệt hoặc Windows có thể cảnh báo vì VietNote còn mới. Xem video 18 giây để cài nhanh.</p>
+    <video controls playsinline preload="none" poster="/assets/cai-dat-windows.jpg" src="/assets/cai-dat-windows.mp4" aria-label="Video hướng dẫn cài VietNote trên Windows"></video>
+    <ol class="install-steps">
+      <li>Nếu trình duyệt báo tệp <b>không phổ biến</b>: bấm <b>···</b> cạnh tệp vừa tải, chọn <b>Keep</b>.</li>
+      <li>Bấm mũi tên cạnh nút <b>Delete</b>, chọn <b>Keep anyway</b> (đừng bấm Delete).</li>
+      <li>Mở tệp cài. Nếu thấy “Windows protected your PC”: bấm <b>More info</b> rồi <b>Run anyway</b>.</li>
+    </ol>
+    <p class="fine">Chưa thấy tệp tải về? <a href="/download/windows">Tải lại</a></p>
   </dialog>
 
   <footer class="footer">
