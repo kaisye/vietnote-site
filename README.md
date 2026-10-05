@@ -8,7 +8,7 @@ Trang giới thiệu và tải VietNote. HTML tĩnh trong `public/`, chạy bằ
 | `public/thanh-toan.html` | Trang payOS chuyển về sau khi thanh toán (`/thanh-toan`) |
 | `public/app.js` | Tải bảng giá từ Supabase, ưu tiên nút tải theo hệ điều hành |
 | `public/config.js` | Địa chỉ Supabase và anon key (công khai theo thiết kế) |
-| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub |
+| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub; video `.mp4` được trả theo từng đoạn (Range) để tua được |
 
 ## Đổi giá và khuyến mãi
 
