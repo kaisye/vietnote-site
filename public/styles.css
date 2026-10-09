@@ -92,7 +92,7 @@ img, video { display: block; max-width: 100%; }
 .nav.scrolled { background: var(--nav-bg); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); box-shadow: 0 1px 0 var(--border); }
 .nav-inner { display: flex; align-items: center; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 14px 24px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
-.mark { width: 28px; height: 28px; fill: var(--violet); transition: transform .5s var(--ease); }
+.mark { width: 30px; height: 30px; border-radius: 7px; box-shadow: 0 4px 12px -4px rgba(82, 106, 222, .55); transition: transform .5s var(--ease); }
 .brand:hover .mark { transform: rotate(-8deg) scale(1.06); }
 .nav nav { display: flex; gap: 4px; margin-left: auto; font-size: 14.5px; font-weight: 500; color: var(--muted); }
 .nav nav a { padding: 8px 12px; border-radius: 10px; transition: color .15s, background .15s; }
@@ -281,13 +281,14 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .final h2 { color: #fff; }
 .final .section-lead { color: rgba(255, 255, 255, .78); }
 .final .cta-row { justify-content: center; }
-.fold { width: 112px; height: 112px; margin-bottom: 26px; overflow: visible; filter: drop-shadow(0 18px 30px rgba(20, 12, 90, .35)); }
+.fold { width: 120px; height: 120px; margin-bottom: 28px; overflow: visible; filter: drop-shadow(0 20px 34px rgba(20, 12, 90, .4)); }
+.fold-tile { fill: #526ade; }
 .face-left { fill: #fff; }
 .face-fold { fill: #d4cefa; }
 .face-right { fill: #f4f2ff; }
 .js .final .face { opacity: 0; }
 .js .final.in .face-left { animation: face-left .8s var(--ease) .1s both; }
-.js .final.in .face-fold { animation: face-fold .8s var(--ease) .35s both; transform-origin: 168px 220px; }
+.js .final.in .face-fold { animation: face-fold .8s var(--ease) .35s both; transform-origin: 195px 312px; }
 .js .final.in .face-right { animation: face-right .8s var(--ease) .6s both; }
 .js .final.in .fold { animation: float 6s ease-in-out 1.6s infinite; }
 @keyframes face-left { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: none; } }
@@ -296,7 +297,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 .footer { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; max-width: 1200px; margin: 96px auto 0; padding: 28px 24px 44px; border-top: 1px solid var(--border); font-size: 14px; color: var(--muted); }
 .footer .brand { margin-right: auto; font-size: 16px; color: var(--ink); }
-.footer .mark { width: 22px; height: 22px; }
+.footer .mark { width: 24px; height: 24px; border-radius: 6px; }
 .footer a:hover { color: var(--violet); }
 
 /* Scroll reveal: hidden only when JS runs, so content never goes missing */
