@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thanh toán · VietNote</title>
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0e0b22">
-  <script>document.documentElement.dataset.theme = 'dark'; try { if (localStorage.getItem('vietnote.theme') === 'light') delete document.documentElement.dataset.theme } catch {}</script>
+  <meta name="theme-color" content="#ffffff">
+  <script>try { if (localStorage.getItem('vietnote.theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch {}</script>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="atmosphere" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="grid"></i></div>
-  <header class="nav"><a class="brand" href="/"><img src="/assets/logo.svg" alt="" width="34" height="34"><span>VietNote</span></a></header>
+  <div class="atmosphere" aria-hidden="true"><i class="glow g1"></i><i class="glow g2"></i><i class="grid"></i></div>
+  <header class="nav"><div class="nav-inner"><a class="brand" href="/"><svg class="mark" viewBox="72 24 304 304" aria-hidden="true"><path d="M80 80 168 32v136l112-64 88 48v120l-88 48V216l-112 64-88-48Z"/></svg><span>VietNote</span></a></div></header>
   <main class="result">
     <div class="result-card" id="card">
-      <div class="mark" id="mark">✓</div>
+      <div class="mark-badge" id="mark">✓</div>
       <h1 id="title">Thanh toán thành công</h1>
       <p id="text">Số giờ đã được cộng vào tài khoản. Quay lại ứng dụng VietNote để tiếp tục, số giờ mới sẽ hiện sau vài giây.</p>
       <p class="order" id="order"></p>
