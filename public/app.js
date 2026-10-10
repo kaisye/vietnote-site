@@ -37,7 +37,7 @@
     const dark = document.documentElement.dataset.theme !== 'dark'
     if (dark) document.documentElement.dataset.theme = 'dark'
     else delete document.documentElement.dataset.theme
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#111022' : '#ffffff'
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#170f18' : '#ffffff'
     try { localStorage.setItem('vietnote.theme', dark ? 'dark' : 'light') } catch {}
   })
 
@@ -110,7 +110,7 @@
   const demo = document.querySelector('.demo')
   const lines = demo?.querySelector('[data-demo-lines]'), points = demo?.querySelector('[data-demo-points]')
   if (demo && lines && points) {
-    const people = { Sarah: '#2f9e8f', Minh: '#526ade', Linh: '#6253d4' }
+    const people = { Sarah: '#2f9e8f', Minh: '#c42cb8', Linh: '#d81e73' }
     const script = [
       { who: 'Sarah', at: '00:12', text: 'Can we lock the launch date for the mobile app?', vi: 'Mình chốt ngày ra mắt app mobile nhé?' },
       { who: 'Minh', at: '00:31', text: 'Bản beta cần thêm một tuần để sửa lỗi thanh toán.' },
