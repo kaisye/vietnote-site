@@ -84,7 +84,8 @@ img, video { display: block; max-width: 100%; }
 .grid { position: absolute; inset: 0; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 56px 56px; -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 20%, transparent 75%); }
 @keyframes drift { to { transform: translate3d(60px, 40px, 0) scale(1.1); } }
 
-.accent { background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* Vertical padding lets the clipped background reach stacked Vietnamese marks (ữ, ễ, ỗ) above the line box. */
+.accent { padding: .14em 0; background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .eyebrow { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .2em; color: var(--violet); }
 
 /* Nav: transparent at the top, frosted once the page scrolls */
