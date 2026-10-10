@@ -37,7 +37,7 @@
     const dark = document.documentElement.dataset.theme !== 'dark'
     if (dark) document.documentElement.dataset.theme = 'dark'
     else delete document.documentElement.dataset.theme
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#170f18' : '#ffffff'
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#111014' : '#fbfbfc'
     try { localStorage.setItem('vietnote.theme', dark ? 'dark' : 'light') } catch {}
   })
 

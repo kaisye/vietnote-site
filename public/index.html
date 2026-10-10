@@ -10,7 +10,7 @@
   <meta property="og:image" content="/assets/og-v3.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fbfbfc">
   <script>document.documentElement.classList.add('js'); try { if (localStorage.getItem('vietnote.theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch {}</script>
   <link rel="icon" href="/assets/logo-v3.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,10 +45,32 @@
 
   <main>
     <section class="hero">
+      <!-- The four cards read as the flow: hear, translate and read aloud, summarise, assign. -->
+      <div class="hero-cards" aria-hidden="true">
+        <div class="hf hf-hear">
+          <p class="hf-step"><i>1</i>Nghe cuộc họp</p>
+          <div class="hf-head"><span class="who" style="background:#2f9e8f">D</span><b>Daniel</b><span class="hf-app">Zoom</span></div>
+          <p class="hf-text">Let's sign the contract next Monday.</p>
+        </div>
+        <div class="hf hf-dub">
+          <p class="hf-step"><i>2</i>Dịch và đọc to</p>
+          <p class="hf-vi">Thứ Hai tuần sau mình ký hợp đồng nhé.</p>
+          <span class="hf-speak"><span class="demo-wave"><b></b><b></b><b></b><b></b><b></b></span>Đang đọc · giọng nam</span>
+        </div>
+        <div class="hf hf-sum">
+          <p class="hf-step"><i>3</i>Tóm tắt</p>
+          <small>QUYẾT ĐỊNH</small>
+          <p>Ký hợp đồng vào thứ Hai, 20/10.</p>
+        </div>
+        <div class="hf hf-task">
+          <p class="hf-step"><i>4</i>Việc cần làm</p>
+          <div class="hf-row"><span class="check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span><p><b>Lan</b> · Gửi bản hợp đồng cuối<em>Hạn: thứ Sáu</em></p></div>
+        </div>
+      </div>
       <div class="hero-copy">
-        <a class="pill" href="#ai-viet" data-reveal><span class="pill-tag">Mới</span>AI viết bài từ buổi workshop 3 tiếng<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
-        <h1 data-reveal><span class="nowrap">Tóm tắt cuộc họp</span><br><span class="accent"><span class="nowrap">Đa nền tảng ·</span> <span class="nowrap">Đa ngôn ngữ</span></span></h1>
-        <p class="lead" data-reveal>Hai tiếng họp, ba thứ tiếng, hàng trăm câu nói. VietNote tóm tắt ý chính và quyết định ngay trong lúc mọi người đang nói, và cho bạn biết ai làm việc gì, hạn khi nào ngay khi cuộc họp vừa kết thúc.</p>
+        <a class="pill" href="#tinh-nang" data-reveal><span class="pill-tag">Mới</span>Lồng tiếng trực tiếp bằng giọng Việt<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+        <h1 data-reveal><span class="nowrap">Họp tiếng nào cũng hiểu,</span> <br><span class="nowrap">họp xong là biết việc.</span></h1>
+        <p class="lead" data-reveal>VietNote nghe cuộc họp cùng bạn trên Zoom, Google Meet, Teams: dịch từng câu sang tiếng Việt, đọc bản dịch bằng giọng Việt, rồi tóm tắt ý chính, ai làm gì, hạn khi nào.</p>
         <div class="cta-row" data-downloads data-reveal>
           <a class="btn btn-primary" data-os="mac" href="/download/mac">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.8 1.2 1.8 2.6 3.1 2.5 1.3-.1 1.7-.8 3.3-.8 1.5 0 2 .8 3.3.8 1.4 0 2.2-1.2 3-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.7-4zM14 5.2c.7-.8 1.2-2 1-3.2-1 0-2.2.7-3 1.5-.6.7-1.2 1.9-1 3.1 1.1.1 2.3-.6 3-1.4z"/></svg>
@@ -61,6 +83,9 @@
         </div>
         <p class="fine" data-reveal>Miễn phí tải về · Tặng <b data-signup-bonus>120 phút</b> dùng thử · macOS Apple Silicon · Windows 10/11</p>
       </div>
+    </section>
+
+    <section class="hero-demo">
 
       <div class="demo" data-reveal aria-label="Minh hoạ: VietNote tóm tắt một cuộc họp đang diễn ra" role="img">
         <div class="demo-window" id="demo">
