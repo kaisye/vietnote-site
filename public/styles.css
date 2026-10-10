@@ -93,7 +93,7 @@ img, video { display: block; max-width: 100%; }
 .nav.scrolled { background: var(--nav-bg); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); box-shadow: 0 1px 0 var(--border); }
 .nav-inner { display: flex; align-items: center; gap: 28px; max-width: 1200px; margin: 0 auto; padding: 14px 24px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
-.mark { width: 30px; height: 30px; border-radius: 7px; box-shadow: 0 4px 12px -4px rgba(82, 106, 222, .55); transition: transform .5s var(--ease); }
+.mark { width: 30px; height: 30px; border-radius: 7px; box-shadow: 0 0 0 1px rgba(37, 35, 59, .08), 0 4px 12px -4px rgba(239, 49, 132, .5); transition: transform .5s var(--ease); }
 .brand:hover .mark { transform: rotate(-8deg) scale(1.06); }
 .nav nav { display: flex; gap: 4px; margin-left: auto; font-size: 14.5px; font-weight: 500; color: var(--muted); }
 .nav nav a { padding: 8px 12px; border-radius: 10px; transition: color .15s, background .15s; }
