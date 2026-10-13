@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8fc">
+  <title>Góp ý cho VietNote · Cùng làm sản phẩm tốt hơn</title>
+  <meta name="description" content="Chia sẻ trải nghiệm của bạn để cùng VietNote xây những tính năng hữu ích hơn.">
+  <link rel="icon" href="/assets/logo-v3.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/feedback.css">
+  <script src="/config.js" defer></script>
+  <script src="/feedback.js" defer></script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Về trang chủ VietNote">
+      <img src="/assets/logo-v3.svg" alt="" width="36" height="36">
+      <span>VietNote</span>
+    </a>
+    <span class="founding-badge"><i></i>100 người dùng đầu tiên</span>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="celebrate" aria-hidden="true">
+        <span>✦</span><span>●</span><span>✦</span><span>●</span><span>✦</span>
+      </div>
+      <p class="eyebrow">MỘT CỘT MỐC NHỎ, MỘT LỜI CẢM ƠN LỚN</p>
+      <h1 id="page-title">Cảm ơn bạn đã là một trong <span>100 người đầu tiên</span> của VietNote.</h1>
+      <p class="intro-copy">Bạn đã tin dùng VietNote từ những ngày đầu - điều đó thật sự có ý nghĩa với chúng tôi. Hãy dành khoảng <b>3 phút</b> chia sẻ trải nghiệm để những bản cập nhật tiếp theo giải quyết đúng điều bạn cần.</p>
+      <div class="promise-row" aria-label="Cam kết khảo sát">
+        <span><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Khoảng 3 phút</span>
+        <span><svg viewBox="0 0 24 24"><path d="M8 11V7a4 4 0 0 1 8 0v4M6 11h12v10H6z"/></svg>Ý kiến được bảo mật</span>
+        <span><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>Mọi góp ý đều được đọc</span>
+      </div>
+    </section>
+
+    <section class="survey-shell" aria-label="Biểu mẫu góp ý">
+      <aside class="survey-aside">
+        <div class="aside-sticky">
+          <span class="step-label">TIẾN ĐỘ</span>
+          <strong><span data-progress-text>0</span>%</strong>
+          <div class="progress-track" aria-hidden="true"><i data-progress-bar></i></div>
+          <p>Mỗi câu trả lời giúp chúng tôi ưu tiên đúng việc cho phiên bản tiếp theo.</p>
+          <blockquote>“Xây VietNote cùng bạn, không chỉ cho bạn.”</blockquote>
+        </div>
+      </aside>
+
+      <form id="feedback-form" novalidate>
+        <label class="website-field" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="question-card" data-question data-required>
+          <div class="question-head"><span>01</span><div><h2>Trải nghiệm tổng thể của bạn thế nào?</h2><p>Chọn cảm nhận gần nhất.</p></div></div>
+          <fieldset class="rating" aria-label="Đánh giá trải nghiệm tổng thể">
+            <label><input type="radio" name="rating" value="1" required><span>1</span><small>Chưa tốt</small></label>
+            <label><input type="radio" name="rating" value="2"><span>2</span><small>Cần cải thiện</small></label>
+            <label><input type="radio" name="rating" value="3"><span>3</span><small>Ổn</small></label>
+            <label><input type="radio" name="rating" value="4"><span>4</span><small>Tốt</small></label>
+            <label><input type="radio" name="rating" value="5"><span>5</span><small>Rất thích</small></label>
+          </fieldset>
+          <p class="field-error" role="alert">Vui lòng chọn một mức đánh giá.</p>
+        </div>
+
+        <div class="question-card" data-question>
+          <div class="question-head"><span>02</span><div><h2>Bạn thường dùng VietNote cho việc gì?</h2><p>Có thể chọn nhiều mục.</p></div></div>
+          <fieldset class="choices">
+            <label><input type="checkbox" name="use_case" value="Họp online"><span>💬</span>Họp online</label>
+            <label><input type="checkbox" name="use_case" value="Học tập / khóa học"><span>📚</span>Học tập / khóa học</label>
+            <label><input type="checkbox" name="use_case" value="Xem video nước ngoài"><span>▶</span>Xem video nước ngoài</label>
+            <label><input type="checkbox" name="use_case" value="Phỏng vấn / nghiên cứu"><span>🎙</span>Phỏng vấn / nghiên cứu</label>
+            <label><input type="checkbox" name="use_case" value="Viết tài liệu"><span>✎</span>Viết tài liệu</label>
+            <label><input type="checkbox" name="use_case" value="Khác"><span>＋</span>Mục đích khác</label>
+          </fieldset>
+        </div>
+
+        <div class="question-card" data-question>
+          <div class="question-head"><span>03</span><div><h2>Điều nào mô tả bạn đúng nhất?</h2><p>Không bắt buộc. Thông tin này giúp chúng tôi hiểu nhu cầu của từng nhóm người dùng.</p></div></div>
+          <fieldset class="choices">
+            <label><input type="radio" name="occupation" value="Sinh viên / học viên"><span>🎓</span>Sinh viên / học viên</label>
+            <label><input type="radio" name="occupation" value="Nhân viên văn phòng"><span>💼</span>Nhân viên văn phòng</label>
+            <label><input type="radio" name="occupation" value="Quản lý / chủ doanh nghiệp"><span>📈</span>Quản lý / chủ doanh nghiệp</label>
+            <label><input type="radio" name="occupation" value="Giáo viên / giảng viên"><span>🧑‍🏫</span>Giáo viên / giảng viên</label>
+            <label><input type="radio" name="occupation" value="Nghiên cứu / phỏng vấn"><span>🔎</span>Nghiên cứu / phỏng vấn</label>
+            <label><input type="radio" name="occupation" value="Nhà sáng tạo nội dung"><span>✨</span>Nhà sáng tạo nội dung</label>
+            <label><input type="radio" name="occupation" value="Lập trình viên / kỹ thuật"><span>⌘</span>Lập trình viên / kỹ thuật</label>
+            <label><input type="radio" name="occupation" value="Khác"><span>＋</span>Khác</label>
+          </fieldset>
+        </div>
+
+        <div class="question-card" data-question data-required>
+          <div class="question-head"><span>04</span><div><h2>Điều gì ở VietNote hữu ích nhất với bạn?</h2><p>Một khoảnh khắc, tính năng hay kết quả cụ thể đều rất quý.</p></div></div>
+          <label class="textarea-wrap">
+            <textarea name="most_useful" rows="4" maxlength="800" required placeholder="Ví dụ: Mình xem khóa học tiếng Anh và phần dịch trực tiếp giúp theo kịp nội dung…"></textarea>
+            <span><b data-count-for="most_useful">0</b>/800</span>
+          </label>
+          <p class="field-error" role="alert">Hãy chia sẻ ít nhất một điều bạn thấy hữu ích.</p>
+        </div>
+
+        <div class="question-card" data-question>
+          <div class="question-head"><span>05</span><div><h2>Điều gì đang làm bạn mất thời gian hoặc chưa hài lòng?</h2><p>Lỗi nhỏ, thao tác khó hiểu hay kết quả chưa như ý—cứ nói thật nhé.</p></div></div>
+          <label class="textarea-wrap">
+            <textarea name="friction" rows="4" maxlength="1000" placeholder="Ví dụ: Mình chưa biết tìm lại bản ghi cũ ở đâu…"></textarea>
+            <span><b data-count-for="friction">0</b>/1000</span>
+          </label>
+        </div>
+
+        <div class="question-card" data-question>
+          <div class="question-head"><span>06</span><div><h2>Nếu VietNote có thêm một tính năng, bạn muốn đó là gì?</h2><p>Đừng ngại đề xuất lớn—đây là nơi cho những ý tưởng mới.</p></div></div>
+          <label class="textarea-wrap">
+            <textarea name="feature_request" rows="4" maxlength="1000" placeholder="Mình mong VietNote có thể…"></textarea>
+            <span><b data-count-for="feature_request">0</b>/1000</span>
+          </label>
+        </div>
+
+        <div class="question-card" data-question data-required>
+          <div class="question-head"><span>07</span><div><h2>Bạn có sẵn lòng giới thiệu VietNote không?</h2><p>0 là “không”, 10 là “chắc chắn có”.</p></div></div>
+          <fieldset class="nps" aria-label="Khả năng giới thiệu VietNote từ 0 đến 10">
+            <div class="nps-scale">
+              <label><input type="radio" name="nps" value="0" required><span>0</span></label><label><input type="radio" name="nps" value="1"><span>1</span></label><label><input type="radio" name="nps" value="2"><span>2</span></label><label><input type="radio" name="nps" value="3"><span>3</span></label><label><input type="radio" name="nps" value="4"><span>4</span></label><label><input type="radio" name="nps" value="5"><span>5</span></label><label><input type="radio" name="nps" value="6"><span>6</span></label><label><input type="radio" name="nps" value="7"><span>7</span></label><label><input type="radio" name="nps" value="8"><span>8</span></label><label><input type="radio" name="nps" value="9"><span>9</span></label><label><input type="radio" name="nps" value="10"><span>10</span></label>
+            </div>
+            <div class="nps-caption"><span>Không</span><span>Chắc chắn có</span></div>
+          </fieldset>
+          <p class="field-error" role="alert">Vui lòng chọn một con số.</p>
+        </div>
+
+        <div class="submit-row">
+          <p>Nhấn gửi là bạn đang giúp phiên bản VietNote tiếp theo tốt hơn 💗</p>
+          <button class="submit-button" type="submit"><span>Gửi góp ý</span><svg viewBox="0 0 24 24"><path d="m5 12 14-7-5 14-3-6-6-1Z"/></svg></button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <dialog id="thank-you">
+    <div class="success-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></div>
+    <p class="eyebrow">ĐÃ NHẬN GÓP Ý</p>
+    <h2>Cảm ơn bạn đã cùng xây VietNote.</h2>
+    <p>Từng chia sẻ của bạn sẽ được đội ngũ đọc và đưa vào quá trình ưu tiên sản phẩm.</p>
+    <button type="button" data-close>Hoàn tất</button>
+  </dialog>
+
+  <footer><a href="/">VietNote</a><span>·</span><a href="mailto:vietdub.contact@gmail.com">vietdub.contact@gmail.com</a></footer>
+</body>
+</html>

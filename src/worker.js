@@ -1,14 +1,93 @@
-// Static pages come from public/; /download/* and videos run code.
+// Static pages come from public/; API, downloads and videos run code.
 import { download } from './download.js'
 
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url)
+    if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
     const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
     if (match) return download(match[1])
     const response = await env.ASSETS.fetch(request)
     return pathname.endsWith('.mp4') ? withRange(request, response) : response
   },
+}
+
+const USE_CASES = new Set([
+  'Họp online', 'Học tập / khóa học', 'Xem video nước ngoài',
+  'Phỏng vấn / nghiên cứu', 'Viết tài liệu', 'Khác',
+])
+const OCCUPATIONS = new Set([
+  'Sinh viên / học viên', 'Nhân viên văn phòng', 'Quản lý / chủ doanh nghiệp',
+  'Giáo viên / giảng viên', 'Nghiên cứu / phỏng vấn', 'Nhà sáng tạo nội dung',
+  'Lập trình viên / kỹ thuật', 'Khác',
+])
+
+async function saveFeedback(request, env) {
+  if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405, { Allow: 'POST' })
+
+  const origin = request.headers.get('Origin')
+  if (origin && origin !== new URL(request.url).origin) return json({ error: 'Origin not allowed' }, 403)
+  if (!env.SUPABASE_URL || !env.SUPABASE_SECRET_KEY) return json({ error: 'Feedback service is not configured' }, 503)
+
+  let body
+  try {
+    const raw = await request.text()
+    if (raw.length > 12_000) return json({ error: 'Payload too large' }, 413)
+    body = JSON.parse(raw)
+  } catch {
+    return json({ error: 'Invalid JSON' }, 400)
+  }
+
+  // Bots commonly complete fields hidden from people. Pretend success without storing it.
+  if (body.website) return json({ ok: true })
+
+  const rating = Number(body.rating)
+  const nps = Number(body.nps)
+  const useCase = Array.isArray(body.use_case) ? [...new Set(body.use_case.filter(value => USE_CASES.has(value)))].slice(0, 6) : []
+  const occupation = OCCUPATIONS.has(body.occupation) ? body.occupation : null
+  const mostUseful = clean(body.most_useful, 800)
+  const friction = clean(body.friction, 1000)
+  const featureRequest = clean(body.feature_request, 1000)
+
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5 || !Number.isInteger(nps) || nps < 0 || nps > 10 || !mostUseful) {
+    return json({ error: 'Invalid feedback' }, 422)
+  }
+
+  const response = await fetch(`${env.SUPABASE_URL}/rest/v1/feedback_responses`, {
+    method: 'POST',
+    headers: {
+      apikey: env.SUPABASE_SECRET_KEY,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify({
+      rating,
+      use_case: useCase,
+      occupation,
+      most_useful: mostUseful,
+      friction,
+      feature_request: featureRequest,
+      nps,
+      source: 'first_100',
+    }),
+  })
+
+  if (!response.ok) {
+    console.error('Supabase feedback insert failed', response.status, await response.text())
+    return json({ error: 'Could not save feedback' }, 502)
+  }
+  return json({ ok: true }, 201)
+}
+
+function clean(value, maxLength) {
+  return typeof value === 'string' ? value.trim().slice(0, maxLength) : ''
+}
+
+function json(body, status = 200, extraHeaders = {}) {
+  return Response.json(body, {
+    status,
+    headers: { 'Cache-Control': 'no-store', ...extraHeaders },
+  })
 }
 
 // The asset server answers a Range request with the whole file, so browsers can't seek.
