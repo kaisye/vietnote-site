@@ -8,7 +8,25 @@ Trang giới thiệu và tải VietNote. HTML tĩnh trong `public/`, chạy bằ
 | `public/thanh-toan.html` | Trang payOS chuyển về sau khi thanh toán (`/thanh-toan`) |
 | `public/app.js` | Tải bảng giá từ Supabase, ưu tiên nút tải theo hệ điều hành |
 | `public/config.js` | Địa chỉ Supabase và anon key (công khai theo thiết kế) |
-| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub; video `.mp4` được trả theo từng đoạn (Range) để tua được |
+| `public/feedback.html` | Form khảo sát dành cho 100 người dùng đầu tiên (`/feedback`) |
+| `public/email-100-users.html` | Email HTML chúc mừng và mời góp ý; thay `{{name}}`, `{{feedback_url}}` trước khi gửi |
+| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub; video `.mp4` được trả theo từng đoạn (Range) để tua được; `/youtube-player` phục vụ player YouTube có thể nhúng trong app |
+
+## Form góp ý
+
+Form tự lưu nháp trong trình duyệt và gửi JSON tới `/api/feedback`. Cloudflare Worker kiểm tra dữ liệu rồi ghi vào bảng Supabase `feedback_responses` bằng secret `SUPABASE_SECRET_KEY`.
+
+Đặt secret trên Cloudflare:
+
+```bash
+npx wrangler secret put SUPABASE_SECRET_KEY
+```
+
+Để chạy Worker local, tạo `.dev.vars` (file này đã được gitignore):
+
+```text
+SUPABASE_SECRET_KEY=sb_secret_...
+```
 
 ## Đổi giá và khuyến mãi
 
