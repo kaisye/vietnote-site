@@ -8,9 +8,7 @@ export default {
     const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
     if (match) return download(match[1])
     if (pathname === '/youtube-player' || pathname === '/youtube-player/') {
-      const assetUrl = new URL(request.url)
-      assetUrl.pathname = '/youtube-player.html'
-      const asset = await env.ASSETS.fetch(new Request(assetUrl, request))
+      const asset = await env.ASSETS.fetch(request)
       const headers = new Headers(asset.headers)
       headers.delete('X-Frame-Options')
       return new Response(asset.body, { status: asset.status, statusText: asset.statusText, headers })
