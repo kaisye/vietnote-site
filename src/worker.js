@@ -1,10 +1,12 @@
 // Static pages come from public/; API, downloads and videos run code.
 import { download } from './download.js'
+import { admin } from './admin.js'
 
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url)
     if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
+    if (pathname.startsWith('/api/admin/')) return admin(request, env, pathname.slice('/api/admin/'.length))
     const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
     if (match) return download(match[1])
     if (pathname === '/youtube-player' || pathname === '/youtube-player/') {

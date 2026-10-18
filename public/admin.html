@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#fff8fc">
+  <title>VietNote Admin</title>
+  <link rel="icon" href="/assets/logo-v3.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/admin.css">
+  <script src="/admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><img src="/assets/logo-v3.svg" alt="" width="32" height="32"><span>VietNote</span><small>Admin</small></a>
+    <div class="actions" hidden>
+      <span class="updated"></span>
+      <button type="button" class="ghost" data-refresh>Làm mới</button>
+      <button type="button" class="ghost" data-logout>Đăng xuất</button>
+    </div>
+  </header>
+
+  <main>
+    <form class="login card" hidden>
+      <h1>Đăng nhập</h1>
+      <label>Tài khoản<input name="user" autocomplete="username" required></label>
+      <label>Mật khẩu<input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="error" role="alert"></p>
+      <button type="submit">Đăng nhập</button>
+    </form>
+
+    <section class="dashboard" hidden>
+      <div class="kpis"></div>
+
+      <article class="card notes">
+        <header><h2>Nhận xét và hướng đi</h2><small>Tự động từ số liệu bên dưới</small></header>
+        <ul class="insights"></ul>
+      </article>
+
+      <div class="grid">
+        <article class="card wide">
+          <header><h2>Người dùng mỗi ngày</h2><span class="legend"><i class="swatch active"></i>Hoạt động<i class="swatch signups"></i>Đăng ký mới</span></header>
+          <div class="chart" data-chart="users"></div>
+        </article>
+        <article class="card wide">
+          <header><h2>Doanh thu và chi phí mỗi ngày</h2><span class="legend"><i class="swatch revenue"></i>Doanh thu<i class="swatch cost"></i>Chi phí</span></header>
+          <div class="chart" data-chart="money"></div>
+        </article>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <header><h2>Tính năng · 7 ngày</h2></header>
+          <div class="table-wrap"><table data-table="features"></table></div>
+        </article>
+        <article class="card">
+          <header><h2>Quay lại sau khi dùng thử</h2><small>Tính trên người đã dùng thử. Nhóm chưa đủ ngày hiện mờ.</small></header>
+          <div class="table-wrap"><table data-table="cohorts"></table></div>
+        </article>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <header><h2>Người dùng tốn chi phí nhất</h2></header>
+          <div class="table-wrap"><table data-table="top_users"></table></div>
+        </article>
+        <article class="card">
+          <header><h2>Đơn hàng mới nhất</h2></header>
+          <div class="table-wrap"><table data-table="orders"></table></div>
+        </article>
+      </div>
+    </section>
+    <p class="loading">Đang tải…</p>
+  </main>
+</body>
+</html>

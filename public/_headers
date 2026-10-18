@@ -6,3 +6,15 @@
 
 /assets/*
   Cache-Control: public, max-age=604800
+
+# The app frames this page to play YouTube videos under its own subtitles.
+/youtube-player
+  ! X-Frame-Options
+/youtube-player.html
+  ! X-Frame-Options
+
+# The admin dashboard stays out of search results.
+/admin
+  X-Robots-Tag: noindex, nofollow
+/admin.html
+  X-Robots-Tag: noindex, nofollow

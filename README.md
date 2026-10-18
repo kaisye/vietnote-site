@@ -59,3 +59,12 @@ Deploy tay: `npx wrangler deploy`. Xem thử trên máy (có cả `/download/*`)
 
 Khi đổi domain, đặt secret `SITE_URL` của Supabase thành domain mới
 (để payOS chuyển về đúng trang `/thanh-toan`).
+
+## Trang quản trị (`/admin`)
+
+Số liệu người dùng, doanh thu, chi phí, tỷ lệ quay lại và đơn hàng, lấy từ hàm Supabase `admin_dashboard()` (chỉ secret key gọi được). Đăng nhập bằng một tài khoản và mật khẩu đặt làm secret của Worker; đổi mật khẩu thì mọi phiên đăng nhập cũ hết hiệu lực.
+
+```bash
+npx wrangler secret put ADMIN_USER
+npx wrangler secret put ADMIN_PASSWORD
+```
