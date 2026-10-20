@@ -88,7 +88,7 @@
       '', `Tính năng mong muốn: ${data.feature_request || 'Không trả lời'}`,
       '', `Khả năng giới thiệu: ${data.nps}/10`,
     ]
-    window.location.href = `mailto:vietdub.contact@gmail.com?subject=${encodeURIComponent('Góp ý từ người dùng VietNote')}&body=${encodeURIComponent(lines.join('\n'))}`
+    window.location.href = `mailto:support@vietnote.vn?subject=${encodeURIComponent('Góp ý từ người dùng VietNote')}&body=${encodeURIComponent(lines.join('\n'))}`
   }
 
   form.addEventListener('input', event => {
