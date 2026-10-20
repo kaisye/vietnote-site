@@ -8,7 +8,7 @@ const SITE = 'https://vietnote.vn'
 const PAGES = new Set(['', '/index', '/feedback', '/thanh-toan', '/admin', '/email-100-users'])
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url)
     const { pathname } = url
     if (url.hostname.endsWith('.workers.dev') && PAGES.has(pathname.replace(/\/$/, '').replace(/\.html$/, ''))) {
@@ -17,7 +17,7 @@ export default {
     if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
     if (pathname.startsWith('/api/admin/')) return admin(request, env, pathname.slice('/api/admin/'.length))
     const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
-    if (match) return download(match[1])
+    if (match) return download(match[1], request, env, ctx)
     if (pathname === '/youtube-player' || pathname === '/youtube-player/') {
       const asset = await env.ASSETS.fetch(request)
       const headers = new Headers(asset.headers)

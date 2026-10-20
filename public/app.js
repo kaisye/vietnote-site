@@ -31,6 +31,20 @@
     }).catch(() => {})
   }
 
+  // Real totals from Supabase, already rounded down to the hundred. Each one shows only
+  // once it is large enough to mean something; until then the line stays hidden.
+  const stats = document.querySelector('[data-stats]')
+  if (config && stats) {
+    rpc('public_stats').then(totals => {
+      const shown = [['users', 100, 'người dùng'], ['downloads', 1000, 'lượt tải']]
+        .filter(([key, min]) => Number.isInteger(totals?.[key]) && totals[key] >= min)
+        .map(([key, , label]) => `<b>${totals[key].toLocaleString('vi-VN')}+</b> ${label}`)
+      if (!shown.length) return
+      stats.innerHTML = shown.join(' · ')
+      stats.hidden = false
+    }).catch(() => {})
+  }
+
   // Light by default; the toggle remembers the choice for this browser.
   const toggle = document.getElementById('theme-toggle')
   if (toggle) toggle.addEventListener('click', () => {
