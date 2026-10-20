@@ -432,3 +432,14 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   .js .final .face { opacity: 1; }
 }
 @media (max-width: 720px) { .art-dub .art-wave { display: none; } .art-dub { height: auto; padding: 14px; } }
+
+/* Real usage totals under the hero buttons; hidden until Supabase answers. */
+.proof { margin-top: 8px; font-size: 14px; color: var(--muted); }
+.proof b { color: var(--ink); font-weight: 700; }
+
+/* Privacy promises: the steps' cards, without numbers. */
+.promises { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; }
+.promises li { padding: 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); }
+.promises b { display: block; margin-bottom: 6px; font-size: 17.5px; font-weight: 700; }
+.promises span { color: var(--muted); font-size: 15px; }
+@media (max-width: 720px) { .promises { grid-template-columns: 1fr; } }
