@@ -2,9 +2,18 @@
 import { download } from './download.js'
 import { admin } from './admin.js'
 
+// Pages moved to vietnote.vn. workers.dev still serves everything installed apps call
+// (/youtube-player, /download, /api, /assets), so only these pages redirect.
+const SITE = 'https://vietnote.vn'
+const PAGES = new Set(['', '/index', '/feedback', '/thanh-toan', '/admin', '/email-100-users'])
+
 export default {
   async fetch(request, env) {
-    const { pathname } = new URL(request.url)
+    const url = new URL(request.url)
+    const { pathname } = url
+    if (url.hostname.endsWith('.workers.dev') && PAGES.has(pathname.replace(/\/$/, '').replace(/\.html$/, ''))) {
+      return Response.redirect(`${SITE}${pathname}${url.search}`, 301)
+    }
     if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
     if (pathname.startsWith('/api/admin/')) return admin(request, env, pathname.slice('/api/admin/'.length))
     const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
