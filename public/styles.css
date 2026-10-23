@@ -371,6 +371,22 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 @keyframes nudge { 50% { transform: translateY(3px); } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px) scale(.98); } }
 
+/* Privacy policy: one readable column, Vietnamese then English */
+.legal { max-width: 760px; margin: 0 auto; padding: 32px 24px 0; }
+.legal-languages { display: inline-flex; gap: 4px; margin-bottom: 28px; padding: 4px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); font-size: 14px; font-weight: 600; }
+.legal-languages a { padding: 6px 14px; border-radius: 9px; color: var(--muted); transition: color .15s, background .15s; }
+.legal-languages a:hover { color: var(--ink); background: var(--mist); }
+.legal-body { padding: 40px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); line-height: 1.7; scroll-margin-top: 24px; }
+.legal-body + .legal-body { margin-top: 32px; }
+.legal-body h1 { font-size: 34px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
+.legal-date { margin-top: 6px; color: var(--faint); font-size: 14px; }
+.legal-body h2 { margin-top: 36px; font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+.legal-body p, .legal-body ul { margin-top: 12px; color: var(--muted); }
+.legal-body ul { padding-left: 22px; }
+.legal-body li + li { margin-top: 8px; }
+.legal-body strong { color: var(--ink); font-weight: 600; }
+.legal-body a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+
 /* Payment result and 404 pages */
 .result { display: grid; place-items: center; min-height: calc(100vh - 80px); padding: 24px; }
 .result-card { width: min(460px, 100%); padding: 44px 32px; text-align: center; border-radius: 26px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); animation: rise .5s var(--ease); }
@@ -422,6 +438,9 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   .section-head { margin-bottom: 36px; }
   .final { padding: 56px 20px; border-radius: 26px; }
   .footer { padding: 24px 16px 36px; }
+  .legal { padding: 20px 16px 0; }
+  .legal-body { padding: 24px 20px; }
+  .legal-body h1 { font-size: 28px; }
   .guide { padding: 28px 16px 20px; }
   .faq summary { font-size: 16px; }
 }
