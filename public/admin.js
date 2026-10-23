@@ -84,9 +84,7 @@ function render(data) {
     { key: 'cost', label: 'Chi phí', color: 'var(--cost)' },
   ], vnd)
 
-  table($('[data-table="features"]'), ['Tính năng', 'Người dùng', 'Giờ', 'Lượt AI', 'Chi phí'], data.features
-    .filter(f => f.hours > 0 || f.ai_requests > 0)
-    .map(f => [FEATURES[f.feature] || f.feature, number.format(f.users), number.format(f.hours), number.format(f.ai_requests), vnd(f.cost_vnd)]))
+  features(data)
 
   table($('[data-table="cohorts"]'), ['Ngày đăng ký', 'Đăng ký', 'Dùng thử', 'Hôm sau', 'Trong 7 ngày'], data.cohorts.slice().reverse()
     .map(c => ({ row: [dayLabel(c.day), c.signed_up, `${c.tried} · ${percent(c.tried, c.signed_up)}`,
@@ -193,6 +191,26 @@ function insights(data) {
 
   const order = { bad: 0, warn: 1, good: 2, info: 3 }
   return list.sort((a, b) => order[a.level] - order[b.level])
+}
+
+// The feature table over the chosen period; a period with no use shows an empty table.
+const RANGES = [[1, '1 ngày'], [3, '3 ngày'], [7, '7 ngày'], [14, '14 ngày'], [30, '1 tháng']]
+let range = 7
+
+function features(data) {
+  const ranges = data.feature_ranges
+  const picker = $('[data-ranges]')
+  picker.hidden = !ranges
+  picker.innerHTML = RANGES.map(([days, label]) => `<button type="button" class="ghost" data-days="${days}" aria-pressed="${days === range}">${label}</button>`).join('')
+  picker.onclick = event => {
+    const button = event.target.closest('[data-days]')
+    if (button) { range = Number(button.dataset.days); features(data) }
+  }
+  $('[data-range-label]').textContent = RANGES.find(([days]) => days === (ranges ? range : 7))[1]
+  const rows = ranges ? ranges[range] ?? [] : data.features
+  table($('[data-table="features"]'), ['Tính năng', 'Người dùng', 'Giờ', 'Lượt AI', 'Chi phí'], rows
+    .filter(f => f.hours > 0 || f.ai_requests > 0)
+    .map(f => [FEATURES[f.feature] || f.feature, number.format(f.users), number.format(f.hours), number.format(f.ai_requests), vnd(f.cost_vnd)]))
 }
 
 function table(element, headings, rows, text = []) {

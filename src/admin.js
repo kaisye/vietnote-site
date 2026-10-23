@@ -45,16 +45,24 @@ async function signedIn(request, env) {
 
 async function dashboard(env) {
   if (!env.SUPABASE_URL || !env.SUPABASE_SECRET_KEY) return json({ error: 'Supabase is not configured' }, 503)
-  const response = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/admin_dashboard`, {
-    method: 'POST',
-    headers: { apikey: env.SUPABASE_SECRET_KEY, 'Content-Type': 'application/json' },
-    body: '{}',
-  })
+  const [response, ranges] = await Promise.all([rpc(env, 'admin_dashboard'), rpc(env, 'admin_feature_ranges')])
   if (!response.ok) {
     console.error('admin_dashboard failed', response.status, await response.text())
     return json({ error: 'Could not load data' }, 502)
   }
-  return json(await response.json())
+  // Without the ranges (say, before their migration runs) the page shows the 7-day table alone.
+  const data = await response.json()
+  if (ranges.ok) data.feature_ranges = await ranges.json()
+  else console.error('admin_feature_ranges failed', ranges.status, await ranges.text())
+  return json(data)
+}
+
+function rpc(env, name) {
+  return fetch(`${env.SUPABASE_URL}/rest/v1/rpc/${name}`, {
+    method: 'POST',
+    headers: { apikey: env.SUPABASE_SECRET_KEY, 'Content-Type': 'application/json' },
+    body: '{}',
+  })
 }
 
 const encoder = new TextEncoder()
