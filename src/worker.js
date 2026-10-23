@@ -5,7 +5,7 @@ import { admin } from './admin.js'
 // Pages moved to vietnote.vn. workers.dev still serves everything installed apps call
 // (/youtube-player, /download, /api, /assets), so only these pages redirect.
 const SITE = 'https://vietnote.vn'
-const PAGES = new Set(['', '/index', '/feedback', '/thanh-toan', '/admin', '/email-100-users'])
+const PAGES = new Set(['', '/index', '/huong-dan', '/feedback', '/thanh-toan', '/admin', '/email-100-users'])
 
 export default {
   async fetch(request, env, ctx) {
