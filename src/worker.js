@@ -39,6 +39,8 @@ const OCCUPATIONS = new Set([
   'Lập trình viên / kỹ thuật', 'Khác',
 ])
 
+const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
+
 async function saveFeedback(request, env) {
   if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405, { Allow: 'POST' })
 
@@ -65,8 +67,9 @@ async function saveFeedback(request, env) {
   const mostUseful = clean(body.most_useful, 800)
   const friction = clean(body.friction, 1000)
   const featureRequest = clean(body.feature_request, 1000)
+  const email = clean(body.email, 254).toLowerCase()
 
-  if (!Number.isInteger(rating) || rating < 1 || rating > 5 || !Number.isInteger(nps) || nps < 0 || nps > 10 || !mostUseful) {
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5 || !Number.isInteger(nps) || nps < 0 || nps > 10 || !mostUseful || !EMAIL.test(email)) {
     return json({ error: 'Invalid feedback' }, 422)
   }
 
@@ -85,7 +88,8 @@ async function saveFeedback(request, env) {
       friction,
       feature_request: featureRequest,
       nps,
-      source: 'first_100',
+      email,
+      source: 'all_users',
     }),
   })
 

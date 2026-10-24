@@ -21,13 +21,14 @@
       friction: String(data.get('friction') || '').trim(),
       feature_request: String(data.get('feature_request') || '').trim(),
       nps: data.get('nps') || '',
+      email: String(data.get('email') || '').trim(),
       website: String(data.get('website') || ''),
     }
   }
 
   const cardAnswered = card => {
     const controls = [...card.querySelectorAll('input, textarea')]
-    return controls.some(control => control.type === 'checkbox' || control.type === 'radio' ? control.checked : control.value.trim())
+    return controls.some(control => control.type === 'checkbox' || control.type === 'radio' ? control.checked : control.value.trim() && control.checkValidity())
   }
 
   const updateProgress = () => {
@@ -87,6 +88,7 @@
       '', `Điểm chưa hài lòng: ${data.friction || 'Không trả lời'}`,
       '', `Tính năng mong muốn: ${data.feature_request || 'Không trả lời'}`,
       '', `Khả năng giới thiệu: ${data.nps}/10`,
+      `Email: ${data.email}`,
     ]
     window.location.href = `mailto:support@vietnote.vn?subject=${encodeURIComponent('Góp ý từ người dùng VietNote')}&body=${encodeURIComponent(lines.join('\n'))}`
   }
