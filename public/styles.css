@@ -277,6 +277,26 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .art-dub .art-wave { flex: none; height: 36px; }
 @keyframes grow { 0% { transform: scaleX(0); } 35%, 85% { transform: scaleX(1); } 100% { transform: scaleX(1); opacity: 0; } }
 
+.art-ext { gap: 18px; padding: 0 18px; }
+.ext-window { flex: 1; min-width: 0; height: 92px; display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: var(--surface); border: 1px solid var(--border-strong); }
+.ext-bar { display: flex; align-items: center; gap: 4px; padding: 5px 8px; font-size: 10.5px; color: var(--faint); border-bottom: 1px solid var(--border); }
+.ext-bar i { width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong); }
+.ext-bar span { flex: 1; min-width: 0; margin-left: 6px; padding: 1px 8px; border-radius: 99px; background: var(--mist); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ext-icon { display: grid; place-items: center; width: 15px; height: 15px; border-radius: 4px; font-size: 9px; color: #fff; background: var(--fill); }
+.ext-video { position: relative; flex: 1; background: linear-gradient(135deg, #2a2733, #15131a); }
+.ext-sub { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); padding: 2px 8px; border-radius: 4px; font-size: 11.5px; font-weight: 600; color: #fff; background: rgba(0,0,0,.6); white-space: nowrap; animation: ext-sub 3.6s var(--ease) infinite; }
+@keyframes ext-sub { 0%, 18% { opacity: 0; transform: translate(-50%, 4px); } 30%, 88% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
+.ext-pop { flex: none; width: 168px; display: flex; flex-direction: column; gap: 7px; padding: 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); font-size: 12px; }
+.ext-btn { padding: 6px 8px; border-radius: 8px; text-align: center; font-weight: 700; color: #fff; background: var(--fill); }
+.ext-pop small { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); white-space: nowrap; }
+/* Below the art, level with the title, so it does not cover the drawing. */
+.card-art + .card-new { top: 170px; }
+.ext-pop .art-wave { height: 14px; gap: 2px; }
+.ext-pop .art-wave b { width: 2px; }
+.card-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; font-size: 14.5px; font-weight: 600; color: var(--brand); }
+.card-link svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; transition: transform .2s; }
+.card-link:hover svg { transform: translateX(3px); }
+@media (max-width: 720px) { .ext-pop { display: none; } .art-ext { padding: 0 14px; } }
 .card-ai { background: var(--surface); }
 .kinds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; list-style: none; }
 .kinds li { padding: 6px 12px; border-radius: 10px; font-size: 13.5px; font-weight: 500; background: var(--surface); border: 1px solid var(--border-strong); transition: transform .25s var(--ease), border-color .2s, color .2s; }
@@ -449,6 +469,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .js [data-reveal] { opacity: 1; transform: none; }
   .js .final .face { opacity: 1; }
+  .ext-sub { animation: none; }
 }
 @media (max-width: 720px) { .art-dub .art-wave { display: none; } .art-dub { height: auto; padding: 14px; } }
 
