@@ -66,6 +66,28 @@
     if (focus && otherChoice.checked) otherInput.focus()
   }
 
+  // Quick tags add or remove their phrase in the answer; the email one fills in the domain.
+  const tagLists = [...form.querySelectorAll('.quick-tags')]
+  const fieldOf = list => form.elements[list.dataset.for]
+  const parts = value => value.split(/\s*[;\n]\s*/).filter(Boolean)
+  const markTags = () => tagLists.forEach(list => {
+    if (list.hasAttribute('data-domain')) return
+    const chosen = parts(fieldOf(list).value)
+    list.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', chosen.includes(button.textContent)))
+  })
+  form.addEventListener('click', event => {
+    const button = event.target.closest('.quick-tags button')
+    if (!button) return
+    const list = button.parentElement, field = fieldOf(list), tag = button.textContent
+    if (list.hasAttribute('data-domain')) field.value = field.value.trim().replace(/@.*$/, '') + tag
+    else {
+      const current = parts(field.value)
+      field.value = (current.includes(tag) ? current.filter(part => part !== tag) : [...current, tag]).join('; ').slice(0, field.maxLength)
+    }
+    field.dispatchEvent(new Event('input', { bubbles: true }))
+    if (list.hasAttribute('data-domain')) field.focus()
+  })
+
   const updateCounts = () => form.querySelectorAll('textarea').forEach(area => {
     const counter = form.querySelector(`[data-count-for="${area.name}"]`)
     if (counter) counter.textContent = area.value.length
@@ -104,6 +126,7 @@
 
   form.addEventListener('input', event => {
     event.target.closest('.question-card')?.classList.remove('invalid')
+    markTags()
     updateCounts()
     updateProgress()
     saveDraft()
@@ -122,7 +145,7 @@
         const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         try { localStorage.removeItem(storageKey) } catch {}
-        form.reset(); showOther(); updateCounts(); updateProgress()
+        form.reset(); showOther(); markTags(); updateCounts(); updateProgress()
         dialog?.showModal()
       } else {
         emailFallback(data)
@@ -141,6 +164,7 @@
   dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close() })
   restoreDraft()
   showOther()
+  markTags()
   updateCounts()
   updateProgress()
 })()
