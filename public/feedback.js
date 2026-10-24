@@ -10,12 +10,15 @@
   const status = form.querySelector('.form-status')
   const submit = form.querySelector('[type="submit"]')
   const dialog = document.getElementById('thank-you')
+  const otherChoice = form.querySelector('[name="use_case"][value="Khác"]')
+  const otherInput = form.querySelector('[name="use_case_other"]')
 
   const values = () => {
     const data = new FormData(form)
     return {
       rating: data.get('rating') || '',
       use_case: data.getAll('use_case'),
+      use_case_other: otherChoice.checked ? String(data.get('use_case_other') || '').trim() : '',
       occupation: data.get('occupation') || '',
       most_useful: String(data.get('most_useful') || '').trim(),
       friction: String(data.get('friction') || '').trim(),
@@ -57,6 +60,34 @@
     }
   }
 
+  // "Mục đích khác" opens a field to say what it is.
+  const showOther = focus => {
+    otherInput.hidden = !otherChoice.checked
+    if (focus && otherChoice.checked) otherInput.focus()
+  }
+
+  // Quick tags add or remove their phrase in the answer; the email one fills in the domain.
+  const tagLists = [...form.querySelectorAll('.quick-tags')]
+  const fieldOf = list => form.elements[list.dataset.for]
+  const parts = value => value.split(/\s*[;\n]\s*/).filter(Boolean)
+  const markTags = () => tagLists.forEach(list => {
+    if (list.hasAttribute('data-domain')) return
+    const chosen = parts(fieldOf(list).value)
+    list.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', chosen.includes(button.textContent)))
+  })
+  form.addEventListener('click', event => {
+    const button = event.target.closest('.quick-tags button')
+    if (!button) return
+    const list = button.parentElement, field = fieldOf(list), tag = button.textContent
+    if (list.hasAttribute('data-domain')) field.value = field.value.trim().replace(/@.*$/, '') + tag
+    else {
+      const current = parts(field.value)
+      field.value = (current.includes(tag) ? current.filter(part => part !== tag) : [...current, tag]).join('; ').slice(0, field.maxLength)
+    }
+    field.dispatchEvent(new Event('input', { bubbles: true }))
+    if (list.hasAttribute('data-domain')) field.focus()
+  })
+
   const updateCounts = () => form.querySelectorAll('textarea').forEach(area => {
     const counter = form.querySelector(`[data-count-for="${area.name}"]`)
     if (counter) counter.textContent = area.value.length
@@ -82,7 +113,7 @@
   const emailFallback = data => {
     const lines = [
       `Đánh giá tổng thể: ${data.rating}/5`,
-      `Mục đích sử dụng: ${data.use_case.join(', ') || 'Không trả lời'}`,
+      `Mục đích sử dụng: ${data.use_case.join(', ') || 'Không trả lời'}${data.use_case_other ? ` (${data.use_case_other})` : ''}`,
       `Nghề nghiệp / vai trò: ${data.occupation || 'Không trả lời'}`,
       '', `Hữu ích nhất: ${data.most_useful}`,
       '', `Điểm chưa hài lòng: ${data.friction || 'Không trả lời'}`,
@@ -95,11 +126,12 @@
 
   form.addEventListener('input', event => {
     event.target.closest('.question-card')?.classList.remove('invalid')
+    markTags()
     updateCounts()
     updateProgress()
     saveDraft()
   })
-  form.addEventListener('change', () => { updateProgress(); saveDraft() })
+  form.addEventListener('change', event => { if (event.target === otherChoice) showOther(true); updateProgress(); saveDraft() })
 
   form.addEventListener('submit', async event => {
     event.preventDefault()
@@ -113,7 +145,7 @@
         const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         try { localStorage.removeItem(storageKey) } catch {}
-        form.reset(); updateCounts(); updateProgress()
+        form.reset(); showOther(); markTags(); updateCounts(); updateProgress()
         dialog?.showModal()
       } else {
         emailFallback(data)
@@ -131,6 +163,8 @@
   dialog?.querySelector('[data-close]')?.addEventListener('click', () => dialog.close())
   dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close() })
   restoreDraft()
+  showOther()
+  markTags()
   updateCounts()
   updateProgress()
 })()

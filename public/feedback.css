@@ -87,6 +87,13 @@ fieldset { margin: 0; padding: 0; border: 0; }
 .textarea-wrap { position: relative; display: block; }
 textarea, .text-input { width: 100%; color: var(--ink); border: 1px solid var(--line); background: #fff; outline: 0; transition: border-color .2s, box-shadow .2s; }
 .text-input { display: block; height: 54px; padding: 0 18px; border-radius: 16px; }
+.text-input[hidden] { display: none; }
+.other-input { margin-top: 10px; }
+.quick-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.quick-tags button { padding: 7px 12px; color: #6f5a67; border: 1px solid var(--line); border-radius: 999px; background: #fff; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: transform .2s var(--ease), border-color .2s, background .2s, color .2s; }
+.quick-tags button:hover { transform: translateY(-1px); border-color: #e994bb; }
+.quick-tags button[aria-pressed="true"] { color: #a51657; border-color: #e994bb; background: #fff5fa; }
+.quick-tags button:focus-visible { outline: 3px solid rgba(216,30,115,.25); outline-offset: 2px; }
 textarea { display: block; min-height: 128px; padding: 16px 18px 34px; resize: vertical; border-radius: 16px; line-height: 1.65; }
 textarea::placeholder, input::placeholder { color: #b19ba8; }
 textarea:focus, .text-input:focus { border-color: #dc6fa1; box-shadow: 0 0 0 4px rgba(216,30,115,.08); }
