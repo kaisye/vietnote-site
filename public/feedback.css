@@ -36,7 +36,7 @@ main { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
 .intro { position: relative; max-width: 880px; margin: 72px auto 82px; text-align: center; }
 .eyebrow { margin: 0 0 18px; color: var(--pink); font-size: 12px; font-weight: 800; letter-spacing: .18em; }
 .intro h1 { margin: 0; font-size: clamp(36px, 6.2vw, 70px); line-height: 1.08; letter-spacing: -.052em; text-wrap: balance; }
-.intro h1 span { display: inline; padding-right: .08em; color: transparent; background: linear-gradient(100deg, #e52678, #e83dab 52%, #c83bc8); -webkit-background-clip: text; background-clip: text; }
+.intro h1 span { display: inline; padding-right: .08em; white-space: nowrap; color: transparent; background: linear-gradient(100deg, #e52678, #e83dab 52%, #c83bc8); -webkit-background-clip: text; background-clip: text; }
 .intro-copy { max-width: 700px; margin: 26px auto 0; color: var(--muted); font-size: clamp(16px, 2vw, 19px); text-wrap: balance; }
 .intro-copy b { color: var(--ink); }
 .promise-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin-top: 30px; color: #624d5a; font-size: 13px; font-weight: 600; }
@@ -85,10 +85,11 @@ fieldset { margin: 0; padding: 0; border: 0; }
 .choices label:has(input:checked) > span { transform: rotate(-5deg) scale(1.08); }
 
 .textarea-wrap { position: relative; display: block; }
-textarea { width: 100%; color: var(--ink); border: 1px solid var(--line); background: #fff; outline: 0; transition: border-color .2s, box-shadow .2s; }
+textarea, .text-input { width: 100%; color: var(--ink); border: 1px solid var(--line); background: #fff; outline: 0; transition: border-color .2s, box-shadow .2s; }
+.text-input { display: block; height: 54px; padding: 0 18px; border-radius: 16px; }
 textarea { display: block; min-height: 128px; padding: 16px 18px 34px; resize: vertical; border-radius: 16px; line-height: 1.65; }
 textarea::placeholder, input::placeholder { color: #b19ba8; }
-textarea:focus { border-color: #dc6fa1; box-shadow: 0 0 0 4px rgba(216,30,115,.08); }
+textarea:focus, .text-input:focus { border-color: #dc6fa1; box-shadow: 0 0 0 4px rgba(216,30,115,.08); }
 .textarea-wrap > span { position: absolute; right: 14px; bottom: 9px; color: #aa96a2; font-size: 11px; }
 .textarea-wrap b { font-weight: 600; }
 
