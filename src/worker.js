@@ -63,6 +63,7 @@ async function saveFeedback(request, env) {
   const rating = Number(body.rating)
   const nps = Number(body.nps)
   const useCase = Array.isArray(body.use_case) ? [...new Set(body.use_case.filter(value => USE_CASES.has(value)))].slice(0, 6) : []
+  const useCaseOther = useCase.includes('Khác') ? clean(body.use_case_other, 200) : ''
   const occupation = OCCUPATIONS.has(body.occupation) ? body.occupation : null
   const mostUseful = clean(body.most_useful, 800)
   const friction = clean(body.friction, 1000)
@@ -83,6 +84,7 @@ async function saveFeedback(request, env) {
     body: JSON.stringify({
       rating,
       use_case: useCase,
+      use_case_other: useCaseOther,
       occupation,
       most_useful: mostUseful,
       friction,

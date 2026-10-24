@@ -87,6 +87,8 @@ fieldset { margin: 0; padding: 0; border: 0; }
 .textarea-wrap { position: relative; display: block; }
 textarea, .text-input { width: 100%; color: var(--ink); border: 1px solid var(--line); background: #fff; outline: 0; transition: border-color .2s, box-shadow .2s; }
 .text-input { display: block; height: 54px; padding: 0 18px; border-radius: 16px; }
+.text-input[hidden] { display: none; }
+.other-input { margin-top: 10px; }
 textarea { display: block; min-height: 128px; padding: 16px 18px 34px; resize: vertical; border-radius: 16px; line-height: 1.65; }
 textarea::placeholder, input::placeholder { color: #b19ba8; }
 textarea:focus, .text-input:focus { border-color: #dc6fa1; box-shadow: 0 0 0 4px rgba(216,30,115,.08); }

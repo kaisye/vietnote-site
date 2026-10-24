@@ -10,12 +10,15 @@
   const status = form.querySelector('.form-status')
   const submit = form.querySelector('[type="submit"]')
   const dialog = document.getElementById('thank-you')
+  const otherChoice = form.querySelector('[name="use_case"][value="Khác"]')
+  const otherInput = form.querySelector('[name="use_case_other"]')
 
   const values = () => {
     const data = new FormData(form)
     return {
       rating: data.get('rating') || '',
       use_case: data.getAll('use_case'),
+      use_case_other: otherChoice.checked ? String(data.get('use_case_other') || '').trim() : '',
       occupation: data.get('occupation') || '',
       most_useful: String(data.get('most_useful') || '').trim(),
       friction: String(data.get('friction') || '').trim(),
@@ -57,6 +60,12 @@
     }
   }
 
+  // "Mục đích khác" opens a field to say what it is.
+  const showOther = focus => {
+    otherInput.hidden = !otherChoice.checked
+    if (focus && otherChoice.checked) otherInput.focus()
+  }
+
   const updateCounts = () => form.querySelectorAll('textarea').forEach(area => {
     const counter = form.querySelector(`[data-count-for="${area.name}"]`)
     if (counter) counter.textContent = area.value.length
@@ -82,7 +91,7 @@
   const emailFallback = data => {
     const lines = [
       `Đánh giá tổng thể: ${data.rating}/5`,
-      `Mục đích sử dụng: ${data.use_case.join(', ') || 'Không trả lời'}`,
+      `Mục đích sử dụng: ${data.use_case.join(', ') || 'Không trả lời'}${data.use_case_other ? ` (${data.use_case_other})` : ''}`,
       `Nghề nghiệp / vai trò: ${data.occupation || 'Không trả lời'}`,
       '', `Hữu ích nhất: ${data.most_useful}`,
       '', `Điểm chưa hài lòng: ${data.friction || 'Không trả lời'}`,
@@ -99,7 +108,7 @@
     updateProgress()
     saveDraft()
   })
-  form.addEventListener('change', () => { updateProgress(); saveDraft() })
+  form.addEventListener('change', event => { if (event.target === otherChoice) showOther(true); updateProgress(); saveDraft() })
 
   form.addEventListener('submit', async event => {
     event.preventDefault()
@@ -113,7 +122,7 @@
         const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         try { localStorage.removeItem(storageKey) } catch {}
-        form.reset(); updateCounts(); updateProgress()
+        form.reset(); showOther(); updateCounts(); updateProgress()
         dialog?.showModal()
       } else {
         emailFallback(data)
@@ -131,6 +140,7 @@
   dialog?.querySelector('[data-close]')?.addEventListener('click', () => dialog.close())
   dialog?.addEventListener('click', event => { if (event.target === dialog) dialog.close() })
   restoreDraft()
+  showOther()
   updateCounts()
   updateProgress()
 })()
