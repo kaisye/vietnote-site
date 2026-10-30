@@ -1,8 +1,10 @@
-// /download/mac and /download/windows stream the latest release installer
+// /download/mac, /download/windows and /download/linux stream the latest release installer
 // from this domain, so visitors never see where the files are stored.
 const FILES = {
   mac: { asset: 'VietNote_aarch64.dmg', name: 'VietNote.dmg', type: 'application/x-apple-diskimage' },
   windows: { asset: 'VietNote_x64-setup.exe', name: 'VietNote-Setup.exe', type: 'application/vnd.microsoft.portable-executable' },
+  linux: { asset: 'VietNote_amd64.deb', name: 'VietNote.deb', type: 'application/vnd.debian.binary-package' },
+  appimage: { asset: 'VietNote_amd64.AppImage', name: 'VietNote.AppImage', type: 'application/octet-stream' },
 }
 const RELEASES = 'https://github.com/kaisye/VietNote/releases/latest/download'
 // Crawlers and link previews follow download links too; they are not downloads.

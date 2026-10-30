@@ -10,7 +10,7 @@ Trang giới thiệu và tải VietNote. HTML tĩnh trong `public/`, chạy bằ
 | `public/config.js` | Địa chỉ Supabase và anon key (công khai theo thiết kế) |
 | `public/feedback.html` | Form khảo sát dành cho 100 người dùng đầu tiên (`/feedback`) |
 | `public/email-100-users.html` | Email HTML chúc mừng và mời góp ý; thay `{{name}}`, `{{feedback_url}}` trước khi gửi |
-| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`: tải bản mới nhất qua domain của trang, không lộ link GitHub; video `.mp4` được trả theo từng đoạn (Range) để tua được; `/youtube-player` phục vụ player YouTube có thể nhúng trong app |
+| `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`, `/download/linux` (.deb), `/download/appimage`: tải bản mới nhất qua domain của trang, không lộ link GitHub; video `.mp4` được trả theo từng đoạn (Range) để tua được; `/youtube-player` phục vụ player YouTube có thể nhúng trong app |
 
 ## Form góp ý
 

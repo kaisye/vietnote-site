@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VietNote · Chép lời, dịch, lồng tiếng và tóm tắt bằng tiếng Việt</title>
-  <meta name="description" content="VietNote chép lời, dịch, lồng tiếng và tóm tắt cuộc họp, video, khoá học trong một ứng dụng. Lồng tiếng Việt trực tiếp với giọng đổi theo người nói. Đa nền tảng, đa ngôn ngữ. Tải miễn phí cho macOS và Windows.">
+  <meta name="description" content="VietNote chép lời, dịch, lồng tiếng và tóm tắt cuộc họp, video, khoá học trong một ứng dụng. Lồng tiếng Việt trực tiếp với giọng đổi theo người nói. Đa nền tảng, đa ngôn ngữ. Tải miễn phí cho macOS, Windows và Ubuntu.">
   <meta property="og:title" content="VietNote · Họp xong, là biết việc. Đa nền tảng, đa ngôn ngữ.">
   <meta property="og:description" content="Tóm tắt cuộc họp bằng AI theo thời gian thực. Đa nền tảng, đa ngôn ngữ. Tặng 120 phút dùng thử.">
   <link rel="canonical" href="https://vietnote.vn/">
@@ -90,8 +90,12 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4.4v7.1H3zm8.5-1.2L21 3v8.5h-9.5zM3 12.5h7.5v7.1L3 18.5zm8.5 0H21V21l-9.5-1.3z"/></svg>
             Tải cho Windows
           </a>
+          <a class="btn btn-ghost" data-os="linux" href="/download/linux">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 5.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm0 2a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9z"/><circle cx="12" cy="4" r="2.2"/><circle cx="5.1" cy="16" r="2.2"/><circle cx="18.9" cy="16" r="2.2"/></svg>
+            Tải cho Ubuntu
+          </a>
         </div>
-        <p class="fine" data-reveal>Miễn phí tải về · Tặng <b data-signup-bonus>120 phút</b> dùng thử · macOS Apple Silicon · Windows 10/11</p>
+        <p class="fine" data-reveal>Miễn phí tải về · Tặng <b data-signup-bonus>120 phút</b> dùng thử · macOS Apple Silicon · Windows 10/11 · Ubuntu 22.04+</p>
         <p class="proof" data-stats hidden></p>
       </div>
     </section>
@@ -188,7 +192,7 @@
         <article class="card" data-reveal>
           <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
           <h3>Đa nền tảng, đa ngôn ngữ</h3>
-          <p>Chạy trên macOS và Windows, nghe được mọi âm thanh trên máy: YouTube, khoá học, webinar, Zoom, Meet, Teams, Discord. Tiếng Anh, Trung, Nhật, Hàn hay tiếng Việt đều được dịch và tóm tắt bằng tiếng Việt.</p>
+          <p>Chạy trên macOS, Windows và Ubuntu, nghe được mọi âm thanh trên máy: YouTube, khoá học, webinar, Zoom, Meet, Teams, Discord. Tiếng Anh, Trung, Nhật, Hàn hay tiếng Việt đều được dịch và tóm tắt bằng tiếng Việt.</p>
         </article>
         <article class="card" data-reveal>
           <span class="icon"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 13v4M12 11v8M15 14v2"/></svg></span>
@@ -217,7 +221,7 @@
         <h2>Ba bước là xong</h2>
       </header>
       <ol class="steps">
-        <li data-reveal><b>Tải và cài đặt</b><span>Chọn bản cho macOS hoặc Windows. Dùng Mac? <a href="#cai-dat-macos">Xem video 30 giây</a>.</span></li>
+        <li data-reveal><b>Tải và cài đặt</b><span>Chọn bản cho macOS, Windows hoặc Ubuntu. Dùng Mac? <a href="#cai-dat-macos">Xem video 30 giây</a>.</span></li>
         <li data-reveal><b>Đăng nhập bằng email</b><span>Nhập mã gửi về email, nhận ngay <span data-signup-bonus>120 phút</span> dùng thử.</span></li>
         <li data-reveal><b>Bấm “Bắt đầu tóm tắt”</b><span>Họp như bình thường. Họp xong, biết ngay việc cần làm.</span></li>
       </ol>
@@ -292,8 +296,12 @@
           <p>Bấm <b>Thông tin thêm</b> rồi <b>Vẫn chạy</b>. Cảnh báo xuất hiện với các ứng dụng mới chưa có nhiều lượt tải.</p>
         </details>
         <details>
+          <summary>Cài trên Ubuntu hoặc Linux khác thế nào?</summary>
+          <p>Trên Ubuntu, Debian, Linux Mint: tải <b>VietNote.deb</b> rồi chạy <code>sudo apt install ./VietNote.deb</code> trong thư mục chứa tệp. Bản phân phối khác: tải <a href="/download/appimage">bản AppImage</a>, bấm chuột phải → Properties → cho phép chạy như chương trình, rồi mở. VietNote tự cập nhật trên cả hai bản.</p>
+        </details>
+        <details>
           <summary>Máy Mac chip Intel có dùng được không?</summary>
-          <p>Hiện VietNote hỗ trợ Mac chip Apple (M1 trở lên) và Windows 10/11 64-bit.</p>
+          <p>Hiện VietNote hỗ trợ Mac chip Apple (M1 trở lên), Windows 10/11 64-bit và Ubuntu 22.04 trở lên (64-bit).</p>
         </details>
         <details>
           <summary>Thời gian được tính như thế nào?</summary>
@@ -338,6 +346,7 @@
         <div class="cta-row" data-downloads>
           <a class="btn btn-light" data-os="mac" href="/download/mac">Tải cho macOS</a>
           <a class="btn btn-outline" data-os="windows" href="/download/windows">Tải cho Windows</a>
+          <a class="btn btn-outline" data-os="linux" href="/download/linux">Tải cho Ubuntu</a>
         </div>
       </div>
     </section>
@@ -371,6 +380,19 @@
       <li>Mở tệp cài. Nếu thấy “Windows protected your PC”: bấm <b>More info</b> rồi <b>Run anyway</b>.</li>
     </ol>
     <p class="fine">Chưa thấy tệp tải về? <a href="/download/windows">Tải lại</a></p>
+  </dialog>
+
+  <dialog class="guide" id="linux-guide" data-os="linux" aria-labelledby="linux-guide-title">
+    <button class="guide-close" type="button" data-close aria-label="Đóng">×</button>
+    <div class="guide-done" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v13M6 11l6 6 6-6M5 20h14"/></svg></div>
+    <h2 id="linux-guide-title">VietNote đang được tải về</h2>
+    <p class="section-lead">Bản cho Ubuntu 22.04 trở lên, Debian và Linux Mint. Cài một lần, sau đó VietNote tự cập nhật.</p>
+    <ol class="install-steps">
+      <li>Mở Terminal trong thư mục chứa tệp <b>VietNote.deb</b> vừa tải (thường là <b>Downloads</b>).</li>
+      <li>Chạy <code>sudo apt install ./VietNote.deb</code> và nhập mật khẩu máy.</li>
+      <li>Mở <b>VietNote</b> từ danh sách ứng dụng. Nếu được hỏi về Keyring: nhập mật khẩu đăng nhập máy.</li>
+    </ol>
+    <p class="fine">Dùng bản Linux khác? <a href="/download/appimage">Tải bản AppImage</a> · Chưa thấy tệp tải về? <a href="/download/linux">Tải lại</a></p>
   </dialog>
 
   <footer class="footer">
