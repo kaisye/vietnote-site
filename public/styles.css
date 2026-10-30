@@ -141,6 +141,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .fine { margin-top: 18px; font-size: 14px; color: var(--muted); }
 .fine b { color: var(--brand); font-weight: 600; }
 .fine a { color: var(--brand); }
+code { padding: 1px 6px; border-radius: 6px; background: var(--mist); color: var(--brand); font: 500 .9em ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
 
 .hero-cards { position: absolute; inset: 0; left: 50%; width: min(1440px, 100vw); transform: translateX(-50%); pointer-events: none; }
 .hf { position: absolute; width: 256px; padding: 14px 16px 16px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); text-align: left; font-size: 13.5px; line-height: 1.45; animation: hf-float 7s ease-in-out infinite; }

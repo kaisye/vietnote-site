@@ -7,13 +7,15 @@
 
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear() })
 
-  // Windows visitors see the Windows button first and highlighted.
-  if (/Windows/i.test(navigator.userAgent)) {
+  // Windows and Linux visitors see their button first and highlighted.
+  const agent = navigator.userAgent
+  const os = /Windows/i.test(agent) ? 'windows' : /Linux/i.test(agent) && !/Android/i.test(agent) ? 'linux' : null
+  if (os) {
     document.querySelectorAll('[data-downloads]').forEach(row => {
-      const mac = row.querySelector('[data-os="mac"]'), win = row.querySelector('[data-os="windows"]')
-      if (!mac || !win) return
-      mac.classList.replace('btn-primary', 'btn-ghost'); win.classList.replace('btn-ghost', 'btn-primary')
-      row.prepend(win)
+      const mac = row.querySelector('[data-os="mac"]'), mine = row.querySelector(`[data-os="${os}"]`)
+      if (!mac || !mine) return
+      mac.classList.replace('btn-primary', 'btn-ghost'); mine.classList.replace('btn-ghost', 'btn-primary')
+      row.prepend(mine)
     })
   }
 
@@ -55,13 +57,14 @@
     try { localStorage.setItem('vietnote.theme', dark ? 'dark' : 'light') } catch {}
   })
 
-  // Downloading: the installer keeps downloading while that OS's install video plays.
+  // Downloading: the installer keeps downloading while that OS's install video (if any) plays.
   document.querySelectorAll('dialog.guide[data-os]').forEach(guide => {
     if (typeof guide.showModal !== 'function') return
     const video = guide.querySelector('video')
     document.querySelectorAll(`[data-downloads] [data-os="${guide.dataset.os}"]`).forEach(link => link.addEventListener('click', () => {
       document.querySelectorAll('video').forEach(v => { if (v !== video) v.pause() })
       guide.showModal()
+      if (!video) return
       video.currentTime = 0
       video.play().catch(() => {})
     }))
@@ -70,7 +73,7 @@
       const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom
       if ((event.target === guide && outside) || event.target.closest('[data-close]')) guide.close()
     })
-    guide.addEventListener('close', () => video.pause())
+    guide.addEventListener('close', () => video?.pause())
   })
 
   const pricing = document.querySelector('[data-pricing]')
