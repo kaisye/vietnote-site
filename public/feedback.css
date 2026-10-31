@@ -171,3 +171,9 @@ footer a:hover { color: var(--pink); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* /ho-tro: the same cards as the survey, as one short column. */
+.support .intro { padding-bottom: 8px; }
+.support-form { display: grid; gap: 16px; max-width: 720px; margin: 0 auto; }
+.support-meta { margin: -4px 4px 0; color: var(--muted, #74616d); font-size: 13px; }
+.support .submit-row a { color: inherit; font-weight: 600; }
