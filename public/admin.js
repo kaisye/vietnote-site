@@ -85,6 +85,7 @@ function render(data) {
   ], vnd)
 
   features(data)
+  heavyUsers(data)
 
   table($('[data-table="cohorts"]'), ['Ngày đăng ký', 'Đăng ký', 'Dùng thử', 'Hôm sau', 'Trong 7 ngày'], data.cohorts.slice().reverse()
     .map(c => ({ row: [dayLabel(c.day), c.signed_up, `${c.tried} · ${percent(c.tried, c.signed_up)}`,
@@ -211,6 +212,29 @@ function features(data) {
   table($('[data-table="features"]'), ['Tính năng', 'Người dùng', 'Giờ', 'Lượt AI', 'Chi phí'], rows
     .filter(f => f.hours > 0 || f.ai_requests > 0)
     .map(f => [FEATURES[f.feature] || f.feature, number.format(f.users), number.format(f.hours), number.format(f.ai_requests), vnd(f.cost_vnd)]))
+}
+
+// Who uses the most hours over the chosen period, and on which features.
+const HEAVY_RANGES = [[7, '7 ngày'], [30, '1 tháng'], [0, 'Từ đầu']]
+let heavyRange = 7
+
+function heavyUsers(data) {
+  const ranges = data.heavy_users
+  $('[data-heavy]').hidden = !ranges
+  if (!ranges) return
+  const picker = $('[data-heavy-ranges]')
+  picker.innerHTML = HEAVY_RANGES.map(([days, label]) => `<button type="button" class="ghost" data-days="${days}" aria-pressed="${days === heavyRange}">${label}</button>`).join('')
+  picker.onclick = event => {
+    const button = event.target.closest('[data-days]')
+    if (button) { heavyRange = Number(button.dataset.days); heavyUsers(data) }
+  }
+  $('[data-heavy-label]').textContent = HEAVY_RANGES.find(([days]) => days === heavyRange)[1]
+  const decimal = value => number.format(value)
+  table($('[data-table="heavy_users"]'), ['Email', 'Giờ', 'Dùng vào', 'Đã trả', 'Giờ còn', 'Lần cuối'], (ranges[heavyRange] ?? [])
+    .map(u => [u.email, decimal(u.hours),
+      u.features.filter(f => f.hours > 0).map(f => `${FEATURES[f.feature] || f.feature} ${decimal(f.hours)}`).join(' · ') || '–',
+      vnd(u.revenue_vnd), decimal(u.hours_left),
+      u.last_active_at ? new Date(u.last_active_at).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }) : '–']), [2])
 }
 
 function table(element, headings, rows, text = []) {
