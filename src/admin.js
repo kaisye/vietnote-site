@@ -45,15 +45,18 @@ async function signedIn(request, env) {
 
 async function dashboard(env) {
   if (!env.SUPABASE_URL || !env.SUPABASE_SECRET_KEY) return json({ error: 'Supabase is not configured' }, 503)
-  const [response, ranges] = await Promise.all([rpc(env, 'admin_dashboard'), rpc(env, 'admin_feature_ranges')])
+  const [response, ranges, heavy] = await Promise.all([rpc(env, 'admin_dashboard'), rpc(env, 'admin_feature_ranges'), rpc(env, 'admin_heavy_users')])
   if (!response.ok) {
     console.error('admin_dashboard failed', response.status, await response.text())
     return json({ error: 'Could not load data' }, 502)
   }
-  // Without the ranges (say, before their migration runs) the page shows the 7-day table alone.
+  // Without the ranges (say, before their migration runs) the page shows the 7-day table alone,
+  // and without the heavy users, no table of them.
   const data = await response.json()
   if (ranges.ok) data.feature_ranges = await ranges.json()
   else console.error('admin_feature_ranges failed', ranges.status, await ranges.text())
+  if (heavy.ok) data.heavy_users = await heavy.json()
+  else console.error('admin_heavy_users failed', heavy.status, await heavy.text())
   return json(data)
 }
 
