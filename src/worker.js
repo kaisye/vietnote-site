@@ -1,11 +1,12 @@
 // Static pages come from public/; API, downloads and videos run code.
 import { download } from './download.js'
 import { admin } from './admin.js'
+import { sendSupport } from './support.js'
 
 // Pages moved to vietnote.vn. workers.dev still serves everything installed apps call
 // (/youtube-player, /download, /api, /assets), so only these pages redirect.
 const SITE = 'https://vietnote.vn'
-const PAGES = new Set(['', '/index', '/huong-dan', '/feedback', '/thanh-toan', '/admin', '/email-100-users'])
+const PAGES = new Set(['', '/index', '/huong-dan', '/feedback', '/thanh-toan', '/admin', '/email-100-users', '/ho-tro'])
 
 export default {
   async fetch(request, env, ctx) {
@@ -15,6 +16,7 @@ export default {
       return Response.redirect(`${SITE}${pathname}${url.search}`, 301)
     }
     if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
+    if (pathname === '/api/support' || pathname === '/api/support/') return sendSupport(request, env)
     if (pathname.startsWith('/api/admin/')) return admin(request, env, pathname.slice('/api/admin/'.length))
     const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
     if (match) return download(match[1], request, env, ctx)

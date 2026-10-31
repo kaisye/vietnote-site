@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fff8fc">
+  <title>Phản ánh · Hỗ trợ · VietNote</title>
+  <meta name="description" content="Báo lỗi, hỏi cách dùng hoặc góp ý cho VietNote. Đội ngũ trả lời qua email.">
+  <link rel="icon" href="/assets/logo-v3.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/feedback.css">
+  <script src="/ho-tro.js" defer></script>
+</head>
+<body class="support">
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Về trang chủ VietNote">
+      <img src="/assets/logo-v3.svg" alt="" width="36" height="36">
+      <span>VietNote</span>
+    </a>
+    <span class="founding-badge"><i></i>Phản ánh · Hỗ trợ</span>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">CHÚNG TÔI ĐỌC MỌI TIN NHẮN</p>
+      <h1 id="page-title">Bạn cần <span>giúp gì</span>?</h1>
+      <p class="intro-copy">Báo lỗi, hỏi cách dùng hay góp ý đều được. Chúng tôi trả lời qua email của bạn, thường trong một ngày làm việc.</p>
+    </section>
+
+    <form id="support-form" class="support-form" novalidate>
+      <label class="website-field" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <input type="hidden" name="version">
+      <input type="hidden" name="os">
+
+      <div class="question-card" data-required>
+        <div class="question-head"><span>01</span><div><h2>Bạn muốn</h2></div></div>
+        <fieldset class="choices">
+          <label><input type="radio" name="kind" value="bug" required checked><span>⚠</span>Báo lỗi</label>
+          <label><input type="radio" name="kind" value="help"><span>?</span>Cần hỗ trợ</label>
+          <label><input type="radio" name="kind" value="idea"><span>✦</span>Góp ý</label>
+        </fieldset>
+      </div>
+
+      <div class="question-card" data-required>
+        <div class="question-head"><span>02</span><div><h2>Chuyện gì đang xảy ra?</h2><p>Bạn đang làm gì, thấy gì, và mong điều gì. Có thông báo lỗi thì chép lại giúp chúng tôi.</p></div></div>
+        <label class="textarea-wrap">
+          <textarea name="message" rows="6" maxlength="4000" required placeholder="Ví dụ: Mình mở video YouTube, bấm Dịch video này thì hiện “Có đoạn chưa dịch được”…"></textarea>
+          <span><b data-count>0</b>/4000</span>
+        </label>
+        <p class="field-error" role="alert">Hãy viết vài dòng để chúng tôi hiểu vấn đề.</p>
+      </div>
+
+      <div class="question-card" data-required>
+        <div class="question-head"><span>03</span><div><h2>Email để chúng tôi trả lời</h2></div></div>
+        <input class="text-input" type="email" name="email" maxlength="254" required autocomplete="email" inputmode="email" placeholder="ten.cua.ban@gmail.com" aria-label="Email của bạn">
+        <p class="field-error" role="alert">Vui lòng nhập đúng địa chỉ email.</p>
+      </div>
+
+      <p class="support-meta" data-meta hidden></p>
+      <div class="submit-row">
+        <p>Hoặc gửi thẳng tới <a href="mailto:support@vietnote.vn">support@vietnote.vn</a></p>
+        <button class="submit-button" type="submit"><span>Gửi</span><svg viewBox="0 0 24 24"><path d="m5 12 14-7-5 14-3-6-6-1Z"/></svg></button>
+      </div>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+
+  <dialog id="thank-you">
+    <div class="success-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></div>
+    <p class="eyebrow">ĐÃ GỬI</p>
+    <h2>Cảm ơn bạn, chúng tôi đã nhận được.</h2>
+    <p>Câu trả lời sẽ được gửi về email của bạn. Nhớ xem cả mục Quảng cáo hoặc Spam nhé.</p>
+    <button type="button" data-close>Xong</button>
+  </dialog>
+
+  <footer><a href="/">VietNote</a><span>·</span><a href="mailto:support@vietnote.vn">support@vietnote.vn</a></footer>
+</body>
+</html>
