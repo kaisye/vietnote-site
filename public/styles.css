@@ -304,7 +304,7 @@ code { padding: 1px 6px; border-radius: 6px; background: var(--mist); color: var
 .kinds li:hover { transform: translateY(-2px); border-color: var(--brand); color: var(--brand); }
 
 /* Steps */
-.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; counter-reset: step; }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; list-style: none; counter-reset: step; }
 .steps li { position: relative; padding: 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); counter-increment: step; }
 .steps li::before { content: '0' counter(step); display: block; margin-bottom: 18px; font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.04em; background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .steps li:not(:last-child)::after { content: ''; position: absolute; top: 46px; right: -12px; width: 8px; height: 8px; border-top: 2px solid var(--blush); border-right: 2px solid var(--blush); transform: rotate(45deg); }
@@ -351,6 +351,7 @@ code { padding: 1px 6px; border-radius: 6px; background: var(--mist); color: var
 .final::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%); }
 .final > * { position: relative; }
 .final h2 { color: #fff; }
+.final .section-lead a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .final .section-lead { color: rgba(255, 255, 255, .78); }
 .final .cta-row { justify-content: center; }
 .fold { width: 120px; height: 120px; margin-bottom: 28px; overflow: visible; filter: drop-shadow(0 20px 34px rgba(0, 0, 0, .45)); }
@@ -385,6 +386,14 @@ code { padding: 1px 6px; border-radius: 6px; background: var(--mist); color: var
 .guide video { width: 100%; aspect-ratio: 16 / 9; margin-top: 22px; border-radius: 16px; background: var(--video-bg); }
 .guide .install-steps { max-width: 720px; margin: 22px auto 0; }
 .guide .fine a { text-decoration: underline; text-underline-offset: 3px; }
+/* The extension: the step after installing, not an extra. */
+.ext-required { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding: 8px 14px 8px 8px; border-radius: 100px; border: 1px solid var(--blush); background: var(--mist); color: var(--ink); font-size: 15px; font-weight: 600; }
+.ext-required:hover { border-color: var(--brand); color: var(--brand); }
+.ext-required svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.guide-next { display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 720px; margin: 24px auto 0; padding: 20px; border-radius: 18px; border: 1px solid var(--blush); background: var(--mist); }
+.guide-next b { font-size: 17px; }
+.guide-next span { color: var(--muted); font-size: 15px; }
+.guide-next .btn { margin-top: 6px; }
 .guide-close { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; transition: background .15s; }
 .guide-close:hover { background: var(--mist); }
 .guide-done { display: grid; place-items: center; width: 54px; height: 54px; margin: 0 auto; border-radius: 16px; background: var(--fill); box-shadow: var(--shadow-brand); }
