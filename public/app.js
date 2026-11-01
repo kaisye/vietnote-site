@@ -169,17 +169,6 @@
   }
 
 
-  // Feature tiles: one group at a time, or all.
-  const featFilter = document.querySelector('.feat-filter')
-  if (featFilter) {
-    featFilter.addEventListener('click', event => {
-      const chip = event.target.closest('button')
-      if (!chip) return
-      featFilter.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === chip)))
-      document.querySelectorAll('.feat').forEach(tile => { tile.hidden = chip.dataset.group !== '' && tile.dataset.group !== chip.dataset.group })
-    })
-  }
-
   // Frosted nav once the page leaves the top.
   const nav = document.getElementById('nav')
   if (nav) {
