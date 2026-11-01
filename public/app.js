@@ -97,32 +97,77 @@
   }
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // With a mouse: a soft glow trails the pointer, and cards (pricing ones arrive later) light up where it is.
+  // With a mouse: a thin streak of light follows the pointer and drops twinkling sparks, like a wand.
   if (!calm && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const glow = document.createElement('div')
-    glow.className = 'cursor-glow'
-    glow.setAttribute('aria-hidden', 'true')
-    document.body.append(glow)
-    let x = innerWidth / 2, y = innerHeight / 3, gx = x, gy = y, frame = 0
-    const follow = () => {
-      gx += (x - gx) * .12; gy += (y - gy) * .12
-      glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`
-      frame = Math.abs(x - gx) + Math.abs(y - gy) > .5 ? requestAnimationFrame(follow) : 0
+    const canvas = document.createElement('canvas')
+    canvas.className = 'wand'
+    canvas.setAttribute('aria-hidden', 'true')
+    document.body.append(canvas)
+    const ctx = canvas.getContext('2d')
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+    resize()
+    window.addEventListener('resize', resize)
+    // Deeper tones on the light page; on the dark one, paler tones that add up into a glow.
+    const COLORS = ['255, 111, 170', '232, 40, 124', '200, 60, 210', '245, 170, 50']
+    const COLORS_DARK = ['255, 140, 190', '255, 205, 230', '225, 150, 255', '255, 210, 120']
+    const TRAIL_MS = 220
+    const trail = [], sparks = []
+    let frame = 0, last = null
+    const star = (x, y, r) => {
+      ctx.beginPath()
+      ctx.moveTo(x, y - r * 2)
+      ctx.quadraticCurveTo(x, y, x + r * 2, y); ctx.quadraticCurveTo(x, y, x, y + r * 2)
+      ctx.quadraticCurveTo(x, y, x - r * 2, y); ctx.quadraticCurveTo(x, y, x, y - r * 2)
+      ctx.fill()
+    }
+    const draw = now => {
+      ctx.clearRect(0, 0, innerWidth, innerHeight)
+      ctx.globalCompositeOperation = document.documentElement.dataset.theme === 'dark' ? 'lighter' : 'source-over'
+      while (trail.length && now - trail[0].t > TRAIL_MS) trail.shift()
+      ctx.lineCap = 'round'
+      for (let i = 1; i < trail.length; i++) {
+        const k = 1 - (now - trail[i].t) / TRAIL_MS
+        ctx.strokeStyle = `rgba(255, 111, 170, ${k * .75})`
+        ctx.lineWidth = k * 2.6
+        ctx.beginPath(); ctx.moveTo(trail[i - 1].x, trail[i - 1].y); ctx.lineTo(trail[i].x, trail[i].y); ctx.stroke()
+      }
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i], age = (now - s.born) / s.life
+        if (age >= 1) { sparks.splice(i, 1); continue }
+        s.x += s.vx; s.y += s.vy; s.vy += .012
+        const alpha = (1 - age) * (.55 + .45 * Math.sin(now / 55 + s.phase))
+        ctx.fillStyle = ctx.shadowColor = `rgba(${s.color}, ${alpha})`
+        ctx.shadowBlur = 6
+        if (s.star) star(s.x, s.y, s.size * (1 - age * .5))
+        else { ctx.beginPath(); ctx.arc(s.x, s.y, s.size * .6 * (1 - age * .4), 0, Math.PI * 2); ctx.fill() }
+      }
+      ctx.shadowBlur = 0
+      frame = trail.length || sparks.length ? requestAnimationFrame(draw) : 0
     }
     document.addEventListener('pointermove', event => {
-      x = event.clientX; y = event.clientY
-      glow.classList.add('on')
-      if (!frame) frame = requestAnimationFrame(follow)
-      const card = event.target.closest?.('.feat, .plan, .post-card')
-      if (card) {
-        card.classList.add('spot')
-        const box = card.getBoundingClientRect()
-        card.style.setProperty('--mx', `${x - box.left}px`)
-        card.style.setProperty('--my', `${y - box.top}px`)
+      const x = event.clientX, y = event.clientY
+      trail.push({ x, y, t: performance.now() })
+      // More sparks the faster the pointer moves, scattered along the stretch it just covered.
+      const count = last ? Math.min(4, Math.floor(Math.hypot(x - last.x, y - last.y) / 14) + (Math.random() < .5 ? 1 : 0)) : 1
+      for (let i = 0; i < count && sparks.length < 140; i++) {
+        const k = Math.random()
+        sparks.push({
+          x: last ? last.x + (x - last.x) * k : x, y: last ? last.y + (y - last.y) * k : y,
+          vx: (Math.random() - .5) * .6, vy: Math.random() * .4 + .1,
+          born: performance.now(), life: 500 + Math.random() * 600, size: 1.2 + Math.random() * 2.4,
+          color: (document.documentElement.dataset.theme === 'dark' ? COLORS_DARK : COLORS)[Math.floor(Math.random() * 4)], star: Math.random() < .45, phase: Math.random() * 6.3,
+        })
       }
+      last = { x, y }
+      if (!frame) frame = requestAnimationFrame(draw)
     }, { passive: true })
-    document.documentElement.addEventListener('pointerleave', () => glow.classList.remove('on'))
+    document.documentElement.addEventListener('pointerleave', () => { last = null })
   }
+
 
   // Feature tiles: one group at a time, or all.
   const featFilter = document.querySelector('.feat-filter')
