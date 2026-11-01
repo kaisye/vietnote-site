@@ -31,6 +31,8 @@ tag: Bài học
 
 `tag` là `Tính năng mới` hoặc `Bài học`. Viết xong chạy `node scripts/blog.mjs` để tạo trang bài, danh sách `/blog/`, RSS `/blog/feed.xml` và cập nhật `sitemap.xml`, rồi commit cả hai thư mục. `node scripts/blog.mjs --check` báo lỗi nếu quên chạy.
 
+Ảnh bìa là đoạn HTML đặt giữa `<!-- cover -->` và `<!-- /cover -->` ở đầu nội dung (xem các bài có sẵn, class `cover` và `cv-*` trong `public/blog.css`); nó dùng làm thumbnail, ảnh đầu bài, và `node scripts/blog.mjs --png` (cần Chrome) xuất ra `public/blog/<slug>.png` để hiện khi chia sẻ link. Hình minh hoạ trong bài là `<figure class="fig">` với các class `fig-*` trong `public/blog.css`.
+
 Không nêu tên nhà cung cấp dịch vụ (nhận dạng giọng nói, AI…) trong bài.
 
 ## Form góp ý
