@@ -439,48 +439,42 @@ code { padding: 1px 6px; border-radius: 6px; background: var(--mist); color: var
 /* The wand trail (app.js, mouse only): drawn on a canvas above the page that never takes a click. */
 .wand { position: fixed; inset: 0; z-index: 60; width: 100%; height: 100%; pointer-events: none; }
 
-/* Features: many small pink tiles, one per feature, all in one screen. The line under each title shows on hover. */
-.feat-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -16px auto 24px; }
-.feat-filter button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 15px; border-radius: 99px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: color .15s, border-color .15s, background .15s, transform .2s var(--ease); }
-.feat-filter button:hover { color: var(--ink); border-color: var(--border-strong); transform: translateY(-1px); }
-.feat-filter button[aria-pressed="true"] { color: #fff; background: var(--fill); border-color: transparent; box-shadow: var(--shadow-brand); }
-.feat-filter small { padding: 0 7px; border-radius: 99px; background: var(--mist); color: var(--muted); font-size: 12px; }
-.feat-filter button[aria-pressed="true"] small { background: rgba(255, 255, 255, .22); color: #fff; }
-.feats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; max-width: 1180px; margin: 0 auto; }
-.feat { --c: #d81e73; position: relative; display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 12px 14px; border-radius: 14px; outline: none; cursor: default;
-  background: linear-gradient(135deg, #fff2f8, #fde4ef); border: 1px solid #f9cfe2; box-shadow: 0 1px 2px rgba(216, 30, 115, .06); transition: transform .25s var(--ease), box-shadow .25s, border-color .2s; animation: feat-in .4s var(--ease) both; }
-.feat[hidden] { display: none; }
-.feat:hover, .feat:focus-visible { z-index: 2; transform: translateY(-2px); border-color: #f3a8c9; box-shadow: 0 10px 24px -12px rgba(216, 30, 115, .45); }
-.feat[data-group="video"] { --c: #7a3fe0; }
-.feat[data-group="tr"] { --c: #1f6fd6; }
-.feat[data-group="ai"] { --c: #c26a00; }
-.feat[data-group="any"] { --c: #178a55; }
-:root[data-theme="dark"] .feat { --c: #ff8fbe; background: linear-gradient(135deg, rgba(255, 111, 170, .16), rgba(210, 58, 203, .12)); border-color: rgba(255, 111, 170, .24); box-shadow: none; }
-:root[data-theme="dark"] .feat:hover, :root[data-theme="dark"] .feat:focus-visible { border-color: rgba(255, 111, 170, .5); box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .6); }
-:root[data-theme="dark"] .feat[data-group="video"] { --c: #c4a8ff; }
-:root[data-theme="dark"] .feat[data-group="tr"] { --c: #8fbfff; }
-:root[data-theme="dark"] .feat[data-group="ai"] { --c: #ffc56b; }
-:root[data-theme="dark"] .feat[data-group="any"] { --c: #7be0a6; }
-.feat-icon { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--surface); color: var(--c); box-shadow: 0 1px 3px rgba(216, 30, 115, .12); transition: transform .3s var(--ease); }
+/* Features: five columns, one per group and one colour each; every tile is a title, its line shows on hover. */
+.feats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; max-width: 1180px; margin: 0 auto; }
+.feat-col { --c: #d81e73; --t1: #fff2f8; --t2: #fde4ef; --b: #f9cfe2; display: grid; gap: 10px; align-content: start; }
+.feat-col[data-group="video"] { --c: #7a3fe0; --t1: #f7f2ff; --t2: #ece3fd; --b: #ddd0fa; }
+.feat-col[data-group="tr"] { --c: #1f6fd6; --t1: #f1f7ff; --t2: #e1edfd; --b: #cbdcf7; }
+.feat-col[data-group="ai"] { --c: #c26a00; --t1: #fff8ee; --t2: #fdeed6; --b: #f6dcb5; }
+.feat-col[data-group="any"] { --c: #178a55; --t1: #f0faf5; --t2: #dcf3e6; --b: #c4e8d3; }
+:root[data-theme="dark"] .feat-col { --c: #ff8fbe; --t1: rgba(255, 111, 170, .17); --t2: rgba(255, 111, 170, .09); --b: rgba(255, 111, 170, .26); }
+:root[data-theme="dark"] .feat-col[data-group="video"] { --c: #c4a8ff; --t1: rgba(160, 120, 255, .18); --t2: rgba(160, 120, 255, .09); --b: rgba(160, 120, 255, .28); }
+:root[data-theme="dark"] .feat-col[data-group="tr"] { --c: #8fbfff; --t1: rgba(90, 150, 255, .18); --t2: rgba(90, 150, 255, .09); --b: rgba(90, 150, 255, .28); }
+:root[data-theme="dark"] .feat-col[data-group="ai"] { --c: #ffc56b; --t1: rgba(255, 180, 70, .16); --t2: rgba(255, 180, 70, .08); --b: rgba(255, 180, 70, .26); }
+:root[data-theme="dark"] .feat-col[data-group="any"] { --c: #7be0a6; --t1: rgba(90, 210, 140, .16); --t2: rgba(90, 210, 140, .08); --b: rgba(90, 210, 140, .26); }
+.feat-col-title { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; padding-left: 4px; color: var(--c); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.feat-col-title::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px var(--t2); }
+.feat { position: relative; display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 12px 14px; border-radius: 14px; outline: none; cursor: default;
+  background: linear-gradient(135deg, var(--t1), var(--t2)); border: 1px solid var(--b); transition: transform .25s var(--ease), box-shadow .25s, border-color .2s; animation: feat-in .4s var(--ease) both; }
+.feat:hover, .feat:focus-visible { z-index: 2; transform: translateY(-2px); border-color: var(--c); box-shadow: 0 10px 24px -14px var(--c); }
+.feat-icon { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--surface); color: var(--c); box-shadow: 0 1px 3px rgba(23, 21, 28, .08); transition: transform .3s var(--ease); }
 :root[data-theme="dark"] .feat-icon { background: rgba(0, 0, 0, .28); box-shadow: none; }
 .feat:hover .feat-icon { transform: rotate(-8deg) scale(1.08); }
 .feat-icon svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.feat h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.3; }
-.feat-new { position: absolute; top: -7px; right: 10px; padding: 0 7px; border-radius: 99px; background: var(--fill); color: #fff; font-size: 10.5px; font-weight: 700; line-height: 17px; box-shadow: var(--shadow-brand); }
+.feat h3 { font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; line-height: 1.3; }
+.feat-new { position: absolute; top: -7px; right: 10px; padding: 0 7px; border-radius: 99px; background: var(--c); color: #fff; font-size: 10.5px; font-weight: 700; line-height: 17px; }
+:root[data-theme="dark"] .feat-new { color: #17151c; }
 .feat p { position: absolute; left: 50%; bottom: calc(100% + 10px); width: max-content; max-width: 240px; padding: 8px 12px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 1.45; text-align: center;
   box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translate(-50%, 4px); transition: opacity .18s, transform .18s, visibility .18s; pointer-events: none; }
 .feat p::after { content: ''; position: absolute; left: 50%; top: 100%; border: 6px solid transparent; border-top-color: var(--ink); transform: translateX(-50%); }
 .feat:hover p, .feat:focus-visible p { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 @keyframes feat-in { from { opacity: 0; transform: translateY(6px) scale(.98); } }
-@media (max-width: 1100px) { .feats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 860px) { .feats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 640px) {
-  .feats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .feats { grid-template-columns: 1fr; gap: 20px; }
+  .feat-col { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .feat-col-title { grid-column: 1 / -1; }
   .feat { gap: 9px; min-height: 56px; padding: 10px; }
   .feat-icon { width: 28px; height: 28px; }
   .feat h3 { font-size: 13.5px; }
   .feat p { display: none; }
-  .feat-filter { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; margin-inline: -16px; padding: 0 16px 4px; }
-  .feat-filter button { flex: none; }
 }
 @media (prefers-reduced-motion: reduce) { .feat { animation: none; } }
