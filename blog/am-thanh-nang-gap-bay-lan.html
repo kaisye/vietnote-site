@@ -4,12 +4,40 @@ description: Khi dùng 4G, VietNote hay báo “Kết nối nhận diện chậm
 date: 2026-10-31
 tag: Bài học
 ---
+<!-- cover -->
+<div class="cover lesson">
+  <span class="cv-badge">Bài học</span>
+  <div class="cv-rates">
+    <p>Âm thanh gửi đi mỗi giây, cho mỗi nguồn</p>
+    <div class="cv-rate"><span>Trước</span><div><i style="width: 100%"></i><b>256 kbps</b></div></div>
+    <div class="cv-rate small"><span>Bây giờ</span><div><i style="width: 14%"></i><b>~35 kbps</b></div></div>
+  </div>
+  <span class="cv-ratio">÷7</span>
+</div>
+<!-- /cover -->
 <h2>Triệu chứng</h2>
 <p>Khi dùng 4G hoặc wifi yếu, giữa cuộc họp VietNote có lúc hiện <strong>Kết nối nhận diện chậm</strong>, rồi một đoạn lời biến mất khỏi bản ghi. Cùng mạng đó vẫn xem video được, vẫn họp online được. Vậy tại sao VietNote lại chậm?</p>
 
 <h2>Nguyên nhân</h2>
 <p>Để chép lời theo thời gian thực, VietNote gửi âm thanh lên máy chủ nhận dạng giọng nói. Chúng tôi gửi âm thanh <strong>thô, không nén</strong>: khoảng 256 kbps cho mỗi nguồn. Khi ghi cuộc họp có cả micro lẫn âm thanh của máy, con số đó gần gấp đôi, khoảng nửa megabit mỗi giây, đi liên tục suốt cuộc họp.</p>
 <p>Trên một đường truyền lên 3 Mbps mà cuộc gọi video đã chiếm phần lớn, phần còn lại không đủ. Âm thanh chưa gửi kịp dồn lại; khi hàng chờ đầy (khoảng 5 giây), ứng dụng buộc phải bỏ bớt đoạn cũ để theo kịp hiện tại. Đó là những câu bị mất.</p>
+<figure class="fig">
+  <div class="fig-box">
+    <p class="fig-label bad">Âm thanh thô</p>
+    <div class="pipe"><span class="call" style="width: 84%">Cuộc gọi video</span><span class="raw" style="width: 28%">~512 kbps</span></div>
+    <p class="fig-label ok" style="margin-top: 26px">Âm thanh nén</p>
+    <div class="pipe"><span class="call" style="width: 84%">Cuộc gọi video</span><span class="opus" style="width: 4%"></span><span class="free" style="width: 12%">trống</span></div>
+    <p class="pipe-legend"><span>0</span><span>Đường truyền lên 3 Mbps</span></p>
+  </div>
+  <figcaption>Minh hoạ: micro và âm thanh máy cùng gửi đi, trên đường truyền lên 3 Mbps mà cuộc gọi video đã chiếm phần lớn.</figcaption>
+</figure>
+<figure class="fig">
+  <div class="fig-box">
+    <div class="queue"><span class="drop">câu cũ</span><div class="queue-box"><span>1s</span><span>2s</span><span>3s</span><span>4s</span><span>5s</span></div><span>mới</span></div>
+    <p class="queue-hint"><span>Bị bỏ để theo kịp</span><span>Hàng chờ đầy 5 giây</span><span>Lời vừa nói</span></p>
+  </div>
+  <figcaption>Khi gửi không kịp, hàng chờ đầy và đoạn cũ nhất bị bỏ: đó là những câu biến mất khỏi bản ghi.</figcaption>
+</figure>
 <p>Trên máy của chúng tôi, mạng văn phòng nhanh nên chưa bao giờ thấy. Cái giá của âm thanh thô bị che hoàn toàn.</p>
 
 <h2>Cách sửa</h2>
