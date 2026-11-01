@@ -10,7 +10,28 @@ Trang giới thiệu và tải VietNote. HTML tĩnh trong `public/`, chạy bằ
 | `public/config.js` | Địa chỉ Supabase và anon key (công khai theo thiết kế) |
 | `public/feedback.html` | Form khảo sát dành cho 100 người dùng đầu tiên (`/feedback`) |
 | `public/email-100-users.html` | Email HTML chúc mừng và mời góp ý; thay `{{name}}`, `{{feedback_url}}` trước khi gửi |
+| `public/blog/`, `blog/`, `scripts/blog.mjs` | Blog (`/blog/`): tính năng mới và bài học. Viết bài trong `blog/`, trang trong `public/blog/` do script tạo |
 | `src/worker.js`, `src/download.js` | `/download/mac`, `/download/windows`, `/download/linux` (.deb), `/download/appimage`: tải bản mới nhất qua domain của trang, không lộ link GitHub; video `.mp4` được trả theo từng đoạn (Range) để tua được; `/youtube-player` phục vụ player YouTube có thể nhúng trong app |
+
+## Viết bài blog
+
+Mỗi bài là một file `blog/<slug>.html` (slug thành đường dẫn `/blog/<slug>`): phần đầu khai báo thông tin bài, sau đó là nội dung HTML.
+
+```html
+---
+title: Tiêu đề bài
+description: Một hai câu tóm tắt, hiện dưới tiêu đề, trong danh sách và khi chia sẻ link
+date: 2026-11-01
+tag: Bài học
+---
+<h2>Chuyện gì đã xảy ra</h2>
+<p>…</p>
+<aside class="takeaway"><strong>Điều rút ra</strong><p>…</p></aside>
+```
+
+`tag` là `Tính năng mới` hoặc `Bài học`. Viết xong chạy `node scripts/blog.mjs` để tạo trang bài, danh sách `/blog/`, RSS `/blog/feed.xml` và cập nhật `sitemap.xml`, rồi commit cả hai thư mục. `node scripts/blog.mjs --check` báo lỗi nếu quên chạy.
+
+Không nêu tên nhà cung cấp dịch vụ (nhận dạng giọng nói, AI…) trong bài.
 
 ## Form góp ý
 

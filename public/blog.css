@@ -1,0 +1,54 @@
+/* The blog at /blog: a list of posts and the posts themselves. Builds on styles.css. */
+:root { --tag-news: #d81e73; --tag-news-bg: #fdeaf3; --tag-lesson: #a35a00; --tag-lesson-bg: #fdf1df; }
+:root[data-theme="dark"] { --tag-news: #ff8fbe; --tag-news-bg: #3a1a2a; --tag-lesson: #ffc56b; --tag-lesson-bg: #3a2c14; }
+
+.blog { max-width: 820px; margin: 0 auto; padding: 40px 24px 0; }
+.blog-head h1 { font-size: 44px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.blog-head p { margin-top: 12px; max-width: 560px; color: var(--muted); font-size: 17px; }
+
+.blog-filter { display: inline-flex; gap: 4px; margin: 28px 0 8px; padding: 4px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); font-size: 14px; font-weight: 600; }
+.blog-filter button { padding: 6px 14px; border: 0; border-radius: 9px; background: none; color: var(--muted); font: inherit; cursor: pointer; transition: color .15s, background .15s; }
+.blog-filter button:hover { color: var(--ink); }
+.blog-filter button[aria-pressed="true"] { color: var(--ink); background: var(--mist); }
+
+.post-list { list-style: none; }
+.post-card { display: block; margin-top: 16px; padding: 26px 28px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: border-color .15s, transform .25s var(--ease); }
+.post-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.post-card h2 { margin-top: 10px; font-size: 22px; font-weight: 700; letter-spacing: -.015em; line-height: 1.3; }
+.post-card p { margin-top: 8px; color: var(--muted); }
+.post-list li[hidden] { display: none; }
+
+.post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--faint); font-size: 14px; }
+.post-tag { padding: 3px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: var(--tag-news); background: var(--tag-news-bg); }
+.post-tag.lesson { color: var(--tag-lesson); background: var(--tag-lesson-bg); }
+
+.post { max-width: 720px; margin: 0 auto; padding: 32px 24px 0; }
+.post-back { display: inline-block; margin-bottom: 24px; color: var(--muted); font-size: 14.5px; font-weight: 600; }
+.post-back:hover { color: var(--brand); }
+.post-head h1 { margin-top: 14px; font-size: 38px; font-weight: 800; letter-spacing: -.025em; line-height: 1.2; }
+.post-lede { margin-top: 16px; color: var(--muted); font-size: 19px; line-height: 1.6; }
+.post-body { margin-top: 32px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 17px; line-height: 1.75; }
+.post-body h2 { margin-top: 40px; font-size: 23px; font-weight: 700; letter-spacing: -.015em; line-height: 1.3; }
+.post-body p, .post-body ul, .post-body ol { margin-top: 16px; }
+.post-body ul, .post-body ol { padding-left: 24px; }
+.post-body li + li { margin-top: 8px; }
+.post-body strong { font-weight: 700; }
+.post-body a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+.post-body code { padding: 1px 6px; border-radius: 6px; background: var(--mist); font-size: .9em; }
+.post-body blockquote { margin-top: 20px; padding: 4px 0 4px 18px; border-left: 3px solid var(--border-strong); color: var(--muted); }
+
+.takeaway { margin-top: 36px; padding: 22px 24px; border-radius: 16px; background: var(--tag-lesson-bg); }
+.takeaway strong { display: block; color: var(--tag-lesson); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+.takeaway p, .takeaway ul { margin-top: 8px; }
+
+.post-end { margin-top: 48px; padding: 24px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border); text-align: center; color: var(--muted); }
+.post-end a { color: var(--brand); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .blog, .post { padding: 20px 16px 0; }
+  .blog-head h1 { font-size: 34px; }
+  .post-card { padding: 20px; }
+  .post-head h1 { font-size: 29px; }
+  .post-lede { font-size: 17px; }
+  .post-body { font-size: 16.5px; }
+}
