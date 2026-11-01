@@ -113,7 +113,7 @@
       x = event.clientX; y = event.clientY
       glow.classList.add('on')
       if (!frame) frame = requestAnimationFrame(follow)
-      const card = event.target.closest?.('.card, .plan, .post-card')
+      const card = event.target.closest?.('.feat, .plan, .post-card')
       if (card) {
         card.classList.add('spot')
         const box = card.getBoundingClientRect()
@@ -122,6 +122,17 @@
       }
     }, { passive: true })
     document.documentElement.addEventListener('pointerleave', () => glow.classList.remove('on'))
+  }
+
+  // Feature tiles: one group at a time, or all.
+  const featFilter = document.querySelector('.feat-filter')
+  if (featFilter) {
+    featFilter.addEventListener('click', event => {
+      const chip = event.target.closest('button')
+      if (!chip) return
+      featFilter.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === chip)))
+      document.querySelectorAll('.feat').forEach(tile => { tile.hidden = chip.dataset.group !== '' && tile.dataset.group !== chip.dataset.group })
+    })
   }
 
   // Frosted nav once the page leaves the top.
