@@ -493,3 +493,15 @@ code { padding: 1px 6px; border-radius: 6px; background: var(--mist); color: var
 .promises b { display: block; margin-bottom: 6px; font-size: 17.5px; font-weight: 700; }
 .promises span { color: var(--muted); font-size: 15px; }
 @media (max-width: 720px) { .promises { grid-template-columns: 1fr; } }
+
+/* Pointer effects (app.js, mouse only): a glow trailing the pointer, cards lit where it is. */
+:root { --cursor-glow: rgba(232, 40, 124, .14); --spot: rgba(216, 30, 115, .08); --spot-edge: rgba(216, 30, 115, .85); }
+:root[data-theme="dark"] { --cursor-glow: rgba(255, 111, 170, .13); --spot: rgba(255, 111, 170, .1); --spot-edge: rgba(255, 111, 170, .9); }
+.cursor-glow { position: fixed; left: -350px; top: -350px; z-index: -1; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, var(--cursor-glow), transparent 65%); pointer-events: none; opacity: 0; transition: opacity .6s; will-change: transform; }
+.cursor-glow.on { opacity: 1; }
+.spot { position: relative; }
+.spot::before, .spot::after { content: ''; position: absolute; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; }
+.spot::after { inset: 0; background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 65%); }
+.spot::before { inset: -1px; padding: 1.5px; background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), var(--spot-edge), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.spot:hover::before, .spot:hover::after { opacity: 1; }

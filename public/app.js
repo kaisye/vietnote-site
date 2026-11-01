@@ -97,6 +97,33 @@
   }
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+  // With a mouse: a soft glow trails the pointer, and cards (pricing ones arrive later) light up where it is.
+  if (!calm && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const glow = document.createElement('div')
+    glow.className = 'cursor-glow'
+    glow.setAttribute('aria-hidden', 'true')
+    document.body.append(glow)
+    let x = innerWidth / 2, y = innerHeight / 3, gx = x, gy = y, frame = 0
+    const follow = () => {
+      gx += (x - gx) * .12; gy += (y - gy) * .12
+      glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`
+      frame = Math.abs(x - gx) + Math.abs(y - gy) > .5 ? requestAnimationFrame(follow) : 0
+    }
+    document.addEventListener('pointermove', event => {
+      x = event.clientX; y = event.clientY
+      glow.classList.add('on')
+      if (!frame) frame = requestAnimationFrame(follow)
+      const card = event.target.closest?.('.card, .plan, .post-card')
+      if (card) {
+        card.classList.add('spot')
+        const box = card.getBoundingClientRect()
+        card.style.setProperty('--mx', `${x - box.left}px`)
+        card.style.setProperty('--my', `${y - box.top}px`)
+      }
+    }, { passive: true })
+    document.documentElement.addEventListener('pointerleave', () => glow.classList.remove('on'))
+  }
+
   // Frosted nav once the page leaves the top.
   const nav = document.getElementById('nav')
   if (nav) {
