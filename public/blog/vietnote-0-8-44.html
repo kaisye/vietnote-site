@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp · Blog VietNote</title>
+  <meta name="description" content="Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.">
+  <link rel="canonical" href="https://vietnote.vn/blog/vietnote-0-8-44">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp · Blog VietNote">
+  <meta property="og:description" content="Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.">
+  <meta property="og:url" content="https://vietnote.vn/blog/vietnote-0-8-44">
+  <meta property="og:image" content="https://vietnote.vn/assets/og-v3.jpg">
+  <meta name="theme-color" content="#fbfbfc">
+  <meta property="article:published_time" content="2026-11-01">
+  <link rel="alternate" type="application/rss+xml" title="Blog VietNote" href="/blog/feed.xml">
+  <script>try { if (localStorage.getItem('vietnote.theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch {}</script>
+  <link rel="icon" href="/assets/logo-v3.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/blog.css">
+  <script src="/config.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"><i class="glow g1"></i><i class="glow g2"></i><i class="grid"></i></div>
+
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="VietNote, trang chủ">
+        <img class="mark" src="/assets/logo-v3.svg" alt="" width="30" height="30">
+        <span>VietNote</span>
+      </a>
+      <nav>
+        <a href="/#tinh-nang">Tính năng</a>
+        <a href="/huong-dan">Hướng dẫn</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/#bang-gia">Bảng giá</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Chuyển giao diện sáng/tối">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-primary btn-small" href="/#tai-ve">Tải về</a>
+    </div>
+  </header>
+
+  <main class="post">
+    <a class="post-back" href="/blog/">← Tất cả bài viết</a>
+    <article>
+      <header class="post-head">
+        <p class="post-meta"><span class="post-tag news">Tính năng mới</span><time datetime="2026-11-01">1/11/2026</time><span>2 phút đọc</span></p>
+        <h1>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp</h1>
+        <p class="post-lede">Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.</p>
+      </header>
+      <div class="post-body">
+        <h2>Không mất cuộc họp khi máy tắt đột ngột</h2>
+        <p>Cuộc họp đang ghi được tự lưu vài giây một lần. Nếu máy hết pin hay ứng dụng bị tắt giữa chừng, lần mở sau VietNote khôi phục lại thành một ghi chú có chữ <strong>(khôi phục)</strong> ở cuối tên. Chuyện gì đã khiến chúng tôi làm tính năng này, bạn đọc ở <a href="/blog/cuoc-hop-chi-nam-trong-bo-nho">bài này</a>.</p>
+        
+        <h2>Island dễ đọc hơn</h2>
+        <p>Chữ to hơn, đậm hơn một chút, đặt trên nền đen gọn như Dynamic Island trên macOS. Mốc thời gian nằm thẳng hàng với lời thoại. Trong menu <strong>…</strong> của island có thêm mục <strong>Giao diện</strong>: Sáng, Tối hoặc Theo hệ thống. Giao diện sáng dùng chữ đen trên nền trắng, dễ nhìn khi bạn ngồi chỗ nhiều ánh sáng.</p>
+        
+        <h2>Bôi đen để hỏi</h2>
+        <ul>
+          <li><strong>Trong lời thoại:</strong> bôi đen vài chữ, rồi hỏi riêng về đoạn đó. Không cần chọn cả câu như trước.</li>
+          <li><strong>Trong câu trả lời:</strong> bôi đen chữ bất kỳ, một thanh nhỏ hiện ra với <strong>Giải thích</strong>, <strong>Dịch</strong>, <strong>Từ vựng</strong> và <strong>Hỏi tiếp</strong>.</li>
+        </ul>
+        <p>Khi câu trả lời đang chạy, bạn cuộn lên đọc lại thì island để yên chỗ bạn đang đọc, không kéo xuống cuối nữa.</p>
+        
+        <h2>Xuất PDF đẹp như trên màn hình</h2>
+        <p>PDF và bản in giữ đúng giao diện ghi chú bạn đang xem, kể cả khi bạn dùng giao diện tối (bản in tự đổi sang nền sáng cho dễ đọc). Bản chép lời nằm ở trang riêng phía sau. File Word không còn sót ký hiệu định dạng.</p>
+        
+        <h2>Và vài sửa lỗi</h2>
+        <ul>
+          <li><strong>Windows:</strong> bấm vào ô hỏi của island là gõ được ngay; tiêu đề hiển thị đúng chữ có dấu chồng như ố, ế, ắ.</li>
+          <li><strong>Mạng yếu:</strong> âm thanh gửi đi nhẹ hơn khoảng bảy lần, ít gặp “Kết nối nhận diện chậm” khi dùng 4G. Chi tiết ở <a href="/blog/am-thanh-nang-gap-bay-lan">bài này</a>.</li>
+        </ul>
+        <p>VietNote tự cập nhật khi bạn mở ứng dụng. Chưa có VietNote? <a href="/#tai-ve">Tải về tại đây</a>.</p>
+      </div>
+    </article>
+    <p class="post-end">Bạn có góp ý hay gặp lỗi? <a href="/ho-tro">Gửi cho chúng tôi</a>, mỗi góp ý đều được đọc.</p>
+  </main>
+
+  <footer class="footer">
+    <a class="brand" href="/"><img class="mark" src="/assets/logo-v3.svg" alt="" width="30" height="30"><span>VietNote</span></a>
+    <span>© <span data-year>2026</span> VietNote</span>
+    <a href="/huong-dan">Hướng dẫn</a>
+    <a href="/blog/">Blog</a>
+    <a href="/quyen-rieng-tu">Quyền riêng tư</a>
+    <a href="https://www.facebook.com/app.vietnote/" target="_blank" rel="noopener">Facebook</a>
+    <a href="mailto:support@vietnote.vn">support@vietnote.vn</a>
+  </footer>
+</body>
+</html>

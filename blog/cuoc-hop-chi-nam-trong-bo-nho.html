@@ -1,0 +1,25 @@
+---
+title: Một cuộc họp chỉ nằm trong bộ nhớ
+description: Trước bản 0.8.44, nếu laptop hết pin giữa cuộc họp, toàn bộ bản ghi và tóm tắt biến mất. Đây là chuyện đã xảy ra, và cách chúng tôi sửa.
+date: 2026-11-01
+tag: Bài học
+---
+<h2>Chuyện gì đã xảy ra</h2>
+<p>Khi bạn ghi một cuộc họp, VietNote chép lời, dịch và tóm tắt ngay trong lúc mọi người nói. Nhưng tất cả những thứ đó chỉ được ghi xuống ổ đĩa vào đúng một thời điểm: khi bạn bấm <strong>Kết thúc &amp; lưu</strong>.</p>
+<p>Trước lúc đó, cuộc họp chỉ nằm trong bộ nhớ của ứng dụng. Laptop hết pin, máy tự khởi động lại để cập nhật, hay ứng dụng bị tắt ngang: một tiếng họp, cả bản ghi lẫn tóm tắt, mất sạch. Mất đúng lúc người dùng cần nó nhất, vì họ đã yên tâm để VietNote ghi thay mình.</p>
+
+<h2>Vì sao chúng tôi không thấy sớm hơn</h2>
+<p>Khi làm và thử, chúng tôi luôn kết thúc cuộc họp đúng cách. Trên máy của người làm ra ứng dụng, pin luôn đầy và không ai rút điện giữa chừng. Lối đi “bình thường” được thử hàng trăm lần, còn lối đi “mọi thứ hỏng giữa chừng” thì gần như không lần nào.</p>
+<p>Khi xem lại, chúng tôi còn tìm ra một lỗi thứ hai, âm thầm hơn. Trên Windows, lúc lưu ghi chú, ứng dụng <strong>xoá file cũ trước rồi mới ghi file mới</strong>. Nếu mất điện đúng giữa hai bước đó, không phải một mà là <em>tất cả</em> ghi chú đều mất.</p>
+
+<h2>Chúng tôi đã sửa thế nào</h2>
+<ul>
+  <li>Trong lúc ghi, cứ khoảng 10 giây, nếu có lời nói mới, VietNote lưu một bản nháp gồm bản ghi, bản dịch, tóm tắt và các câu hỏi đáp. Khi bạn dừng ghi, bản nháp được lưu thêm một lần nữa.</li>
+  <li>Lúc mở ứng dụng, nếu vẫn còn bản nháp, nghĩa là lần trước chưa kết thúc êm. VietNote biến nó thành một ghi chú có chữ <strong>(khôi phục)</strong> ở cuối tên.</li>
+  <li>Mọi lần lưu giờ đều ghi file mới cho xong và chắc chắn đã nằm trên ổ đĩa, rồi mới thay file cũ bằng một bước duy nhất. Mất điện lúc nào cũng còn lại hoặc bản cũ, hoặc bản mới, không bao giờ mất cả hai.</li>
+</ul>
+
+<aside class="takeaway">
+  <strong>Điều rút ra</strong>
+  <p>Dữ liệu người dùng không được phép chỉ tồn tại trong bộ nhớ, dù chỉ vài phút. Và đừng chỉ thử lối đi suôn sẻ: hãy hỏi “nếu tắt máy ngay lúc này thì mất gì?” ở mọi bước.</p>
+</aside>

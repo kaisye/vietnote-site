@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Blog VietNote</title>
+    <link>https://vietnote.vn/blog/</link>
+    <description>Tính năng mới và bài học từ sai sót của VietNote.</description>
+    <language>vi</language>
+    <item>
+      <title>Một cuộc họp chỉ nằm trong bộ nhớ</title>
+      <link>https://vietnote.vn/blog/cuoc-hop-chi-nam-trong-bo-nho</link>
+      <guid>https://vietnote.vn/blog/cuoc-hop-chi-nam-trong-bo-nho</guid>
+      <pubDate>Sun, 01 Nov 2026 01:00:00 GMT</pubDate>
+      <category>Bài học</category>
+      <description>Trước bản 0.8.44, nếu laptop hết pin giữa cuộc họp, toàn bộ bản ghi và tóm tắt biến mất. Đây là chuyện đã xảy ra, và cách chúng tôi sửa.</description>
+    </item>
+    <item>
+      <title>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp</title>
+      <link>https://vietnote.vn/blog/vietnote-0-8-44</link>
+      <guid>https://vietnote.vn/blog/vietnote-0-8-44</guid>
+      <pubDate>Sun, 01 Nov 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.</description>
+    </item>
+    <item>
+      <title>Âm thanh nặng gấp bảy lần mức cần</title>
+      <link>https://vietnote.vn/blog/am-thanh-nang-gap-bay-lan</link>
+      <guid>https://vietnote.vn/blog/am-thanh-nang-gap-bay-lan</guid>
+      <pubDate>Sat, 31 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Bài học</category>
+      <description>Khi dùng 4G, VietNote hay báo “Kết nối nhận diện chậm” và mất cả đoạn lời. Nguyên nhân là chúng tôi gửi âm thanh đi mà không nén.</description>
+    </item>
+    <item>
+      <title>Khi hai người lạ bỗng thành “ông – cháu”</title>
+      <link>https://vietnote.vn/blog/nguoi-la-thanh-ong-chau</link>
+      <guid>https://vietnote.vn/blog/nguoi-la-thanh-ong-chau</guid>
+      <pubDate>Wed, 28 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Bài học</category>
+      <description>Phụ đề tiếng Việt từng gọi hai người mới gặp là ông và cháu, và giữ cách gọi đó suốt cả video. Lỗi nằm ở chỗ chúng tôi bảo AI đoán.</description>
+    </item>
+  </channel>
+</rss>

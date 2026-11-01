@@ -1,0 +1,26 @@
+---
+title: Âm thanh nặng gấp bảy lần mức cần
+description: Khi dùng 4G, VietNote hay báo “Kết nối nhận diện chậm” và mất cả đoạn lời. Nguyên nhân là chúng tôi gửi âm thanh đi mà không nén.
+date: 2026-10-31
+tag: Bài học
+---
+<h2>Triệu chứng</h2>
+<p>Khi dùng 4G hoặc wifi yếu, giữa cuộc họp VietNote có lúc hiện <strong>Kết nối nhận diện chậm</strong>, rồi một đoạn lời biến mất khỏi bản ghi. Cùng mạng đó vẫn xem video được, vẫn họp online được. Vậy tại sao VietNote lại chậm?</p>
+
+<h2>Nguyên nhân</h2>
+<p>Để chép lời theo thời gian thực, VietNote gửi âm thanh lên máy chủ nhận dạng giọng nói. Chúng tôi gửi âm thanh <strong>thô, không nén</strong>: khoảng 256 kbps cho mỗi nguồn. Khi ghi cuộc họp có cả micro lẫn âm thanh của máy, con số đó gần gấp đôi, khoảng nửa megabit mỗi giây, đi liên tục suốt cuộc họp.</p>
+<p>Trên một đường truyền lên 3 Mbps mà cuộc gọi video đã chiếm phần lớn, phần còn lại không đủ. Âm thanh chưa gửi kịp dồn lại; khi hàng chờ đầy (khoảng 5 giây), ứng dụng buộc phải bỏ bớt đoạn cũ để theo kịp hiện tại. Đó là những câu bị mất.</p>
+<p>Trên máy của chúng tôi, mạng văn phòng nhanh nên chưa bao giờ thấy. Cái giá của âm thanh thô bị che hoàn toàn.</p>
+
+<h2>Cách sửa</h2>
+<ul>
+  <li>Âm thanh giờ được nén bằng Opus, định dạng mà các ứng dụng gọi điện vẫn dùng, ở khoảng 32 kbps. Nhẹ hơn chừng <strong>bảy lần</strong>, nhận dạng vẫn chính xác như trước, chỉ thêm khoảng 40 mili giây độ trễ.</li>
+  <li>Âm thanh được gom thành từng gói 60 mili giây. Gói quá nhỏ thì phần “vỏ” của mỗi gói lại tốn thêm băng thông.</li>
+  <li>Khi bạn dừng, ứng dụng đẩy nốt phần âm thanh cuối đi trước, để câu cuối cùng không bị cắt.</li>
+  <li>Nếu vì lý do nào đó máy không nén được, VietNote tự quay về gửi âm thanh thô như cũ, không dừng giữa chừng. Mỗi bản phát hành cũng được kiểm tra tự động: bộ nén không chạy thì bản đó không được phát hành.</li>
+</ul>
+
+<aside class="takeaway">
+  <strong>Điều rút ra</strong>
+  <p>Hãy thử trên mạng tệ nhất mà người dùng có thể gặp, không phải mạng tốt nhất mà mình đang có. Và với thứ chạy liên tục suốt một tiếng đồng hồ, mỗi kbps tiết kiệm được đều đáng giá.</p>
+</aside>
