@@ -38,12 +38,76 @@
       <description>Khi dùng 4G, VietNote hay báo “Kết nối nhận diện chậm” và mất cả đoạn lời. Nguyên nhân là chúng tôi gửi âm thanh đi mà không nén.</description>
     </item>
     <item>
+      <title>VietNote có bản cho Ubuntu</title>
+      <link>https://vietnote.vn/blog/vietnote-cho-ubuntu</link>
+      <guid>https://vietnote.vn/blog/vietnote-cho-ubuntu</guid>
+      <pubDate>Sat, 31 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Sau macOS và Windows, VietNote chạy trên Ubuntu 22.04 trở lên, đủ cả thu âm thanh máy, island, phụ đề và tự cập nhật.</description>
+    </item>
+    <item>
       <title>Khi hai người lạ bỗng thành “ông – cháu”</title>
       <link>https://vietnote.vn/blog/nguoi-la-thanh-ong-chau</link>
       <guid>https://vietnote.vn/blog/nguoi-la-thanh-ong-chau</guid>
       <pubDate>Wed, 28 Oct 2026 01:00:00 GMT</pubDate>
       <category>Bài học</category>
       <description>Phụ đề tiếng Việt từng gọi hai người mới gặp là ông và cháu, và giữ cách gọi đó suốt cả video. Lỗi nằm ở chỗ chúng tôi bảo AI đoán.</description>
+    </item>
+    <item>
+      <title>Chọn cách dịch, sổ tay cho từng video, xem lại không tốn phút</title>
+      <link>https://vietnote.vn/blog/chon-cach-dich</link>
+      <guid>https://vietnote.vn/blog/chon-cach-dich</guid>
+      <pubDate>Mon, 26 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Dịch tự nhiên, giữ thuật ngữ hay sát nghĩa: bạn chọn. VietNote ghi nhớ nhân vật và thuật ngữ của từng video để dịch thống nhất, và xem lại video đã dịch thì không trừ phút.</description>
+    </item>
+    <item>
+      <title>Tiện ích trình duyệt: dịch video ngay trên trang bạn đang xem</title>
+      <link>https://vietnote.vn/blog/tien-ich-trinh-duyet</link>
+      <guid>https://vietnote.vn/blog/tien-ich-trinh-duyet</guid>
+      <pubDate>Sat, 24 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Tiện ích VietNote cho Chrome và Edge dịch và lồng tiếng video trên YouTube, Facebook, Douyin, Bilibili, Coursera và Udemy, không cần rời trang.</description>
+    </item>
+    <item>
+      <title>Xem YouTube với phụ đề tiếng Việt và lồng tiếng</title>
+      <link>https://vietnote.vn/blog/xem-youtube-co-long-tieng</link>
+      <guid>https://vietnote.vn/blog/xem-youtube-co-long-tieng</guid>
+      <pubDate>Thu, 15 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Dán link YouTube, VietNote phát video kèm phụ đề tiếng Việt và giọng đọc lồng tiếng. Bản dịch luôn đi trước vài phút nên không phải chờ.</description>
+    </item>
+    <item>
+      <title>VietNote Island, phụ đề trực tiếp và giọng đọc tiếng Việt</title>
+      <link>https://vietnote.vn/blog/vietnote-island-va-phu-de</link>
+      <guid>https://vietnote.vn/blog/vietnote-island-va-phu-de</guid>
+      <pubDate>Sat, 10 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Một khung nhỏ kiểu Dynamic Island hiện bản ghi và bản dịch ngay trên màn hình, phụ đề tiếng Việt chạy dưới bất kỳ video nào, và bản dịch được đọc thành tiếng.</description>
+    </item>
+    <item>
+      <title>Dịch file ghi âm và AI viết</title>
+      <link>https://vietnote.vn/blog/dich-file-va-ai-viet</link>
+      <guid>https://vietnote.vn/blog/dich-file-va-ai-viet</guid>
+      <pubDate>Fri, 09 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Đã có sẵn file ghi âm hay video? VietNote chép lời và dịch cả file. Rồi AI viết biến bản ghi thành biên bản, ghi chú buổi học, bài viết hay bài đăng.</description>
+    </item>
+    <item>
+      <title>Hỏi ngay trong cuộc họp, và xuất ghi chú ra Word, PDF</title>
+      <link>https://vietnote.vn/blog/hoi-dap-trong-cuoc-hop</link>
+      <guid>https://vietnote.vn/blog/hoi-dap-trong-cuoc-hop</guid>
+      <pubDate>Mon, 05 Oct 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Không hiểu một câu vừa nghe? Bôi đen rồi hỏi, nhờ giải thích, dịch hay gợi ý cách trả lời, ngay trong lúc họp. Hỏi lại cả cuộc họp sau đó, và xuất tóm tắt ra Word hoặc PDF.</description>
+    </item>
+    <item>
+      <title>VietNote ra mắt: ghi chú và tóm tắt cuộc họp theo thời gian thực</title>
+      <link>https://vietnote.vn/blog/vietnote-ra-mat</link>
+      <guid>https://vietnote.vn/blog/vietnote-ra-mat</guid>
+      <pubDate>Sat, 19 Sep 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Bản đầu tiên của VietNote nghe cuộc họp, chép lời, dịch sang tiếng Việt và tóm tắt thành ý chính, quyết định, việc cần làm ngay trong lúc mọi người đang nói.</description>
     </item>
   </channel>
 </rss>

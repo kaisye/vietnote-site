@@ -23,13 +23,14 @@ title: Tiêu đề bài
 description: Một hai câu tóm tắt, hiện dưới tiêu đề, trong danh sách và khi chia sẻ link
 date: 2026-11-01
 tag: Bài học
+version: 0.8.44
 ---
 <h2>Chuyện gì đã xảy ra</h2>
 <p>…</p>
 <aside class="takeaway"><strong>Điều rút ra</strong><p>…</p></aside>
 ```
 
-`tag` là `Tính năng mới` hoặc `Bài học`. Viết xong chạy `node scripts/blog.mjs` để tạo trang bài, danh sách `/blog/`, RSS `/blog/feed.xml` và cập nhật `sitemap.xml`, rồi commit cả hai thư mục. `node scripts/blog.mjs --check` báo lỗi nếu quên chạy.
+`tag` là `Tính năng mới` hoặc `Bài học`. `version` (không bắt buộc, vd. `0.8.7`) hiện số phiên bản cạnh bài trên dòng thời gian của `/blog/`. Viết xong chạy `node scripts/blog.mjs` để tạo trang bài, danh sách `/blog/`, RSS `/blog/feed.xml` và cập nhật `sitemap.xml`, rồi commit cả hai thư mục. `node scripts/blog.mjs --check` báo lỗi nếu quên chạy.
 
 Ảnh bìa là đoạn HTML đặt giữa `<!-- cover -->` và `<!-- /cover -->` ở đầu nội dung (xem các bài có sẵn, class `cover` và `cv-*` trong `public/blog.css`); nó dùng làm thumbnail, ảnh đầu bài, và `node scripts/blog.mjs --png` (cần Chrome) xuất ra `public/blog/<slug>.png` để hiện khi chia sẻ link. Hình minh hoạ trong bài là `<figure class="fig">` với các class `fig-*` trong `public/blog.css`.
 

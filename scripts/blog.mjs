@@ -112,7 +112,11 @@ ${main}
 }
 
 const tagChip = tag => `<span class="post-tag ${TAGS[tag]}">${tag}</span>`
-const meta = post => `<p class="post-meta">${tagChip(post.tag)}<time datetime="${post.date}">${shortDate(post.date)}</time><span>${post.minutes} phút đọc</span></p>`
+// Optional front matter `version: 0.8.7` names the release a post is about.
+const versionChip = post => post.version ? `<span class="post-version">v${escape(post.version)}</span>` : ''
+const meta = post => `<p class="post-meta">${tagChip(post.tag)}<time datetime="${post.date}">${shortDate(post.date)}</time>${versionChip(post)}<span>${post.minutes} phút đọc</span></p>`
+const cardMeta = post => `<p class="post-meta">${tagChip(post.tag)}${versionChip(post)}<span>${post.minutes} phút đọc</span></p>`
+const MONTHS = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
 
 function postPage(post) {
   const main = `  <main class="post">
@@ -139,22 +143,38 @@ ${indent(post.body, 8)}
 }
 
 function indexPage(posts) {
-  const items = posts.map(post => {
-    const text = `${meta(post)}
+  const item = post => {
+    const [, m, d] = post.date.split('-')
+    const text = `${cardMeta(post)}
         <h2>${escape(post.title)}</h2>
         <p>${escape(post.description)}</p>`
-    return post.cover
-      ? `      <li data-tag="${TAGS[post.tag]}"><a class="post-card has-cover" href="/blog/${post.slug}">
-        <div class="post-thumb" aria-hidden="true">
-${indent(post.cover, 10)}
-        </div>
-        <div>
-        ${text}
-        </div>
-      </a></li>`
-      : `      <li data-tag="${TAGS[post.tag]}"><a class="post-card" href="/blog/${post.slug}">
-        ${text}
-      </a></li>`
+    const card = post.cover
+      ? `<a class="post-card has-cover" href="/blog/${post.slug}">
+          <div class="post-thumb" aria-hidden="true">
+${indent(post.cover, 12)}
+          </div>
+          <div>
+          ${text}
+          </div>
+        </a>`
+      : `<a class="post-card" href="/blog/${post.slug}">
+          ${text}
+        </a>`
+    return `        <li class="tl-item" data-tag="${TAGS[post.tag]}">
+          <time class="tl-date" datetime="${post.date}"><b>${+d}</b>Th${+m}</time><i class="tl-dot ${TAGS[post.tag]}" aria-hidden="true"></i>
+          ${card}
+        </li>`
+  }
+  // Newest month first, newest post first; blog.js can flip both.
+  const months = [...new Set(posts.map(post => post.date.slice(0, 7)))]
+  const items = months.map(month => {
+    const [y, m] = month.split('-')
+    return `    <section class="tl-month">
+      <h2 class="tl-month-label">${MONTHS[m - 1]}, ${y}</h2>
+      <ol class="post-list">
+${posts.filter(post => post.date.startsWith(month)).map(item).join('\n')}
+      </ol>
+    </section>`
   }).join('\n')
   const main = `  <main class="blog">
     <header class="blog-head">
@@ -166,9 +186,10 @@ ${indent(post.cover, 10)}
       <button type="button" data-tag="news" aria-pressed="false">Tính năng mới</button>
       <button type="button" data-tag="lesson" aria-pressed="false">Bài học</button>
     </div>
-    <ul class="post-list">
+    <p class="blog-order">Mới biết VietNote? <button type="button" class="blog-sort" data-oldest="false">Xem từ ngày đầu tiên ↓</button></p>
+    <div class="timeline">
 ${items}
-    </ul>
+    </div>
   </main>`
   return page({
     title: 'Blog · VietNote',
