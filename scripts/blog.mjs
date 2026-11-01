@@ -2,8 +2,14 @@
 // the list at public/blog/index.html, public/blog/feed.xml and the sitemap entries.
 // node scripts/blog.mjs          write the pages
 // node scripts/blog.mjs --check  fail when the pages are out of date
-import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs'
+// node scripts/blog.mjs --png    also render each cover to public/blog/<slug>.png for link
+//                                previews (needs Chrome; CHROME=/path/to/chrome to override)
+// A post's cover is the HTML between <!-- cover --> and <!-- /cover --> at the top of its body.
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, mkdtempSync } from 'node:fs'
 import { join, dirname } from 'node:path'
+import { tmpdir } from 'node:os'
+import { execFileSync } from 'node:child_process'
+import { pathToFileURL } from 'node:url'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -24,12 +30,19 @@ function readPost(file) {
   for (const key of ['title', 'description', 'date', 'tag']) if (!meta[key]) throw new Error(`${file}: missing ${key}`)
   if (!TAGS[meta.tag]) throw new Error(`${file}: tag must be one of ${Object.keys(TAGS).join(', ')}`)
   if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date)) throw new Error(`${file}: date must be YYYY-MM-DD`)
-  const body = match[2].trim()
+  const cover = match[2].match(/<!-- cover -->\n?([\s\S]*?)\n?<!-- \/cover -->\n*/)
+  const body = match[2].replace(cover?.[0] ?? '', '').trim()
   const words = body.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length
-  return { ...meta, slug: file.replace(/\.html$/, ''), body, minutes: Math.max(1, Math.round(words / 220)) }
+  const slug = file.replace(/\.html$/, '')
+  return {
+    ...meta, slug, body, cover: cover?.[1].trim() ?? '', minutes: Math.max(1, Math.round(words / 220)),
+    image: existsSync(join(ROOT, `public/blog/${slug}.png`)) ? `/blog/${slug}.png` : '/assets/og-v3.jpg',
+  }
 }
 
-function page({ title, description, path, type = 'website', extraHead = '', main, script = '' }) {
+const indent = (html, spaces) => html.replace(/^(?=.)/gm, ' '.repeat(spaces))
+
+function page({ title, description, path, type = 'website', image = '/assets/og-v3.jpg', extraHead = '', main, script = '' }) {
   const url = `${SITE}${path}`
   return `<!doctype html>
 <html lang="vi">
@@ -43,7 +56,8 @@ function page({ title, description, path, type = 'website', extraHead = '', main
   <meta property="og:title" content="${escape(title)}">
   <meta property="og:description" content="${escape(description)}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${SITE}/assets/og-v3.jpg">
+  <meta property="og:image" content="${SITE}${image}">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#fbfbfc">${extraHead}
   <link rel="alternate" type="application/rss+xml" title="Blog VietNote" href="/blog/feed.xml">
   <script>try { if (localStorage.getItem('vietnote.theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch {}</script>
@@ -108,25 +122,40 @@ function postPage(post) {
         ${meta(post)}
         <h1>${escape(post.title)}</h1>
         <p class="post-lede">${escape(post.description)}</p>
-      </header>
+      </header>${post.cover ? `
+      <div class="post-cover" aria-hidden="true">
+${indent(post.cover, 8)}
+      </div>` : ''}
       <div class="post-body">
-${post.body.replace(/^/gm, '        ')}
+${indent(post.body, 8)}
       </div>
     </article>
     <p class="post-end">Bạn có góp ý hay gặp lỗi? <a href="/ho-tro">Gửi cho chúng tôi</a>, mỗi góp ý đều được đọc.</p>
   </main>`
   return page({
-    title: `${post.title} · Blog VietNote`, description: post.description, path: `/blog/${post.slug}`, type: 'article',
+    title: `${post.title} · Blog VietNote`, description: post.description, path: `/blog/${post.slug}`, type: 'article', image: post.image,
     extraHead: `\n  <meta property="article:published_time" content="${post.date}">`, main,
   })
 }
 
 function indexPage(posts) {
-  const items = posts.map(post => `      <li data-tag="${TAGS[post.tag]}"><a class="post-card" href="/blog/${post.slug}">
-        ${meta(post)}
+  const items = posts.map(post => {
+    const text = `${meta(post)}
         <h2>${escape(post.title)}</h2>
-        <p>${escape(post.description)}</p>
-      </a></li>`).join('\n')
+        <p>${escape(post.description)}</p>`
+    return post.cover
+      ? `      <li data-tag="${TAGS[post.tag]}"><a class="post-card has-cover" href="/blog/${post.slug}">
+        <div class="post-thumb" aria-hidden="true">
+${indent(post.cover, 10)}
+        </div>
+        <div>
+        ${text}
+        </div>
+      </a></li>`
+      : `      <li data-tag="${TAGS[post.tag]}"><a class="post-card" href="/blog/${post.slug}">
+        ${text}
+      </a></li>`
+  }).join('\n')
   const main = `  <main class="blog">
     <header class="blog-head">
       <h1>Blog</h1>
@@ -178,6 +207,29 @@ function sitemap(posts) {
   return /  <!-- blog[\s\S]*?<!-- \/blog -->/.test(current)
     ? current.replace(/  <!-- blog[\s\S]*?<!-- \/blog -->/, block)
     : current.replace('</urlset>', `${block}\n</urlset>`)
+}
+
+// Each cover alone at 1200×630, styled as on the site, for link previews.
+function renderCovers(posts) {
+  const chrome = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+  const dir = mkdtempSync(join(tmpdir(), 'blog-cover-'))
+  const css = name => pathToFileURL(join(ROOT, 'public', name)).href
+  for (const post of posts.filter(p => p.cover)) {
+    const html = join(dir, `${post.slug}.html`)
+    writeFileSync(html, `<!doctype html><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="${css('styles.css')}"><link rel="stylesheet" href="${css('blog.css')}">
+<style>html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #15111a; } .atmosphere { display: none; }</style>
+<body>${post.cover}</body>`)
+    execFileSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1', '--window-size=1200,630',
+      '--virtual-time-budget=4000', `--screenshot=${join(ROOT, `public/blog/${post.slug}.png`)}`, pathToFileURL(html).href], { stdio: 'ignore' })
+    console.log(`cover → public/blog/${post.slug}.png`)
+  }
+}
+
+if (process.argv.includes('--png')) {
+  mkdirSync(join(ROOT, 'public/blog'), { recursive: true })
+  renderCovers(readdirSync(join(ROOT, 'blog')).filter(f => f.endsWith('.html')).map(readPost))
 }
 
 const posts = readdirSync(join(ROOT, 'blog')).filter(f => f.endsWith('.html')).map(readPost)

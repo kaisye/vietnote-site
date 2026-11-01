@@ -10,7 +10,8 @@
   <meta property="og:title" content="VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp · Blog VietNote">
   <meta property="og:description" content="Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.">
   <meta property="og:url" content="https://vietnote.vn/blog/vietnote-0-8-44">
-  <meta property="og:image" content="https://vietnote.vn/assets/og-v3.jpg">
+  <meta property="og:image" content="https://vietnote.vn/blog/vietnote-0-8-44.png">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#fbfbfc">
   <meta property="article:published_time" content="2026-11-01">
   <link rel="alternate" type="application/rss+xml" title="Blog VietNote" href="/blog/feed.xml">
@@ -57,23 +58,62 @@
         <h1>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp</h1>
         <p class="post-lede">Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.</p>
       </header>
+      <div class="post-cover" aria-hidden="true">
+        <div class="cover news">
+          <span class="cv-badge">VietNote 0.8.44</span>
+          <div class="cv-island">
+            <p class="cv-status"><i class="cv-led"></i>Đang nghe</p>
+            <p class="cv-line dim"><span class="cv-time">12:04</span><span>Bên marketing xin thêm hai tuần để chạy thử.</span></p>
+            <p class="cv-line"><span class="cv-time">12:05</span><span>Vậy mình cần chốt <mark>ngân sách quý 4</mark> trước thứ Sáu nhé.</span></p>
+          </div>
+        </div>
+      </div>
       <div class="post-body">
         <h2>Không mất cuộc họp khi máy tắt đột ngột</h2>
         <p>Cuộc họp đang ghi được tự lưu vài giây một lần. Nếu máy hết pin hay ứng dụng bị tắt giữa chừng, lần mở sau VietNote khôi phục lại thành một ghi chú có chữ <strong>(khôi phục)</strong> ở cuối tên. Chuyện gì đã khiến chúng tôi làm tính năng này, bạn đọc ở <a href="/blog/cuoc-hop-chi-nam-trong-bo-nho">bài này</a>.</p>
-        
+
         <h2>Island dễ đọc hơn</h2>
         <p>Chữ to hơn, đậm hơn một chút, đặt trên nền đen gọn như Dynamic Island trên macOS. Mốc thời gian nằm thẳng hàng với lời thoại. Trong menu <strong>…</strong> của island có thêm mục <strong>Giao diện</strong>: Sáng, Tối hoặc Theo hệ thống. Giao diện sáng dùng chữ đen trên nền trắng, dễ nhìn khi bạn ngồi chỗ nhiều ánh sáng.</p>
-        
+        <figure class="fig">
+          <div class="fig-box fig-row">
+            <div>
+              <p class="fig-label">Tối</p>
+              <div class="mini-island">
+                <p class="mi-status"><i></i>Đang nghe</p>
+                <p><span>12:05</span>Vậy mình cần chốt ngân sách quý 4 trước thứ Sáu nhé.</p>
+              </div>
+            </div>
+            <div>
+              <p class="fig-label">Sáng</p>
+              <div class="mini-island light">
+                <p class="mi-status"><i></i>Đang nghe</p>
+                <p><span>12:05</span>Vậy mình cần chốt ngân sách quý 4 trước thứ Sáu nhé.</p>
+              </div>
+            </div>
+          </div>
+          <figcaption>Island ở giao diện tối và sáng (hình minh hoạ).</figcaption>
+        </figure>
+
         <h2>Bôi đen để hỏi</h2>
         <ul>
           <li><strong>Trong lời thoại:</strong> bôi đen vài chữ, rồi hỏi riêng về đoạn đó. Không cần chọn cả câu như trước.</li>
           <li><strong>Trong câu trả lời:</strong> bôi đen chữ bất kỳ, một thanh nhỏ hiện ra với <strong>Giải thích</strong>, <strong>Dịch</strong>, <strong>Từ vựng</strong> và <strong>Hỏi tiếp</strong>.</li>
         </ul>
+        <figure class="fig">
+          <div class="fig-box">
+            <div class="mini-island">
+              <p><span>12:05</span><span class="mi-plain">Vậy mình cần chốt <mark>ngân sách quý 4</mark> trước thứ Sáu nhé.</span></p>
+              <div class="mi-answer">“Ngân sách quý 4” là khoản chi dự kiến cho ba tháng cuối năm, thường gồm <mark>chi phí quảng cáo</mark> và các khoản phát sinh dịp cuối năm.</div>
+              <div class="mi-pick"><b>Giải thích</b><b>Dịch</b><b>Từ vựng</b><b>Hỏi tiếp</b></div>
+            </div>
+          </div>
+          <figcaption>Bôi đen “ngân sách quý 4” để hỏi; trong câu trả lời, bôi đen tiếp để giải thích, dịch hay hỏi thêm (hình minh hoạ).</figcaption>
+        </figure>
         <p>Khi câu trả lời đang chạy, bạn cuộn lên đọc lại thì island để yên chỗ bạn đang đọc, không kéo xuống cuối nữa.</p>
-        
+
         <h2>Xuất PDF đẹp như trên màn hình</h2>
         <p>PDF và bản in giữ đúng giao diện ghi chú bạn đang xem, kể cả khi bạn dùng giao diện tối (bản in tự đổi sang nền sáng cho dễ đọc). Bản chép lời nằm ở trang riêng phía sau. File Word không còn sót ký hiệu định dạng.</p>
-        
+
         <h2>Và vài sửa lỗi</h2>
         <ul>
           <li><strong>Windows:</strong> bấm vào ô hỏi của island là gõ được ngay; tiêu đề hiển thị đúng chữ có dấu chồng như ố, ế, ắ.</li>

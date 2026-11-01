@@ -10,7 +10,8 @@
   <meta property="og:title" content="Một cuộc họp chỉ nằm trong bộ nhớ · Blog VietNote">
   <meta property="og:description" content="Trước bản 0.8.44, nếu laptop hết pin giữa cuộc họp, toàn bộ bản ghi và tóm tắt biến mất. Đây là chuyện đã xảy ra, và cách chúng tôi sửa.">
   <meta property="og:url" content="https://vietnote.vn/blog/cuoc-hop-chi-nam-trong-bo-nho">
-  <meta property="og:image" content="https://vietnote.vn/assets/og-v3.jpg">
+  <meta property="og:image" content="https://vietnote.vn/blog/cuoc-hop-chi-nam-trong-bo-nho.png">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#fbfbfc">
   <meta property="article:published_time" content="2026-11-01">
   <link rel="alternate" type="application/rss+xml" title="Blog VietNote" href="/blog/feed.xml">
@@ -57,22 +58,66 @@
         <h1>Một cuộc họp chỉ nằm trong bộ nhớ</h1>
         <p class="post-lede">Trước bản 0.8.44, nếu laptop hết pin giữa cuộc họp, toàn bộ bản ghi và tóm tắt biến mất. Đây là chuyện đã xảy ra, và cách chúng tôi sửa.</p>
       </header>
+      <div class="post-cover" aria-hidden="true">
+        <div class="cover lesson">
+          <span class="cv-badge">Bài học</span>
+          <div class="cv-note">
+            <p class="cv-note-title">Họp nhóm sản phẩm <span class="cv-rec">● 58:12</span></p>
+            <i style="width: 92%"></i><i style="width: 78%"></i><i style="width: 86%"></i><i style="width: 64%"></i><i style="width: 80%"></i>
+          </div>
+          <div class="cv-battery"><span></span><b>1%</b></div>
+        </div>
+      </div>
       <div class="post-body">
         <h2>Chuyện gì đã xảy ra</h2>
         <p>Khi bạn ghi một cuộc họp, VietNote chép lời, dịch và tóm tắt ngay trong lúc mọi người nói. Nhưng tất cả những thứ đó chỉ được ghi xuống ổ đĩa vào đúng một thời điểm: khi bạn bấm <strong>Kết thúc &amp; lưu</strong>.</p>
         <p>Trước lúc đó, cuộc họp chỉ nằm trong bộ nhớ của ứng dụng. Laptop hết pin, máy tự khởi động lại để cập nhật, hay ứng dụng bị tắt ngang: một tiếng họp, cả bản ghi lẫn tóm tắt, mất sạch. Mất đúng lúc người dùng cần nó nhất, vì họ đã yên tâm để VietNote ghi thay mình.</p>
-        
+
+        <figure class="fig">
+          <div class="fig-box">
+            <p class="fig-label bad">Trước 0.8.44</p>
+            <div class="track"><div class="fill memory"></div><div class="cut"></div><span class="end">Kết thúc &amp; lưu</span><span class="note" style="left: 0; color: var(--tag-lesson)">Chỉ nằm trong bộ nhớ</span><span class="note" style="left: 72%; color: var(--bad)">Mất cả buổi</span></div>
+            <p class="fig-label ok">Từ 0.8.44</p>
+            <div class="track"><div class="fill saved"></div><i class="tick" style="left: 10%"></i><i class="tick" style="left: 20%"></i><i class="tick" style="left: 30%"></i><i class="tick" style="left: 40%"></i><i class="tick" style="left: 50%"></i><i class="tick" style="left: 60%"></i><i class="tick" style="left: 68%"></i><div class="cut"></div><span class="end">Kết thúc &amp; lưu</span><span class="note" style="left: 0; color: var(--ok)">Lưu nháp khoảng 10 giây một lần</span><span class="note" style="left: 72%; color: var(--ok)">Chỉ mất vài giây cuối</span></div>
+          </div>
+          <figcaption>Máy tắt giữa cuộc họp (⚡): trước đây mất hết, giờ chỉ mất vài giây cuối.</figcaption>
+        </figure>
+
         <h2>Vì sao chúng tôi không thấy sớm hơn</h2>
         <p>Khi làm và thử, chúng tôi luôn kết thúc cuộc họp đúng cách. Trên máy của người làm ra ứng dụng, pin luôn đầy và không ai rút điện giữa chừng. Lối đi “bình thường” được thử hàng trăm lần, còn lối đi “mọi thứ hỏng giữa chừng” thì gần như không lần nào.</p>
         <p>Khi xem lại, chúng tôi còn tìm ra một lỗi thứ hai, âm thầm hơn. Trên Windows, lúc lưu ghi chú, ứng dụng <strong>xoá file cũ trước rồi mới ghi file mới</strong>. Nếu mất điện đúng giữa hai bước đó, không phải một mà là <em>tất cả</em> ghi chú đều mất.</p>
-        
+
+        <figure class="fig">
+          <div class="fig-box fig-row">
+            <div class="fig-steps">
+              <p class="fig-label bad">Cách lưu cũ trên Windows</p>
+              <div class="step"><b>1</b>Xoá file ghi chú cũ</div>
+              <p class="step-cut">⚡ Mất điện ở đây: không còn file nào</p>
+              <div class="step"><b>2</b>Ghi file mới</div>
+            </div>
+            <div class="fig-steps">
+              <p class="fig-label ok">Cách lưu mới</p>
+              <div class="step"><b>1</b>Ghi file mới, đợi đến khi nó nằm hẳn trên ổ đĩa</div>
+              <div class="step"><b>2</b>Thay file cũ bằng file mới trong một bước</div>
+              <p class="step-ok">Mất điện lúc nào cũng còn một bản đầy đủ</p>
+            </div>
+          </div>
+          <figcaption>Thứ tự các bước quyết định việc mất một ghi chú hay mất tất cả.</figcaption>
+        </figure>
+
         <h2>Chúng tôi đã sửa thế nào</h2>
         <ul>
           <li>Trong lúc ghi, cứ khoảng 10 giây, nếu có lời nói mới, VietNote lưu một bản nháp gồm bản ghi, bản dịch, tóm tắt và các câu hỏi đáp. Khi bạn dừng ghi, bản nháp được lưu thêm một lần nữa.</li>
           <li>Lúc mở ứng dụng, nếu vẫn còn bản nháp, nghĩa là lần trước chưa kết thúc êm. VietNote biến nó thành một ghi chú có chữ <strong>(khôi phục)</strong> ở cuối tên.</li>
           <li>Mọi lần lưu giờ đều ghi file mới cho xong và chắc chắn đã nằm trên ổ đĩa, rồi mới thay file cũ bằng một bước duy nhất. Mất điện lúc nào cũng còn lại hoặc bản cũ, hoặc bản mới, không bao giờ mất cả hai.</li>
         </ul>
-        
+        <figure class="fig">
+          <div class="fig-box">
+            <div class="note-item"><i>↺</i><div><strong>Họp nhóm sản phẩm (khôi phục)</strong><small>Bản ghi, bản dịch, tóm tắt và hỏi đáp đến lần lưu cuối</small></div></div>
+          </div>
+          <figcaption>Lần mở sau, cuộc họp dang dở hiện lại trong danh sách ghi chú (hình minh hoạ).</figcaption>
+        </figure>
+
         <aside class="takeaway">
           <strong>Điều rút ra</strong>
           <p>Dữ liệu người dùng không được phép chỉ tồn tại trong bộ nhớ, dù chỉ vài phút. Và đừng chỉ thử lối đi suôn sẻ: hãy hỏi “nếu tắt máy ngay lúc này thì mất gì?” ở mọi bước.</p>

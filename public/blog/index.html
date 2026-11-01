@@ -11,6 +11,7 @@
   <meta property="og:description" content="Tính năng mới của VietNote và những bài học rút ra từ sai sót khi làm ứng dụng phiên dịch, ghi chú cuộc họp.">
   <meta property="og:url" content="https://vietnote.vn/blog/">
   <meta property="og:image" content="https://vietnote.vn/assets/og-v3.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#fbfbfc">
   <link rel="alternate" type="application/rss+xml" title="Blog VietNote" href="/blog/feed.xml">
   <script>try { if (localStorage.getItem('vietnote.theme') === 'dark') document.documentElement.dataset.theme = 'dark' } catch {}</script>
@@ -60,25 +61,74 @@
       <button type="button" data-tag="lesson" aria-pressed="false">Bài học</button>
     </div>
     <ul class="post-list">
-      <li data-tag="lesson"><a class="post-card" href="/blog/cuoc-hop-chi-nam-trong-bo-nho">
+      <li data-tag="lesson"><a class="post-card has-cover" href="/blog/cuoc-hop-chi-nam-trong-bo-nho">
+        <div class="post-thumb" aria-hidden="true">
+          <div class="cover lesson">
+            <span class="cv-badge">Bài học</span>
+            <div class="cv-note">
+              <p class="cv-note-title">Họp nhóm sản phẩm <span class="cv-rec">● 58:12</span></p>
+              <i style="width: 92%"></i><i style="width: 78%"></i><i style="width: 86%"></i><i style="width: 64%"></i><i style="width: 80%"></i>
+            </div>
+            <div class="cv-battery"><span></span><b>1%</b></div>
+          </div>
+        </div>
+        <div>
         <p class="post-meta"><span class="post-tag lesson">Bài học</span><time datetime="2026-11-01">1/11/2026</time><span>2 phút đọc</span></p>
         <h2>Một cuộc họp chỉ nằm trong bộ nhớ</h2>
         <p>Trước bản 0.8.44, nếu laptop hết pin giữa cuộc họp, toàn bộ bản ghi và tóm tắt biến mất. Đây là chuyện đã xảy ra, và cách chúng tôi sửa.</p>
+        </div>
       </a></li>
-      <li data-tag="news"><a class="post-card" href="/blog/vietnote-0-8-44">
+      <li data-tag="news"><a class="post-card has-cover" href="/blog/vietnote-0-8-44">
+        <div class="post-thumb" aria-hidden="true">
+          <div class="cover news">
+            <span class="cv-badge">VietNote 0.8.44</span>
+            <div class="cv-island">
+              <p class="cv-status"><i class="cv-led"></i>Đang nghe</p>
+              <p class="cv-line dim"><span class="cv-time">12:04</span><span>Bên marketing xin thêm hai tuần để chạy thử.</span></p>
+              <p class="cv-line"><span class="cv-time">12:05</span><span>Vậy mình cần chốt <mark>ngân sách quý 4</mark> trước thứ Sáu nhé.</span></p>
+            </div>
+          </div>
+        </div>
+        <div>
         <p class="post-meta"><span class="post-tag news">Tính năng mới</span><time datetime="2026-11-01">1/11/2026</time><span>2 phút đọc</span></p>
         <h2>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp</h2>
         <p>Island chữ to và rõ hơn, có giao diện sáng. Bôi đen vài chữ để hỏi riêng về đoạn đó. Cuộc họp đang ghi được tự lưu, máy có tắt đột ngột cũng không mất.</p>
+        </div>
       </a></li>
-      <li data-tag="lesson"><a class="post-card" href="/blog/am-thanh-nang-gap-bay-lan">
+      <li data-tag="lesson"><a class="post-card has-cover" href="/blog/am-thanh-nang-gap-bay-lan">
+        <div class="post-thumb" aria-hidden="true">
+          <div class="cover lesson">
+            <span class="cv-badge">Bài học</span>
+            <div class="cv-rates">
+              <p>Âm thanh gửi đi mỗi giây, cho mỗi nguồn</p>
+              <div class="cv-rate"><span>Trước</span><div><i style="width: 100%"></i><b>256 kbps</b></div></div>
+              <div class="cv-rate small"><span>Bây giờ</span><div><i style="width: 14%"></i><b>~35 kbps</b></div></div>
+            </div>
+            <span class="cv-ratio">÷7</span>
+          </div>
+        </div>
+        <div>
         <p class="post-meta"><span class="post-tag lesson">Bài học</span><time datetime="2026-10-31">31/10/2026</time><span>2 phút đọc</span></p>
         <h2>Âm thanh nặng gấp bảy lần mức cần</h2>
         <p>Khi dùng 4G, VietNote hay báo “Kết nối nhận diện chậm” và mất cả đoạn lời. Nguyên nhân là chúng tôi gửi âm thanh đi mà không nén.</p>
+        </div>
       </a></li>
-      <li data-tag="lesson"><a class="post-card" href="/blog/nguoi-la-thanh-ong-chau">
-        <p class="post-meta"><span class="post-tag lesson">Bài học</span><time datetime="2026-10-28">28/10/2026</time><span>1 phút đọc</span></p>
+      <li data-tag="lesson"><a class="post-card has-cover" href="/blog/nguoi-la-thanh-ong-chau">
+        <div class="post-thumb" aria-hidden="true">
+          <div class="cover lesson">
+            <span class="cv-badge">Bài học</span>
+            <div class="cv-subs">
+              <p class="cv-en">“Where are you headed?”</p>
+              <div class="cv-sub wrong"><p>Cháu đi đâu đấy?</p><em>đoán</em></div>
+              <div class="cv-sub right"><p>Bạn đi đâu đấy?</p><em>an toàn</em></div>
+            </div>
+          </div>
+        </div>
+        <div>
+        <p class="post-meta"><span class="post-tag lesson">Bài học</span><time datetime="2026-10-28">28/10/2026</time><span>2 phút đọc</span></p>
         <h2>Khi hai người lạ bỗng thành “ông – cháu”</h2>
         <p>Phụ đề tiếng Việt từng gọi hai người mới gặp là ông và cháu, và giữ cách gọi đó suốt cả video. Lỗi nằm ở chỗ chúng tôi bảo AI đoán.</p>
+        </div>
       </a></li>
     </ul>
   </main>
