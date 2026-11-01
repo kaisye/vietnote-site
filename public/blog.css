@@ -284,3 +284,18 @@
 .notebook { display: grid; gap: 8px; }
 .notebook p { margin-top: 0 !important; padding: 8px 12px; border-radius: 10px; background: var(--mist); font-size: 14.5px; }
 .notebook b { display: inline-block; width: 92px; color: var(--muted); font-size: 13px; }
+
+/* Meeting reminder: the island asking to take notes (cover and figure). */
+.cv-remind-title { margin-top: 2cqw; font-size: 3.2cqw; font-weight: 700; }
+.cv-remind-text { margin-top: .8cqw; color: #b9b4c7; font-size: 2.1cqw; }
+.cv-remind-actions { display: flex; gap: 1.2cqw; margin-top: 2.4cqw; font-size: 1.9cqw; font-weight: 600; }
+.cv-remind-actions b, .cv-remind-actions span { padding: .9cqw 2cqw; border-radius: 99cqw; }
+.cv-remind-actions b { background: #ff5fa2; color: #fff; }
+.cv-remind-actions span { background: rgba(255, 255, 255, .1); }
+.mi-offer { max-width: 440px; margin: 0 auto; }
+.mi-offer strong { display: block; margin-top: 12px; font-size: 17px; }
+.mi-offer small { display: block; margin-top: 4px; color: #b9b4c7; font-size: 14px; }
+.mi-offer-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; font-size: 13px; font-weight: 600; }
+.mi-offer-actions b, .mi-offer-actions span { padding: 6px 12px; border-radius: 99px; }
+.mi-offer-actions b { background: #ff5fa2; color: #fff; }
+.mi-offer-actions span { background: rgba(255, 255, 255, .1); }

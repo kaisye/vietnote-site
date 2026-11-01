@@ -22,6 +22,14 @@
       <description>VietNote giờ chạy trên Ubuntu. Phần lớn ứng dụng chạy ngay từ đầu, nhưng năm lỗi chỉ hiện ra trên Linux, và lỗi nào cũng bắt nguồn từ một điều chúng tôi tưởng là hiển nhiên.</description>
     </item>
     <item>
+      <title>VietNote 0.8.45: nhắc ghi chú khi cuộc họp bắt đầu</title>
+      <link>https://vietnote.vn/blog/nhac-ghi-chu-khi-hop</link>
+      <guid>https://vietnote.vn/blog/nhac-ghi-chu-khi-hop</guid>
+      <pubDate>Sun, 01 Nov 2026 01:00:00 GMT</pubDate>
+      <category>Tính năng mới</category>
+      <description>Khi Zoom, Google Meet hay Teams bắt đầu dùng micro, island hỏi bạn có muốn ghi chú cuộc họp không. Không còn họp xong mới nhớ ra chưa bật VietNote.</description>
+    </item>
+    <item>
       <title>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp</title>
       <link>https://vietnote.vn/blog/vietnote-0-8-44</link>
       <guid>https://vietnote.vn/blog/vietnote-0-8-44</guid>
