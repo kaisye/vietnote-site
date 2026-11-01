@@ -1,0 +1,93 @@
+---
+title: Đưa VietNote lên Ubuntu: năm lỗi chỉ Linux mới có
+description: VietNote giờ chạy trên Ubuntu. Phần lớn ứng dụng chạy ngay từ đầu, nhưng năm lỗi chỉ hiện ra trên Linux, và lỗi nào cũng bắt nguồn từ một điều chúng tôi tưởng là hiển nhiên.
+date: 2026-11-01
+tag: Bài học
+---
+<!-- cover -->
+<div class="cover lesson">
+  <span class="cv-badge">Bài học</span>
+  <div class="cv-term">
+    <p class="cv-term-bar"><i></i><i></i><i></i></p>
+    <p><b>$</b> sudo apt install ./VietNote.deb</p>
+    <p class="dim">Setting up viet-note (0.8.39) ...</p>
+    <p><b>$</b> vietnote</p>
+    <p class="cv-term-cursor"></p>
+  </div>
+  <span class="cv-ratio">5 lỗi</span>
+</div>
+<!-- /cover -->
+<h2>Vì sao lại là Ubuntu</h2>
+<p>VietNote ra đời trên macOS rồi có thêm bản Windows. Nhưng không ít người làm kỹ thuật, sinh viên và giảng viên dùng Ubuntu hằng ngày, và họ cũng họp, cũng xem khoá học tiếng nước ngoài như mọi người. Bản <strong>0.8.39</strong> là bản đầu tiên có bộ cài cho Ubuntu 22.04 trở lên: tệp <code>.deb</code> cho Ubuntu, Debian, Linux Mint, và bản AppImage cho các bản Linux khác. Cả hai đều tự cập nhật như trên macOS và Windows.</p>
+<p>Giao diện của VietNote vốn dùng chung một bộ mã cho mọi hệ điều hành, nên phần lớn ứng dụng chạy được ngay từ lần đầu. Những gì phải làm lại đều nằm ở chỗ ứng dụng chạm vào hệ điều hành: nghe âm thanh của máy, lưu phiên đăng nhập, mở đường link, và cửa sổ island nổi trên mọi ứng dụng khác. Năm lỗi dưới đây đều nằm ở đúng những chỗ đó.</p>
+
+<h2>1. Ẩn island làm ứng dụng thoát</h2>
+<p>Ở chế độ phụ đề, island để chuột bấm xuyên qua, trừ vùng chữ. Trên Linux, thư viện quản lý cửa sổ mà chúng tôi dùng giả định cửa sổ lúc nào cũng đang hiện. Khi island đang ẩn mà ứng dụng bảo nó “cho chuột bấm xuyên qua”, thư viện không tìm thấy cửa sổ thật và làm cả ứng dụng thoát. Chúng tôi sửa bằng cách ghi nhớ yêu cầu đó, rồi chỉ áp dụng khi island đã hiện lên.</p>
+
+<h2>2. Island không kéo đi được</h2>
+<p>Muốn chuột bấm xuyên qua, ứng dụng thu vùng nhận chuột của cửa sổ về một điểm. Muốn lấy lại chuột, nó nới vùng đó ra. Trên Linux, bước thu và bước nới lại tác động lên hai lớp khác nhau của cùng một cửa sổ, nên vùng nhận chuột thu về rồi không bao giờ mở ra lại. Island hiện đó, nhưng bấm hay kéo đều không ăn thua. Giờ VietNote đặt vùng nhận chuột trực tiếp, ở cùng một chỗ cho cả hai chiều.</p>
+
+<h2>3. Phụ đề và lồng tiếng im lặng</h2>
+<p>Trên island không hiện phụ đề, cũng không nghe thấy giọng lồng tiếng. Lỗi nằm ở loa: âm thanh có nhiều cách biểu diễn từng mẫu, và trên macOS lẫn Windows, loa luôn nhận dạng số thực. Ứng dụng chỉ biết đúng dạng đó. Trên Ubuntu, loa lại báo nó muốn số nguyên 16-bit. Ứng dụng từ chối phát. Khi bật lồng tiếng, phụ đề chờ giọng đọc đọc đến câu nào mới hiện câu đó, nên phụ đề cũng đứng im theo. Giờ VietNote chuyển âm thanh sang đúng dạng mà loa yêu cầu, dạng nào cũng được.</p>
+
+<h2>4. Phiên dịch trực tiếp cứ ngập ngừng</h2>
+<p>Lỗi này khó thấy nhất. Người nói trong video nói rất trôi chảy, vậy mà bản dịch cứ đứt từng đoạn. Nguyên nhân: VietNote đang nghe lại chính giọng lồng tiếng của nó. Giọng đọc bản dịch phát ra loa, mà VietNote lại thu mọi thứ phát ra loa, nên bản dịch tiếng Việt quay ngược vào bản thu, trộn với tiếng gốc và làm rối phần nhận dạng.</p>
+<p>Trên macOS và Windows, VietNote báo cho hệ thống bỏ riêng âm thanh của chính nó ra khỏi bản thu. Âm thanh trên Linux không có cách nào để làm vậy: ứng dụng chỉ thu được <em>tất cả</em> những gì đi ra loa. Vì vậy trong lúc ghi âm thanh máy, VietNote tạo một loa ảo. Video và cuộc họp phát vào loa ảo, rồi được chuyển tiếp ra loa thật, chậm hơn chừng 30 mili giây, không ai nghe ra. VietNote chỉ thu từ loa ảo, còn giọng lồng tiếng thì đi thẳng ra loa thật, bỏ qua loa ảo. Dừng ghi là loa ảo biến mất, mọi thứ trở lại như cũ.</p>
+<figure class="fig">
+  <div class="fig-box">
+    <p class="fig-label bad">Trước: VietNote nghe lại chính mình</p>
+    <div class="chain">
+      <div><small>VietNote phát</small><strong>Giọng lồng tiếng</strong></div><span class="fig-arrow">→</span>
+      <div><small>Phát ra</small><strong>Loa</strong></div><span class="fig-arrow">→</span>
+      <div class="bad"><small>Thu lại vào</small><strong>Bản thu, lẫn với tiếng gốc</strong></div>
+    </div>
+    <p class="fig-label ok" style="margin-top: 24px">Bây giờ: hai đường riêng</p>
+    <div class="chain">
+      <div><small>Âm thanh cần dịch</small><strong>Video, cuộc họp</strong></div><span class="fig-arrow">→</span>
+      <div class="ok"><small>VietNote chỉ thu ở đây</small><strong>Loa ảo VietNote</strong></div><span class="fig-arrow">→</span>
+      <div><small>Bạn nghe</small><strong>Loa thật</strong></div>
+    </div>
+    <div class="chain" style="margin-top: 10px">
+      <div><small>VietNote phát</small><strong>Giọng lồng tiếng</strong></div><span class="fig-arrow">→</span>
+      <div><small>Bỏ qua loa ảo</small><strong>Đi thẳng</strong></div><span class="fig-arrow">→</span>
+      <div><small>Bạn nghe</small><strong>Loa thật</strong></div>
+    </div>
+  </div>
+  <figcaption>Giọng lồng tiếng không còn đi qua chỗ VietNote đang nghe, nên không bị dịch lại.</figcaption>
+</figure>
+
+<h2>5. Phụ đề kéo không nhúc nhích</h2>
+<p>Đây là lỗi lọt qua bản phát hành đầu tiên. Chúng tôi đã thử kéo island ở dạng thường, và nó chạy. Nhưng người dùng đầu tiên chuyển sang dạng phụ đề, và phụ đề không kéo đi đâu được.</p>
+<p>Đọc lại mã không thấy gì sai. Thay vì tiếp tục đoán, chúng tôi đo trực tiếp trên máy đang gặp lỗi: cửa sổ thật nằm ở đâu, lớn bao nhiêu, vùng nào đang nhận chuột. Con số trả lời ngay: ứng dụng đã yêu cầu khung phụ đề 860×190 ở cuối màn hình, nhưng cửa sổ vẫn kẹt ở kích thước cũ 520×540, kích thước của bảng island lúc trước.</p>
+<p>Nguyên nhân là island được tạo ở chế độ “không cho người dùng kéo giãn”. Trên macOS và Windows, chế độ này chỉ chặn người dùng. Trên Linux, nó khoá luôn kích thước cửa sổ, chặn cả chính ứng dụng. Ứng dụng tưởng phụ đề nằm một chỗ, trong khi trên màn hình nó nằm chỗ khác, nên mỗi lần bạn đưa chuột vào, ứng dụng kết luận chuột đang ở ngoài và cho bấm xuyên qua.</p>
+<figure class="fig">
+  <div class="fig-box fig-row">
+    <div>
+      <p class="fig-label ok">Ứng dụng tưởng</p>
+      <div class="win-map"><span class="want" style="left: 18.4%; top: 61.4%; width: 63.2%; height: 25.7%">Phụ đề 860×190</span></div>
+    </div>
+    <div>
+      <p class="fig-label bad">Thực tế trên màn hình</p>
+      <div class="win-map"><span class="real" style="left: 18.4%; top: 27%; width: 38.2%; height: 73%">Cửa sổ kẹt ở 520×540</span></div>
+    </div>
+  </div>
+  <figcaption>Nửa dưới màn hình 2560×1440 lúc lỗi xảy ra. Ứng dụng tìm chuột trong khung bên trái, còn phụ đề lại được vẽ trong cửa sổ bên phải.</figcaption>
+</figure>
+<p>Bản sửa chỉ có một dòng: trên Linux, island được phép đổi kích thước. Cửa sổ không có viền nên người dùng vẫn không tự kéo giãn được. Bản sửa có trong <strong>0.8.40</strong>, đến với người dùng Ubuntu qua chính tính năng tự cập nhật vừa thêm.</p>
+
+<h2>Phát hành cũng có bài học</h2>
+<ul>
+  <li><strong>Đóng gói trên bản Ubuntu cũ nhất được hỗ trợ.</strong> Bộ cài được tạo trên Ubuntu 22.04. Bộ cài tạo trên bản mới hơn có thể đòi những thư viện mà máy 22.04 chưa có, và không mở được.</li>
+  <li><strong>Tự cập nhật trên Linux có hai kiểu.</strong> Bản AppImage tự thay tệp của chính nó. Bản <code>.deb</code> được cài vào hệ thống, nên khi cập nhật, máy hỏi mật khẩu một lần.</li>
+  <li><strong>Nút tải lên trang trước khi có tệp để tải.</strong> Trang web được cập nhật nút <strong>Tải cho Ubuntu</strong> trong lúc bản phát hành còn đang chờ bản macOS đóng gói xong. Trong vài giờ, ai bấm nút đó đều nhận thông báo “Bản cài đặt đang được cập nhật”. Nút tải chỉ nên lên trang khi tệp đã thật sự có để tải.</li>
+</ul>
+<p>Còn một giới hạn chưa giải được: trên phiên Wayland, hệ điều hành không cho ứng dụng tự đặt vị trí cửa sổ, nên island có thể không nằm đúng chỗ. Nếu gặp, hãy chọn phiên <strong>Ubuntu on Xorg</strong> ở màn hình đăng nhập.</p>
+
+<aside class="takeaway">
+  <strong>Điều rút ra</strong>
+  <ul>
+    <li>Mỗi điều “luôn đúng” trên hai hệ điều hành là một lỗi đang chờ ở hệ điều hành thứ ba. Loa luôn nhận số thực, hệ thống luôn tách được âm thanh của từng ứng dụng, cửa sổ luôn đổi được kích thước: cả ba đều sai trên Linux.</li>
+    <li>Hãy thử bằng bản cài thật và đi hết các chế độ người dùng sẽ dùng, không chỉ chế độ mình hay dùng.</li>
+    <li>Khi đọc mã không ra lỗi, đừng đoán tiếp. Đo trạng thái thật trên máy đang gặp lỗi, con số thường chỉ thẳng vào nguyên nhân.</li>
+  </ul>
+</aside>

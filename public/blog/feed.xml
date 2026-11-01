@@ -14,6 +14,14 @@
       <description>Trước bản 0.8.44, nếu laptop hết pin giữa cuộc họp, toàn bộ bản ghi và tóm tắt biến mất. Đây là chuyện đã xảy ra, và cách chúng tôi sửa.</description>
     </item>
     <item>
+      <title>Đưa VietNote lên Ubuntu: năm lỗi chỉ Linux mới có</title>
+      <link>https://vietnote.vn/blog/dua-vietnote-len-ubuntu</link>
+      <guid>https://vietnote.vn/blog/dua-vietnote-len-ubuntu</guid>
+      <pubDate>Sun, 01 Nov 2026 01:00:00 GMT</pubDate>
+      <category>Bài học</category>
+      <description>VietNote giờ chạy trên Ubuntu. Phần lớn ứng dụng chạy ngay từ đầu, nhưng năm lỗi chỉ hiện ra trên Linux, và lỗi nào cũng bắt nguồn từ một điều chúng tôi tưởng là hiển nhiên.</description>
+    </item>
+    <item>
       <title>VietNote 0.8.44: island mới, bôi đen để hỏi, tự lưu cuộc họp</title>
       <link>https://vietnote.vn/blog/vietnote-0-8-44</link>
       <guid>https://vietnote.vn/blog/vietnote-0-8-44</guid>
