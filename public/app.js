@@ -97,7 +97,7 @@
   }
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // With a mouse: a thin streak of light follows the pointer and drops twinkling sparks, like a wand.
+  // With a mouse: the pointer drops tiny twinkling sparks, like a wand.
   if (!calm && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const canvas = document.createElement('canvas')
     canvas.className = 'wand'
@@ -114,8 +114,7 @@
     // Deeper tones on the light page; on the dark one, paler tones that add up into a glow.
     const COLORS = ['255, 111, 170', '232, 40, 124', '200, 60, 210', '245, 170, 50']
     const COLORS_DARK = ['255, 140, 190', '255, 205, 230', '225, 150, 255', '255, 210, 120']
-    const TRAIL_MS = 220
-    const trail = [], sparks = []
+    const sparks = []
     let frame = 0, last = null
     const star = (x, y, r) => {
       ctx.beginPath()
@@ -127,14 +126,6 @@
     const draw = now => {
       ctx.clearRect(0, 0, innerWidth, innerHeight)
       ctx.globalCompositeOperation = document.documentElement.dataset.theme === 'dark' ? 'lighter' : 'source-over'
-      while (trail.length && now - trail[0].t > TRAIL_MS) trail.shift()
-      ctx.lineCap = 'round'
-      for (let i = 1; i < trail.length; i++) {
-        const k = 1 - (now - trail[i].t) / TRAIL_MS
-        ctx.strokeStyle = `rgba(255, 111, 170, ${k * .75})`
-        ctx.lineWidth = k * 2.6
-        ctx.beginPath(); ctx.moveTo(trail[i - 1].x, trail[i - 1].y); ctx.lineTo(trail[i].x, trail[i].y); ctx.stroke()
-      }
       for (let i = sparks.length - 1; i >= 0; i--) {
         const s = sparks[i], age = (now - s.born) / s.life
         if (age >= 1) { sparks.splice(i, 1); continue }
@@ -146,11 +137,10 @@
         else { ctx.beginPath(); ctx.arc(s.x, s.y, s.size * .6 * (1 - age * .4), 0, Math.PI * 2); ctx.fill() }
       }
       ctx.shadowBlur = 0
-      frame = trail.length || sparks.length ? requestAnimationFrame(draw) : 0
+      frame = sparks.length ? requestAnimationFrame(draw) : 0
     }
     document.addEventListener('pointermove', event => {
       const x = event.clientX, y = event.clientY
-      trail.push({ x, y, t: performance.now() })
       // More sparks the faster the pointer moves, scattered along the stretch it just covered.
       const count = last ? Math.min(4, Math.floor(Math.hypot(x - last.x, y - last.y) / 14) + (Math.random() < .5 ? 1 : 0)) : 1
       for (let i = 0; i < count && sparks.length < 140; i++) {
