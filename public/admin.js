@@ -66,7 +66,8 @@ function render(data) {
   $('.kpis').innerHTML = [
     ['Người dùng', number.format(k.users), `+${number.format(k.new_7d)} trong 7 ngày`],
     ['Hoạt động hôm nay', number.format(k.active_today), `Hôm qua ${number.format(k.active_yesterday)}`],
-    ['Người mua', number.format(k.buyers), `${percent(k.buyers, k.users)} người dùng`],
+    ['Người mua', number.format(k.buyers), `${percent(k.buyers, k.users)} người dùng` +
+      (k.paid_orders == null ? '' : `<br>${number.format(k.paid_orders)} lượt mua · ${number.format(k.paid_orders - k.buyers)} lượt mua lại`)],
     ['Doanh thu', vnd(k.revenue_vnd), `7 ngày: ${vnd(k.revenue_7d)}`],
     ['Chi phí', vnd(k.cost_vnd), `7 ngày: ${vnd(k.cost_7d)}`],
     ['Lãi gộp', `<span class="${margin >= 0 ? 'good' : 'bad'}">${vnd(margin)}</span>`, `7 ngày: <span class="${margin7 >= 0 ? 'good' : 'bad'}">${vnd(margin7)}</span>`],
