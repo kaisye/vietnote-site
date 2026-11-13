@@ -97,7 +97,7 @@
           </a>
         </div>
         <a class="ext-required" href="/extension" target="_blank" rel="noopener" data-reveal><span class="pill-tag">Bước 2</span>Cài thêm tiện ích VietNote cho Chrome hoặc Edge<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
-        <p class="fine" data-reveal>Miễn phí tải về · Tặng <b data-signup-bonus>120 phút</b> dùng thử · macOS Apple Silicon · Windows 10/11 · Ubuntu 22.04+</p>
+        <p class="fine" data-reveal>Miễn phí tải về · Tặng <b data-signup-bonus>120 phút</b> dùng thử · macOS 14.2+ · Windows 10/11 · Ubuntu 22.04+ · Mac chip Intel? <a href="/download/mac-intel">Tải bản Intel</a></p>
         <p class="proof" data-stats hidden></p>
       </div>
     </section>
@@ -303,7 +303,7 @@
         <h2>Bốn bước là xong</h2>
       </header>
       <ol class="steps">
-        <li data-reveal><b>Tải và cài đặt</b><span>Chọn bản cho macOS, Windows hoặc Ubuntu. Dùng Mac? <a href="#cai-dat-macos">Xem video 30 giây</a>.</span></li>
+        <li data-reveal><b>Tải và cài đặt</b><span>Chọn bản cho macOS, Windows hoặc Ubuntu. Dùng Mac? <a href="#cai-dat-macos">Xem cách cài</a>.</span></li>
         <li data-reveal><b>Cài tiện ích cho Chrome hoặc Edge</b><span>Bắt buộc để dịch video ngay trên YouTube, Facebook, Douyin, Bilibili. <a href="/extension" target="_blank" rel="noopener">Cài từ Chrome Web Store</a>, rồi bấm biểu tượng VietNote trên trình duyệt để kết nối.</span></li>
         <li data-reveal><b>Đăng nhập bằng email</b><span>Nhập mã gửi về email, nhận ngay <span data-signup-bonus>120 phút</span> dùng thử.</span></li>
         <li data-reveal><b>Bấm “Bắt đầu tóm tắt”</b><span>Họp như bình thường. Họp xong, biết ngay việc cần làm.</span></li>
@@ -315,20 +315,14 @@
       <header class="section-head" data-reveal>
         <p class="eyebrow">HƯỚNG DẪN CÀI ĐẶT</p>
         <h2>Cài trên macOS <span class="accent">trong 1 phút</span></h2>
-        <p class="section-lead">Lần đầu mở, macOS sẽ chặn vì VietNote chưa có trên App Store. Làm theo video, chỉ cần một lần.</p>
+        <p class="section-lead">VietNote đã được Apple xác minh: tải về là mở được ngay, không cần vào cài đặt bảo mật.</p>
       </header>
-      <div class="install-grid">
-        <figure class="video-frame" data-reveal>
-          <video controls preload="none" playsinline poster="/assets/cai-dat-macos-v4.jpg" src="/assets/cai-dat-macos-v4.mp4" aria-label="Video hướng dẫn cài VietNote trên macOS"></video>
-        </figure>
-        <ol class="install-steps" data-reveal>
-          <li>Kéo <b>VietNote</b> vào thư mục <b>Applications</b>.</li>
-          <li>Mở VietNote, macOS báo chưa xác minh: bấm <b>Done</b> (đừng chọn Move to Trash).</li>
-          <li><b>Menu Apple → System Settings → Privacy &amp; Security</b>, kéo xuống phần Security, bấm <b>Open Anyway</b>.</li>
-          <li>Bấm <b>Open Anyway</b> lần nữa, nhập mật khẩu máy Mac.</li>
-          <li>Nếu được hỏi về Keychain: nhập mật khẩu đăng nhập máy Mac, chọn <b>Always Allow</b>.</li>
-        </ol>
-      </div>
+      <ol class="install-steps" data-reveal>
+        <li>Mở tệp <b>VietNote.dmg</b> vừa tải, kéo <b>VietNote</b> vào thư mục <b>Applications</b>.</li>
+        <li>Mở VietNote từ <b>Applications</b> hoặc Launchpad.</li>
+        <li>Khi macOS hỏi quyền dùng <b>micro</b> và <b>ghi âm thanh</b> của máy, chọn <b>Cho phép</b> để VietNote nghe được cuộc họp và video.</li>
+        <li>Nếu được hỏi về Keychain: nhập mật khẩu đăng nhập máy Mac, chọn <b>Always Allow</b>.</li>
+      </ol>
     </section>
 
     <section id="bang-gia" class="section">
@@ -368,7 +362,7 @@
       <div class="faq-list" data-reveal>
         <details>
           <summary>macOS báo “không thể mở vì không xác minh được nhà phát triển”?</summary>
-          <p>Bấm <b>Done</b>, rồi mở <b>Menu Apple → System Settings → Privacy &amp; Security</b>, kéo xuống và bấm <b>Open Anyway</b> cạnh dòng VietNote. Chỉ cần làm một lần. <a href="#cai-dat-macos">Xem video hướng dẫn</a>.</p>
+          <p>Từ bản 0.8.51, VietNote được Apple xác minh nên không còn thông báo này. Nếu vẫn gặp, bạn đang mở một bản cũ: tải lại bản mới ở trên. Nếu chưa tải lại được, bấm <b>Done</b>, rồi vào <b>Menu Apple → System Settings → Privacy &amp; Security</b> và bấm <b>Open Anyway</b> cạnh dòng VietNote.</p>
         </details>
         <details>
           <summary>VietNote hỏi mật khẩu “login” keychain?</summary>
@@ -384,7 +378,7 @@
         </details>
         <details>
           <summary>Máy Mac chip Intel có dùng được không?</summary>
-          <p>Hiện VietNote hỗ trợ Mac chip Apple (M1 trở lên), Windows 10/11 64-bit và Ubuntu 22.04 trở lên (64-bit).</p>
+          <p>Có. <a href="/download/mac-intel">Tải bản cho Mac chip Intel</a>. Máy cần chạy macOS 14.2 (Sonoma) trở lên, thường là các máy Intel từ năm 2018 trở về sau. Không chắc máy mình dùng chip gì? Vào <b>Menu Apple → About This Mac</b>: dòng <b>Chip</b> ghi Apple M… là chip Apple, dòng <b>Processor</b> ghi Intel là chip Intel.</p>
         </details>
         <details>
           <summary>Thời gian được tính như thế nào?</summary>
@@ -440,13 +434,10 @@
     <button class="guide-close" type="button" data-close aria-label="Đóng">×</button>
     <div class="guide-done" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v13M6 11l6 6 6-6M5 20h14"/></svg></div>
     <h2 id="mac-guide-title">VietNote đang được tải về</h2>
-    <p class="section-lead">Trong lúc chờ, xem video 30 giây cách cài trên Mac. Chỉ cần làm một lần.</p>
-    <video controls playsinline preload="none" poster="/assets/cai-dat-macos-v4.jpg" src="/assets/cai-dat-macos-v4.mp4" aria-label="Video hướng dẫn cài VietNote trên macOS"></video>
+    <p class="section-lead">Cài chỉ mất vài giây. Máy Mac chip Intel? <a href="/download/mac-intel">Tải bản Intel</a>.</p>
     <ol class="install-steps">
       <li>Mở tệp <b>VietNote.dmg</b> vừa tải, kéo <b>VietNote</b> vào thư mục <b>Applications</b>.</li>
-      <li>Mở VietNote, macOS báo chưa xác minh: bấm <b>Done</b> (đừng chọn Move to Trash).</li>
-      <li><b>Menu Apple → System Settings → Privacy &amp; Security</b>, kéo xuống phần Security, bấm <b>Open Anyway</b>.</li>
-      <li>Bấm <b>Open Anyway</b> lần nữa, nhập mật khẩu máy Mac.</li>
+      <li>Mở VietNote từ <b>Applications</b>. Khi macOS hỏi quyền dùng <b>micro</b> và <b>ghi âm thanh</b>, chọn <b>Cho phép</b>.</li>
       <li>Nếu được hỏi về Keychain: nhập mật khẩu đăng nhập máy Mac, chọn <b>Always Allow</b>.</li>
     </ol>
     <div class="guide-next">

@@ -18,7 +18,7 @@ export default {
     if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
     if (pathname === '/api/support' || pathname === '/api/support/') return sendSupport(request, env)
     if (pathname.startsWith('/api/admin/')) return admin(request, env, pathname.slice('/api/admin/'.length))
-    const match = pathname.match(/^\/download\/([a-z]+)\/?$/)
+    const match = pathname.match(/^\/download\/([a-z-]+)\/?$/)
     if (match) return download(match[1], request, env, ctx)
     if (pathname === '/youtube-player' || pathname === '/youtube-player/') {
       const asset = await env.ASSETS.fetch(request)

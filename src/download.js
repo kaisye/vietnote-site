@@ -2,6 +2,7 @@
 // from this domain, so visitors never see where the files are stored.
 const FILES = {
   mac: { asset: 'VietNote_aarch64.dmg', name: 'VietNote.dmg', type: 'application/x-apple-diskimage' },
+  'mac-intel': { asset: 'VietNote_x64.dmg', name: 'VietNote.dmg', type: 'application/x-apple-diskimage' },
   windows: { asset: 'VietNote_x64-setup.exe', name: 'VietNote-Setup.exe', type: 'application/vnd.microsoft.portable-executable' },
   linux: { asset: 'VietNote_amd64.deb', name: 'VietNote.deb', type: 'application/vnd.debian.binary-package' },
   appimage: { asset: 'VietNote_amd64.AppImage', name: 'VietNote.AppImage', type: 'application/octet-stream' },
@@ -11,7 +12,7 @@ const RELEASES = 'https://github.com/kaisye/VietNote/releases/latest/download'
 const ROBOTS = /bot|crawl|spider|preview|facebookexternalhit|zalo|slurp|curl|wget|python|headless/i
 
 export async function download(platform, request, env, ctx) {
-  const file = FILES[platform]
+  const file = Object.hasOwn(FILES, platform) && FILES[platform]
   if (!file) return new Response('Not found', { status: 404 })
   const upstream = await fetch(`${RELEASES}/${file.asset}`, { cf: { cacheEverything: true, cacheTtl: 600 } })
   if (!upstream.ok) {
