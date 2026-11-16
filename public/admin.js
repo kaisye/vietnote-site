@@ -9,6 +9,9 @@ const number = new Intl.NumberFormat('vi-VN')
 const vnd = value => `${number.format(Math.round(value || 0))}đ`
 const short = value => Math.abs(value) >= 1e6 ? `${(value / 1e6).toFixed(1).replace('.0', '')}tr` : Math.abs(value) >= 1e3 ? `${Math.round(value / 1e3)}k` : String(Math.round(value))
 const dayLabel = day => { const [, m, d] = day.split('-'); return `${Number(d)}/${Number(m)}` }
+const usd = value => `$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+// Prepaid service balances: below LOW shows as a warning, below CRITICAL in red.
+const BALANCE_LOW = 20, BALANCE_CRITICAL = 5
 const percent = (part, whole) => whole ? `${Math.round(100 * part / whole)}%` : '–'
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 
@@ -72,6 +75,7 @@ function render(data) {
     ['Chi phí', vnd(k.cost_vnd), `7 ngày: ${vnd(k.cost_7d)}`],
     ['Lãi gộp', `<span class="${margin >= 0 ? 'good' : 'bad'}">${vnd(margin)}</span>`, `7 ngày: <span class="${margin7 >= 0 ? 'good' : 'bad'}">${vnd(margin7)}</span>`],
     ['Giờ chưa dùng', number.format(k.hours_left), 'Số giờ trong tài khoản'],
+    ...balanceCards(data.balances),
   ].map(([label, value, note]) => `<div class="card kpi"><span>${label}</span><strong>${value}</strong><small>${note}</small></div>`).join('')
 
   $('.insights').innerHTML = insights(data).map(item => `<li class="${item.level}"><i></i><div><b>${item.title}</b><p>${item.detail}</p>${item.action ? `<p class="next">→ ${item.action}</p>` : ''}</div></li>`).join('')
@@ -98,6 +102,18 @@ function render(data) {
 
   table($('[data-table="orders"]'), ['Thời gian', 'Email', 'Gói', 'Số tiền'], data.orders
     .map(o => [new Date(o.paid_at).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }), o.email, o.package_id, vnd(o.amount_vnd)]), [1, 2])
+}
+
+const SERVICES = [['speech', 'Số dư dịch vụ giọng nói'], ['ai', 'Số dư dịch vụ AI']]
+
+function balanceCards(balances) {
+  if (!balances) return []
+  return SERVICES.map(([key, label]) => {
+    const balance = balances[key]
+    if (!balance || balance.usd == null) return [label, '–', `Không đọc được${balance?.error ? ` (${escape(balance.error)})` : ''}`]
+    const level = balance.usd < BALANCE_CRITICAL ? 'bad' : balance.usd < BALANCE_LOW ? 'warn' : 'good'
+    return [label, `<span class="${level}">${usd(balance.usd)}</span>`, 'Tiền nạp trước còn lại']
+  })
 }
 
 // Columns after the first are numbers unless listed in `text`.
@@ -189,6 +205,14 @@ function insights(data) {
   if (costly && featureCost > 0 && costly.cost_vnd / featureCost >= .4) {
     add('info', `${FEATURES[costly.feature] || costly.feature} chiếm ${Math.round(100 * costly.cost_vnd / featureCost)}% chi phí 7 ngày`,
       `${number.format(costly.hours)} giờ, ${number.format(costly.users)} người dùng.`, 'Tối ưu chi phí của tính năng này mang lại nhiều nhất.')
+  }
+
+  // A prepaid service balance running out stops its features for everyone.
+  for (const [key, label] of SERVICES) {
+    const value = data.balances?.[key]?.usd
+    if (value == null || value >= BALANCE_LOW) continue
+    add(value < BALANCE_CRITICAL ? 'bad' : 'warn', `${label} còn ${usd(value)}`,
+      'Khi hết tiền, các tính năng dùng dịch vụ này sẽ ngừng chạy với mọi người dùng.', 'Nạp thêm tiền cho dịch vụ này.')
   }
 
   const order = { bad: 0, warn: 1, good: 2, info: 3 }
