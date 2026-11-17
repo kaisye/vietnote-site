@@ -45,7 +45,7 @@ async function signedIn(request, env) {
 
 async function dashboard(env) {
   if (!env.SUPABASE_URL || !env.SUPABASE_SECRET_KEY) return json({ error: 'Supabase is not configured' }, 503)
-  const [response, ranges, heavy] = await Promise.all([rpc(env, 'admin_dashboard'), rpc(env, 'admin_feature_ranges'), rpc(env, 'admin_heavy_users')])
+  const [response, ranges, heavy, balances] = await Promise.all([rpc(env, 'admin_dashboard'), rpc(env, 'admin_feature_ranges'), rpc(env, 'admin_heavy_users'), serviceBalances(env)])
   if (!response.ok) {
     console.error('admin_dashboard failed', response.status, await response.text())
     return json({ error: 'Could not load data' }, 502)
@@ -57,7 +57,24 @@ async function dashboard(env) {
   else console.error('admin_feature_ranges failed', ranges.status, await ranges.text())
   if (heavy.ok) data.heavy_users = await heavy.json()
   else console.error('admin_heavy_users failed', heavy.status, await heavy.text())
+  if (balances) data.balances = balances
   return json(data)
+}
+
+// Prepaid balances left at the speech and AI services, from a backend function
+// that holds their keys. Null when it is not set up or does not answer.
+async function serviceBalances(env) {
+  if (!env.ADMIN_BALANCE_SECRET) return null
+  try {
+    const response = await fetch(`${env.SUPABASE_URL}/functions/v1/admin-balances`, {
+      headers: { 'x-admin-secret': env.ADMIN_BALANCE_SECRET }, signal: AbortSignal.timeout(10000),
+    })
+    if (response.ok) return await response.json()
+    console.error('admin-balances failed', response.status, await response.text())
+  } catch (error) {
+    console.error('admin-balances failed', error)
+  }
+  return null
 }
 
 function rpc(env, name) {
