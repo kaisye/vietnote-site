@@ -299,3 +299,36 @@
 .mi-offer-actions b, .mi-offer-actions span { padding: 6px 12px; border-radius: 99px; }
 .mi-offer-actions b { background: #ff5fa2; color: #fff; }
 .mi-offer-actions span { background: rgba(255, 255, 255, .1); }
+
+/* VietNote trên iPhone và Android */
+.cv-phones { display: flex; align-items: flex-end; gap: 6cqw; margin-top: 4cqw; }
+.cv-phones figure { display: grid; justify-items: center; gap: 1.6cqw; margin: 0; }
+.cv-phones figcaption { color: #b9b4c7; font-size: 1.8cqw; font-weight: 700; }
+.cv-phone { position: relative; width: 19cqw; height: 39cqw; padding: .9cqw; border-radius: 3.6cqw; background: #050407; box-shadow: inset 0 0 0 .25cqw #3a3940, 0 3cqw 8cqw rgba(0, 0, 0, .55); }
+.cv-phones figure:first-child .cv-phone { transform: rotate(-4deg); }
+.cv-phones figure:last-child .cv-phone { transform: rotate(3deg); }
+.cv-screen { display: flex; flex-direction: column; gap: .9cqw; height: 100%; padding: 3.6cqw 1.5cqw 1.5cqw; overflow: hidden; border-radius: 2.8cqw; background: #1d1824; font-size: 1.15cqw; }
+.cv-cam { position: absolute; top: 1.7cqw; left: 50%; width: 5.6cqw; height: 1.6cqw; margin-left: -2.8cqw; border-radius: 99cqw; background: #000; }
+.cv-cam.dot { width: 1.4cqw; height: 1.4cqw; margin-left: -.7cqw; }
+.cv-screen h4 { font-size: 1.7cqw; font-weight: 800; }
+.cv-chip { align-self: flex-start; padding: .2cqw .9cqw; border-radius: 99cqw; background: rgba(255, 95, 162, .16); color: #ff8fbe; font-size: 1cqw; font-weight: 700; }
+.cv-pl { padding: .8cqw 1cqw; border-radius: 1.2cqw; background: rgba(255, 255, 255, .06); line-height: 1.4; }
+.cv-pl b { display: block; color: #8e8a99; font-size: .95cqw; }
+.cv-pl em { display: block; color: #ff8fbe; font-style: normal; }
+.cv-recbtn { flex: none; align-self: center; width: 4.6cqw; height: 4.6cqw; margin-top: auto; border-radius: 50%; background: linear-gradient(135deg, #e8287c, #d23acb); box-shadow: 0 0 2cqw rgba(232, 40, 124, .55); }
+.cv-todo { display: flex; gap: .8cqw; align-items: flex-start; padding: .7cqw 0; border-bottom: .1cqw solid rgba(255, 255, 255, .08); line-height: 1.35; }
+.cv-todo i { flex: none; aspect-ratio: 1; width: 1.3cqw; height: 1.3cqw; margin-top: .1cqw; border-radius: 50%; border: .2cqw solid #ff8fbe; }
+.cv-todo i.done { border-color: #5fd08f; background: #5fd08f; }
+.cv-todo s { color: #8e8a99; }
+
+.phone-lines { display: grid; gap: 8px; max-width: 420px; margin: 0 auto; }
+.phone-lines p { padding: 10px 12px; border-radius: 14px; background: var(--mist); font-size: 14.5px; line-height: 1.45; }
+.phone-lines small { display: block; color: var(--faint); font-size: 12px; font-weight: 600; }
+.phone-lines em { display: block; color: var(--tag-news); font-style: normal; }
+.todo-list { display: grid; max-width: 420px; margin: 0 auto; }
+.todo-list p { display: flex; gap: 10px; padding: 10px 2px; border-bottom: 1px solid var(--border); font-size: 15px; line-height: 1.4; }
+.todo-list p:last-child { border-bottom: 0; }
+.todo-list i { flex: none; width: 18px; height: 18px; margin-top: 2px; border-radius: 50%; border: 2px solid var(--tag-news); }
+.todo-list i.done { border-color: var(--ok); background: var(--ok); }
+.todo-list s { color: var(--faint); }
+.todo-list small { display: block; color: var(--muted); font-size: 13px; }
