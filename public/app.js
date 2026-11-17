@@ -19,6 +19,16 @@
     })
   }
 
+  // On a phone, its own app comes first: the phone row moves above the desktop downloads.
+  const phone = /iPhone|iPod/i.test(agent) ? 'ios' : /Android/i.test(agent) ? 'android' : null
+  if (phone) {
+    document.querySelectorAll('[data-mobile-downloads]').forEach(row => {
+      const mine = row.querySelector(`[data-os="${phone}"]`)
+      if (mine) row.prepend(mine)
+      row.parentElement.querySelector('[data-downloads]')?.before(row)
+    })
+  }
+
   // Signup bonus from Supabase (app_settings), so it changes without a deploy.
   const rpc = name => fetch(`${config.supabaseUrl}/rest/v1/rpc/${name}`, {
     method: 'POST',
@@ -188,6 +198,8 @@
   // Hero demo: a meeting in three languages, transcribed and summarised as it happens.
   const demo = document.querySelector('.demo')
   const lines = demo?.querySelector('[data-demo-lines]'), points = demo?.querySelector('[data-demo-points]')
+  // The phone in front of the laptop records the same meeting: each finished line, and the time.
+  const phoneLines = document.querySelector('[data-phone-lines]'), phoneTime = document.querySelector('[data-phone-time]')
   if (demo && lines && points) {
     const people = { Sarah: '#2f9e8f', Minh: '#c42cb8', Linh: '#d81e73' }
     const script = [
@@ -224,6 +236,13 @@
           text.classList.remove('typing')
         }
         if (item.vi) line.append(el('div', 'line-vi', `→ ${item.vi}`))
+        if (phoneLines) {
+          const copy = line.cloneNode(true)
+          copy.className = 'ph-line'
+          phoneLines.append(copy)
+          while (phoneLines.children.length > 5) phoneLines.firstElementChild.remove()
+        }
+        if (phoneTime) phoneTime.textContent = item.at
       } else if (item.point) {
         const point = el('div', 'point', item.text)
         point.prepend(el('small', '', item.point))
@@ -239,7 +258,8 @@
     if (calm) script.forEach(item => add(item, true))
     else (async () => {
       for (;;) {
-        lines.replaceChildren(); points.replaceChildren()
+        lines.replaceChildren(); points.replaceChildren(); phoneLines?.replaceChildren()
+        if (phoneTime) phoneTime.textContent = '00:00'
         demo.classList.remove('fading')
         await wait(500)
         for (const item of script) { await add(item, false); await wait(item.who ? 650 : 900) }

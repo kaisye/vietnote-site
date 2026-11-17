@@ -1,11 +1,13 @@
-// /download/mac, /download/windows and /download/linux stream the latest release installer
-// from this domain, so visitors never see where the files are stored.
+// /download/mac, /download/windows, /download/linux and /download/android stream the latest
+// installer from this domain, so visitors never see where the files are stored.
 const FILES = {
   mac: { asset: 'VietNote_aarch64.dmg', name: 'VietNote.dmg', type: 'application/x-apple-diskimage' },
   'mac-intel': { asset: 'VietNote_x64.dmg', name: 'VietNote.dmg', type: 'application/x-apple-diskimage' },
   windows: { asset: 'VietNote_x64-setup.exe', name: 'VietNote-Setup.exe', type: 'application/vnd.microsoft.portable-executable' },
   linux: { asset: 'VietNote_amd64.deb', name: 'VietNote.deb', type: 'application/vnd.debian.binary-package' },
   appimage: { asset: 'VietNote_amd64.AppImage', name: 'VietNote.AppImage', type: 'application/octet-stream' },
+  // The Android app ships on its own schedule, so its APK sits in a fixed release tagged `android`.
+  android: { url: 'https://github.com/kaisye/VietNote/releases/download/android/VietNote.apk', name: 'VietNote.apk', type: 'application/vnd.android.package-archive' },
 }
 const RELEASES = 'https://github.com/kaisye/VietNote/releases/latest/download'
 // Crawlers and link previews follow download links too; they are not downloads.
@@ -14,7 +16,7 @@ const ROBOTS = /bot|crawl|spider|preview|facebookexternalhit|zalo|slurp|curl|wge
 export async function download(platform, request, env, ctx) {
   const file = Object.hasOwn(FILES, platform) && FILES[platform]
   if (!file) return new Response('Not found', { status: 404 })
-  const upstream = await fetch(`${RELEASES}/${file.asset}`, { cf: { cacheEverything: true, cacheTtl: 600 } })
+  const upstream = await fetch(file.url || `${RELEASES}/${file.asset}`, { cf: { cacheEverything: true, cacheTtl: 600 } })
   if (!upstream.ok) {
     return new Response('Bản cài đặt đang được cập nhật, vui lòng thử lại sau ít phút.', {
       status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' },
