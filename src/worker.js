@@ -2,6 +2,7 @@
 import { download } from './download.js'
 import { admin } from './admin.js'
 import { sendSupport } from './support.js'
+import { sharePage } from './share.js'
 
 // Pages moved to vietnote.vn. workers.dev still serves everything installed apps call
 // (/youtube-player, /download, /api, /assets), so only these pages redirect.
@@ -14,6 +15,12 @@ export default {
     const { pathname } = url
     if (url.hostname.endsWith('.workers.dev') && PAGES.has(pathname.replace(/\/$/, '').replace(/\.html$/, ''))) {
       return Response.redirect(`${SITE}${pathname}${url.search}`, 301)
+    }
+    // A note shared from the app; and what lets the iPhone app open such links itself.
+    const shared = pathname.match(/^\/n\/([^/]+)\/?$/)
+    if (shared) return sharePage(shared[1], env)
+    if (pathname === '/.well-known/apple-app-site-association' || pathname === '/apple-app-site-association') {
+      return json(APP_LINKS, 200, { 'Cache-Control': 'public, max-age=3600' })
     }
     if (pathname === '/api/feedback' || pathname === '/api/feedback/') return saveFeedback(request, env)
     if (pathname === '/api/support' || pathname === '/api/support/') return sendSupport(request, env)
@@ -30,6 +37,9 @@ export default {
     return pathname.endsWith('.mp4') ? withRange(request, response) : response
   },
 }
+
+// Universal Links: the iPhone app (team WAUHVZUW6N) opens vietnote.vn/n/… itself.
+const APP_LINKS = { applinks: { details: [{ appIDs: ['WAUHVZUW6N.vn.vietnote.app'], components: [{ '/': '/n/*', comment: 'Shared notes' }] }] } }
 
 const USE_CASES = new Set([
   'Họp online', 'Học tập / khóa học', 'Xem video nước ngoài',
