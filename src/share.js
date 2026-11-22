@@ -42,6 +42,8 @@ function page({ title, description, body }, status, note) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#fbfbfc">
 <meta name="robots" content="noindex, nofollow">
 <title>${escapeHTML(title)}</title>
 <meta name="description" content="${escapeHTML(description)}">
@@ -170,7 +172,6 @@ const LOGO = '<img src="/assets/logo-v3.svg" width="24" height="24" alt="">'
 
 const STYLE = `
 :root{--bg:#fbfbfc;--surface:#fff;--ink:#17151c;--muted:#5d5a66;--faint:#9a97a3;--border:#ebeaef;--brand:#d81e73;--brand-strong:#be1663;--mist:#f4f3f7;--shadow:0 1px 2px rgba(23,21,28,.04),0 4px 14px rgba(23,21,28,.035);color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#111014;--surface:#1b1a20;--ink:#f4f3f7;--muted:#b3b0bd;--faint:#7d7a86;--border:#2b2a32;--brand:#ff4f9a;--brand-strong:#ff6aa9;--mist:#23222a;--shadow:none;color-scheme:dark}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
