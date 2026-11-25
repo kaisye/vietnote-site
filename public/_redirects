@@ -2,3 +2,5 @@
 /extension https://chromewebstore.google.com/detail/hjlgolaibolmabdfaibikeffonalafhk 302
 # vietnote.vn/ios opens VietNote on the App Store.
 /ios https://apps.apple.com/vn/app/id6834786419 302
+# The recording contribution terms were removed with the feature; old app links land on the privacy policy.
+/dong-gop-ban-ghi /quyen-rieng-tu 302
