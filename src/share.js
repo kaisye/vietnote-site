@@ -163,7 +163,7 @@ const SCRIPT = `<script>
   else if (/Mac/.test(ua)) { get.href = '/download/mac'; }
   else if (/Windows/.test(ua)) { get.href = '/download/windows'; }
   document.getElementById('open-app').addEventListener('click', function () {
-    setTimeout(function () { if (!document.hidden) hint.textContent = 'Nếu VietNote chưa mở, hãy tải và cài VietNote rồi bấm lại.'; }, 1500);
+    setTimeout(function () { if (!document.hidden) hint.textContent = /iPhone|iPad|iPod|Android/.test(ua) ? 'Nếu VietNote chưa mở, hãy tải và cài VietNote rồi bấm lại.' : 'Nếu VietNote chưa mở, hãy cập nhật VietNote rồi bấm lại, hoặc chép link trang này và dán vào Cài đặt › Đồng bộ ghi chú › Mở link chia sẻ.'; }, 1500);
   });
 })();
 </script>`
